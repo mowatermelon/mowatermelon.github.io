@@ -1,0 +1,152 @@
+# Header
+
+menu:
+  主页: /
+  js学习: /categories/js学习/
+  软件折腾: /categories/软件折腾/
+  样式学习: /categories/样式表/
+  近期文字: /archives/2017/09/
+
+# SubNav
+# 如果你想将网站与某个你的个人账户管理显示，正确配置之后，就放开对应的账号前面的  # 号
+subnav:
+  github: "https://github.com/mowatermelon"
+  #weibo: "#"
+  #rss: "#"
+  zhihu: "https://www.zhihu.com/people/wu-mo-61-63/activities"
+  #qq: "#"
+  #weixin: "#"
+  #jianshu: "#"
+  #douban: "#"
+  #segmentfault: "#"
+  #bilibili: "#"
+  #acfun: "#"
+  mail: "mailto:neefoxmo@gmail.com"
+  #facebook: "#"
+  #google: "#"
+  #twitter: "#"
+  #linkedin: "#"
+
+rss: /atom.xml
+
+# 是否需要修改 root 路径
+# 如果您的网站存放在子目录中，例如 http://yoursite.com/blog，
+# 请将您的 url 设为 http://yoursite.com/blog 并把 root 设为 /blog/。
+root:
+
+# Content
+
+# 文章太长，截断按钮文字
+excerpt_link: 'read more'
+# 文章卡片右下角常驻链接，不需要请设置为false，如果已经设置了文章截断，不需要设置这个打开这个参数
+show_all_link: false
+# 数学公式
+mathjax: false
+# 是否在新窗口打开链接
+open_in_new: false
+
+# 打赏
+# 打赏type设定：0-关闭打赏； 1-文章对应的md文件里有reward:true属性，才有打赏； 2-所有文章均有打赏
+reward_type: 0
+# 打赏wording
+reward_wording: 'watermelon lalala~~~'
+# 支付宝二维码图片地址，跟你设置头像的方式一样。比如：/assets/img/alipay.jpg
+alipay:
+# 微信二维码图片地址
+weixin:
+
+# 目录
+# 目录设定：0-不显示目录； 1-文章对应的md文件里有toc:true属性，才有目录； 2-所有文章均显示目录
+toc: 2
+# 根据自己的习惯来设置，如果你的目录标题习惯有标号，置为true即可隐藏hexo重复的序号；否则置为false
+toc_hide_index: true
+# 目录为空时的提示
+toc_empty_wording: '目录君被吃掉了，好可怜555555'
+
+# 是否有快速回到顶部的按钮
+top: true
+
+# Miscellaneous
+# baidu_analytics 统计用户id  可以到 https://tongji.baidu.com/web/register    进行申请，一般是十六位的数字字母结合一个字符串
+#                 然后就可以在 https://tongji.baidu.com/web/welcome/login  登陆后看到网站的流量详情了
+# google_analytics 你的跟踪ID  请到 https://analytics.google.com/analytics/web/?authuser=0#provision/CreateAccount/ 页面申请，一般是通过中横线分为三段一个字符串，除了第一段是字母，后面两段都是纯数字
+#                 然后就可以在 https://analytics.google.com/analytics/web/  登陆后看到网站的流量详情了，这个需要谷歌账号翻墙来着才能看
+# 默认集成的谷歌分析
+# baidu_analytics: '2a3434754695a673014b5e1a20dd5cee'
+google_analytics: 'UA-106069703-1'
+favicon: /img/favicon.ico
+
+# 你的头像url，
+# 可以是你github的图像地址，如果不知道可以去https://api.github.com/users/{your-github-name}查看相关信息
+# 也可以是相对主页面的img图片地址
+avatar: https://avatars1.githubusercontent.com/u/18508817?v=4
+
+# 是否开启分享
+share_jia: true
+
+# 评论：1、Gitment ，2、畅言；3、Disqus ； 不需要使用某项，直接设置值为false，或注释掉
+# 多说和网易云跟帖已经关了，畅言注册需要网站备案，Disqus被墙了，而且样式感觉一般
+# 我主要这边默认已经将gitment的样式集成到项目中了，如果想要修改就在当前根目录执行 npm install，安装相关包之后，
+# 在修改了source-src/css/comment.scss之后，执行npm run dist，就可以重新编译一遍了
+
+# 1 Gitment
+# 插件作者官方说明: https://imsun.net/posts/gitment-introduction/
+# 也直接去可以去https://github.com/settings/applications/new  申请你自己的相关id和Secret信息
+#  enable: false
+#  githubID: #{your-github-name}
+#  repo: #{your-github-name}.github.io
+#  ClientID: #{your-ClientID}
+#  ClientSecret: #{your-ClientSecret}
+gitment:
+  enable: true
+  githubID: mowatermelon
+  repo: mowatermelon.github.io
+  ClientID: 733f8ecb4a5dc083ab11
+  ClientSecret: 880daa512d40ac262b0cdd2b0482bdf9651da9ea
+  lazy: false
+
+# 2、畅言
+changyan_appid: false
+changyan_conf: false
+
+# 3、Disqus 在hexo根目录的config里也有disqus_shortname字段，优先使用yilia的
+disqus: false
+
+
+# 样式定制 - 一般不需要修改，除非有很强的定制欲望…
+style:
+  # 头像上面的背景颜色
+  header: '#00bcd4'
+  # 右滑板块背景
+  slider: 'linear-gradient(200deg,#a0cfe4,#e8c37e)'
+
+# slider的设置
+slider:
+  # 是否默认展开tags板块
+  showTags: false
+
+# 显示在主页右侧栏的智能菜单
+# 如不需要，将该对应项置为false，这个一般推荐配置
+# 比如
+# smart_menu:
+#  innerArchive: '所有文章'
+#  friends: '文字分类'
+#  aboutme: '关于我'
+smart_menu:
+  innerArchive: '所有文章'
+  friends: '文字分类'
+  aboutme: '关于我'
+
+friends:
+  阶段总结: /categories/阶段总结/
+  框架学习: /categories/框架学习/
+  前端思考: /categories/前端思考/
+  前端知识: /categories/前端知识/
+  软件折腾: /categories/软件折腾/
+  样式学习: /categories/样式表/
+  知识储备: /categories/知识储备/
+  .NET: /tags/net/
+  js学习: /categories/js学习/
+
+# aboutme 页面对应的文本内容
+aboutme: 吴王苑外云<br><br>莫过两三巡<br>
