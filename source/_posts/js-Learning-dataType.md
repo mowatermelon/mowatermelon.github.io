@@ -67,7 +67,9 @@ __请注意，对于`未声明的变量`使用除 `typeof` 之外的其他运算
     var oTemp;
     console.log(oTemp2 == undefined);
 ```
+
 当函数无明确返回值时，返回的也是值 `undefined`，如下所示：
+
 ```javascript
     function testFunc() {
     }
