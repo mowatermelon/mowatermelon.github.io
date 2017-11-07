@@ -5,14 +5,16 @@ tags:
   - prompt
   - localStorage
   - js学习
-date: 2017-04-25 00:00:00
+date: 2017-10-16 00:00:00
 ---
 
 参考网站[developer.mozilla](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/JavaScript_basics)
 
 # 1 定义
 
-用于显示可提示用户进行输入的对话框，会弹出一个对话框， 有一点像 `alert()` 只不过 `prompt()` 需要用户输入数据,，而且在用户点击 `OK` 后将数据存储在变量里。
+用于显示可提示用户进行输入的对话框，会弹出一个对话框， 有一点像 `alert()` 只不过 `prompt()` 需要用户输入数据，而且在用户点击 `OK` 后将数据存储在变量里。
+
+<!-- more -->
 
 # 2 语法
 
@@ -22,8 +24,8 @@ prompt(text,defaultText)
 
 |参数|描述|
 |:---|:---|
-text| 可选。要在对话框中显示的纯文本（而不是 HTML 格式的文本）。
-defaultText|可选。默认的输入文本。
+|text| 可选。要在对话框中显示的纯文本（而不是 HTML 格式的文本）。|
+|defaultText|可选。默认的输入文本。|
 
 > 说明
 
@@ -86,16 +88,6 @@ defaultText|可选。默认的输入文本。
       border: 1px solid #cccccc;
       border-radius: 4px;
   }
-  code, pre {
-      font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
-  }
-  pre {
-      white-space: pre-wrap;
-  }
-  code, kbd, pre, samp {
-      font-family: monospace, serif;
-      font-size: 1em;
-  }
   h1, .h1 {
       font-size: 36px;
   }
@@ -125,25 +117,6 @@ defaultText|可选。默认的输入文本。
     <input type="button" class="btn btn-info" value="Display a prompt box" />
     <br/>
     <br/>
-    <pre>
-    window.onload =function(){
-      var show_btn = document.querySelector('input');
-      var show_sel =document.querySelector('h1');
-      show_btn.onclick =function(){
-        //召唤promt大法
-        show_prompt(show_sel);
-      }
-    }
-
-    //弹出promt提示框，并作转化处理
-    function show_prompt(selText){
-      var myName = prompt('Please enter your name.','watermelon');
-      if (myName!=null && myName!=""){
-        localStorage.setItem('name', myName);
-        selText.innerHTML += ' hello , <span class="text-info">' + myName+'</span>';
-      }
-    }
-    </pre>
   </div>
 </body>
 <script type="text/javascript">
