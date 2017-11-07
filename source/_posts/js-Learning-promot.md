@@ -5,7 +5,7 @@ tags:
   - prompt
   - localStorage
   - js学习
-date: 2017-10-16 00:00:00
+date: 2017-10-15 00:00:00
 ---
 
 参考网站[developer.mozilla](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/JavaScript_basics)
