@@ -159,7 +159,7 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://{{注册呢称}}.github.io/ 
+url: https://{{注册呢称}}.github.io/
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -252,7 +252,7 @@ subnav:
 ## 3.4 不知道怎么更换主题
 
   [官方主题shop](https://hexo.io/themes/)，你可以选择你想要的主题，每个主题的`readme.md`中都有相关说明，日常摊手.jpg，我肯定是要拿自己改写的主题做例子，我主题的名称是`melon`，如果大家对这个主题有什么好的建议，可以直接这个仓库下提`issues`进行相关建议。
-  
+
   > 安装
   ```bash
   # 在vscode终端中输入以下指令，这个是在项目根文件夹下执行这个指令
@@ -315,7 +315,7 @@ Usage: hexo <command>
 
 |   可选参数名   |   官方解释   |   个人解读   |
 |:---|:---|:---|
-|   hexo clean   |   Remove generated files and cache.   |   清除所有生成的网页文件夹和数据缓存，主要是清除项目中`hexo -g`生成的`public`文件夹中内容，或者通过`hexo -s`生成网站的一些`数据缓存`   |
+|   hexo clean   |   Remove generated files and cache.   |   清除所有生成的网页文件夹和数据缓存，主要是清除项目中`hexo -g`生成的`public`文件夹中内容，或者通过`hexo s  --watch`生成网站的一些`数据缓存`   |
 |   hexo config   |   Get or set configurations.   |   获取当前的hexo所有配置   |
 |   hexo deploy   |   Deploy your website.   |   将本地的`blog`推送到对应的`git仓库`，使用缩写`d`也可以执行，一般执行`hexo d -g`   |
 |   hexo generate   |   Generate static files.   |   将本地静态`md`文件生成对应的静态`blog`文件，使用缩写`g`也可以执行，本地预览的时候一般执行`hexo g --watch`，也会结合deploy，如`hexo g -d`，一键生成和部署，生成的文件一般在本地项目`public`文件夹中   |
@@ -326,7 +326,7 @@ Usage: hexo <command>
 |   hexo new `layout` `title`  |   Create a new post.   |   生成规定`layout`和规定`title`的`md`文件，`layout`可以是`post`, `page`, `draft` or `whatever you want`，`title`是生成的md文件名，内容可以是`whatever you want`，但是请注意使用英文名，也不要出现太多奇怪符号。   |
 |   hexo publish `layout` `filename`  |   Moves a draft post from _drafts to _posts folder.   |   将md文件从`draft`中发布成`post`模版格式，在`post`中的md文件在执行`hexo s`时在页面才会被看到，`layout`参数为`选填参数`，默认是`draft`，`filename`参数为必填参数，文件名必须是`source/_drafts`中已经存在的文件名  |
 |   hexo render   |   Render files with renderer plugins.   |   强制将文件进行渲染，可参考4.3.1   |
-|   hexo server   |   Start the server.   |   启动hexo本地服务，在本地查看网页运行效果   |
+|   hexo server   |   Start the server.   |   启动hexo本地服务，在本地查看网页运行效果，并且实时监听页面变化，可以简写成`hexo s --watch`   |
 |   hexo version   |   Display version information.   |   查看本地hexo版本，还可以写成`hexo v`或者`hexo -v`   |
 
 > Global Options:
@@ -362,7 +362,7 @@ Render files with renderer plugins (e.g. Markdown) and save them at the specifie
 
 ### 4.3.2 如何从其他blog系统进行迁移
 
-> -  RSS
+> RSS
 
 首先，安装 `hexo-migrator-rss` 插件。
 
@@ -376,7 +376,7 @@ Render files with renderer plugins (e.g. Markdown) and save them at the specifie
   PS x:\xx\xxxx>hexo migrate rss <source>
 ```
 
-> -  Jekyll
+> Jekyll
 
 把 `_posts` 文件夹内的所有文件复制到 `source/_posts` 文件夹，并在 `_config.yml` 中修改 `new_post_name` 参数。
 
@@ -384,7 +384,7 @@ Render files with renderer plugins (e.g. Markdown) and save them at the specifie
 new_post_name: :year-:month-:day-:title.md
 ```
 
-> -  Octopress
+> Octopress
 
 把 `Octopress`中`source/_posts` 文件夹内的所有文件转移到 `Hexo` 的 `source/_posts` 文件夹，并修改 `_config.yml` 中的 `new_post_name` 参数。
 
@@ -392,7 +392,7 @@ new_post_name: :year-:month-:day-:title.md
 new_post_name: :year-:month-:day-:title.md
 ```
 
-> -  WordPress
+> WordPress
 
 首先，安装 `hexo-migrator-wordpress` 插件。
 
@@ -412,7 +412,7 @@ new_post_name: :year-:month-:day-:title.md
 
 这个插件并不能完美地实现`WordPress->Hexo`的数据转换，尤其是在处理`WordPress`的分类方面`存在问题`（见`Front-matter`中的分类与标签）。因此，建议您在迁移完成后，手工审阅所有生成的`markdown`文件，检查其中是否有`错误`。对于文章数量较大的`WordPress`站点，这项工作可能要花很长的时间。
 
-> - Joomla
+> Joomla
 
 首先，安装 `hexo-migrator-joomla` 插件。
 
