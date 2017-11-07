@@ -88,4 +88,5 @@ date: 2017-10-16 00:00:00
 |:---|:---|:---|
 |indexOf| 返回某个指定的字符串值在字符串中首次出现的位置，对大小写敏感|varName.indexOf(param1,param2)|
 |lastIndexOf| 返回一个指定的字符串值最后出现的位置，在一个字符串中的指定位置从后向前搜索，对大小写敏感。|varName.lastIndexOf(param1,param2)|
-|concat| 连接两个或多个字符串，可以接受传入多个参数，字符串返回值是拼接之后变量值，数组返回的是插入值之后数组，每传入一个参数|varName.concat(param1,param2,param3,...,paramN)|
+|concat| 连接两个或多个字符串，可以接受传入多个参数，字符串返回值是拼接之后变量值，数组返回的是插入值之后数组。|varName.concat(param1,param2,param3,...,paramN)|
+|slice| 返回对应字符串或者数组中下标从param1到param2的的元素|varName.slice(param1,param2)|
