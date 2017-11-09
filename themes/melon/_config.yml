@@ -37,9 +37,9 @@ root:
 # Content
 
 # 文章太长，截断按钮文字
-excerpt_link: 'read more'
+excerpt_link: ''
 # 文章卡片右下角常驻链接，不需要请设置为false，如果已经设置了文章截断，不需要设置这个打开这个参数
-show_all_link: false
+show_all_link: 阅读更多
 # 数学公式
 mathjax: false
 # 是否在新窗口打开链接

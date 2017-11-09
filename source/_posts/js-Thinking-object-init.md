@@ -5,7 +5,7 @@ tags:
   - object
   - watermelon
   - js_thinking
-date: 2017-10-16 00:00:00
+date: 2017-10-18 00:00:00
 ---
 # 1 js中何为对象
 
