@@ -1,15 +1,17 @@
 ---
 title: 西瓜有话说之js简介
-category: js_Learning
+category: js学习
 tags:
   - history
   - watermelon
-  - js_Learning
+  - js学习
 date: 2017-10-18 00:00:00
 ---
 # 1 js产生原因
 
 在js诞生之前，大部分因特网用户还仅仅通过 28.8 kbit/s 的调制解调器连接到网络，网络访问条件可以说很恶劣，拨号上网速度之慢，每次与`服务器`进行数据交互都是对用户耐心的一次考验，但是这个时候的网页为了更好提供更多功能，已经变得相对复杂了，很多页面存在表单信息提交。
+
+<!--more-->
 
 可是，当时所有的请求都是直接发送到`服务器`进行处理的，不管是数据验证还是实质的读取存储数据，很多情况下，用户由于不太清楚页面信息填写规则，把一些错误信息发送到后台，后台肯定不干啊，结果用户填完信息，等了半天，页面才出现一个错误提示，某某字段是必填项啊，你必须要填什么信息或者你填写的某某信息不太符合规范之类。
 
@@ -65,7 +67,7 @@ Java（对Javascript）的影响，主要是把数据分成基本类型（primit
 作为设计者，他一点也不喜欢自己的这个把`Java`作为`Javascript`设计原型的产品
 
 ```text
-与其说我爱Javascript，不如说我恨它。它是C语言和Self语言一夜情的产物。十八世纪英国文学家约翰逊博士说得好：‘它的优秀之处并非原创，它的原创之处并不优秀。’（the part that is good is not original, and the part that is original is not good. 
+与其说我爱Javascript，不如说我恨它。它是C语言和Self语言一夜情的产物。十八世纪英国文学家约翰逊博士说得好：‘它的优秀之处并非原创，它的原创之处并不优秀。’（the part that is good is not original, and the part that is original is not good.
 ```
 
 # 3 开发版本迭代

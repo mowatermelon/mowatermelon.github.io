@@ -13,7 +13,7 @@ subnav:
   github: "https://github.com/mowatermelon"
   #weibo: "#"
   #rss: "#"
-  zhihu: "https://www.zhihu.com/people/wu-mo-61-63/activities"
+  #zhihu: ""
   #qq: "#"
   #weixin: "#"
   #jianshu: "#"
@@ -138,15 +138,18 @@ smart_menu:
   aboutme: '关于我'
 
 friends:
-  阶段总结: /categories/阶段总结/
+  js思考: /categories/js-thinking/
+  js学习: /categories/js学习/
+  样式学习: /categories/样式表/
   框架学习: /categories/框架学习/
   前端思考: /categories/前端思考/
   前端知识: /categories/前端知识/
-  软件折腾: /categories/软件折腾/
-  样式学习: /categories/样式表/
-  知识储备: /categories/知识储备/
+  Linux: /categories/Linux/
   .NET: /tags/NET/
-  js学习: /categories/js学习/
+  知识储备: /categories/知识储备/
+  软件折腾: /categories/软件折腾/
+  阶段总结: /categories/阶段总结/
+
 
 # aboutme 页面对应的文本内容
 aboutme: 吴王苑外云<br><br>莫过两三巡<br>
