@@ -82,7 +82,7 @@ favicon: /img/favicon.ico
 avatar: https://avatars1.githubusercontent.com/u/18508817?v=4
 
 # 是否开启分享
-share_jia: true
+share_jia: false
 
 # 评论：1、Gitment ，2、畅言；3、Disqus ； 不需要使用某项，直接设置值为false，或注释掉
 # 多说和网易云跟帖已经关了，畅言注册需要网站备案，Disqus被墙了，而且样式感觉一般
