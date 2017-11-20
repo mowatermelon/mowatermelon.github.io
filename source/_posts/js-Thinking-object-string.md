@@ -5,7 +5,7 @@ tags:
   - string
   - watermelon
   - js_thinking
-date: 2017-10-21 00:00:00
+date: 2017-10-22 00:00:00
 ---
 # 1. 定义
 
@@ -80,6 +80,7 @@ var tString_4 = tag`Hello ${ a + b } world ${ a * b}hahaha ${ a / b}`;
 |objectName| 相关对象类型名称 |就像上面`js`代码中`String`|
 |varName| 相关对象类型实例化后的变量名 |就像上面`js`代码中`strString`,`oString`,`tString_1`|
 |varName_val| 相关对象类型实例化后的实际内容 |就像上面`js`代码中`hello watermelon`|
+|functionName|函数名称|就像上文的`tag`|
 |letter|字母|letter(8) 代表八个子母，一个字母长度为一|
 |char|汉字|char(8) 代表八个汉字，一个汉字长度为一|
 |num|数字|num(8) 代表八个数字，一个数字长度为一|
@@ -92,26 +93,37 @@ var tString_4 = tag`Hello ${ a + b } world ${ a * b}hahaha ${ a / b}`;
 |强硬方法|会改变字符串原始值|就是执行某个方法之后，`varName`原本所包含的内容会变化|
 |父字符串|原始的对象内容|就像上面`js`代码中`strString`,`oString`,`tString_1`|
 |子字符串|传入需要检索或者替换的参数值|就像上面`js`代码中`hello watermelon`|
+|不推荐使用|该特性是非标准的，请尽量不要在生产环境中使用它。|如果下面属性和方法的描述中出现这五个字，意思最好不要使用这个属性或者这个方法。|
+|已废弃|目前现行的几大主流浏览器都不支持了|如果下面属性和方法的描述中出现这三个字，意思你使用了这个一般会报错，或者直接返回undefined。|
 
-# 3. 字符串的原生属性
+# 3. 字符串的属性
 
-|特性名称| 是否可修改|
-|:---|:---|
-|writable|false|
-|enumerable|false|
-|configurable|false|
-
-> 提示
-
-所有 `String` 的`实例`都继承自 `String.prototype`. 任何`String.prototype`上的改变都会影响到所有的 `String` 实例。
+## 3.1 继承对象的属性
 
 |属性名|描述|使用方法|
 |:---|:---|:---|
 |constructor| 对创建对象的函数的引用（指针）。|varName.constructor|
-|proto|对象具有属性`__proto__`，可称为隐式原型，一个对象的隐式原型指向构造该对象的构造函数的原型。|`varName.__proto__`|
+|`__proto__`|对象具有属性`__proto__`，可称为隐式原型，一个对象的隐式原型指向构造该对象的构造函数的原型。|`varName.__proto__`|
 |length|字符串的长度。|varName.length|
+|`__count__`| `已废弃`，用来存放对象的可枚举的属性的个数|`varName.__count__`|
+|`__noSuchMethod__`|`已废弃`，属性曾经是指当调用某个对象里不存在的方法时即将被执行的函数，在`__noSuchMethod__`属性被移除之后，`ECMAScript 2015 (ES6)` 规范转而采用 `Proxy` 对象， 可以实现下面的效果（以及更多）。|`varName.__noSuchMethod__ = fun(id, args){}` @param1 id 调用的不存在的方法名 @param2 args 传递给该方法的参数数组|
+|`__parent__`|`已废弃`，指向一个对象的上下文，对于最顶层对象来说,这个属性的值就是全局对象`window`。|`varName.__parent__`|
 
-> constructor
+## 3.2 继承funciton的属性
+
+|属性名|描述|使用方法|
+|:---|:---|:---|
+|arguments| `不推荐使用`，属性代表传入函数的实参，它是一个类数组对象。已经被废弃很多年了，现在推荐的做法是使用函数内部可用的 `arguments` 对象来访问函数的实参。在函数递归调用的时候（在某一刻同一个函数运行了多次，也就是有多套实参），那么 `arguments` 属性的值是最近一次该函数调用时传入的实参。如果函数不在执行期间，那么该函数的 `arguments` 属性的值是 `null`。|objectName.arguments or functionName.arguments|
+|arity|`已废弃`，返回一个函数的形参数量，是一个古老的已经没有浏览器支持的属性,你应该使用`length`属性来代替.。|objectName.arity or functionName.arity|
+|caller| `不推荐使用`，如果一个函数`functionName`是在`全局作用域`内被调用的,则`functionName.caller`为`null`,相反,如果一个函数是在另外一个函数作用域内被调用的,则`functionName.caller`指向调用它的`那个函数`，该属性的常用形式`arguments.callee.caller`替代了被废弃的`arguments.caller`。|objectName.caller or functionName.caller|
+|displayName| `不推荐使用`，获取函数的显示名称。|objectName.displayName or functionName.displayName|
+|length|指明函数的形参个数，length 是函数对象的一个属性值，指该函数有多少个必须要传入的参数，即形参的个数。形参的数量不包括剩余参数个数，仅包括第一个具有默认值之前的参数个数。与之对比的是，arguments.length 是函数被调用时实际传参的个数。|objectName.length or functionName.length|
+|name|返回一个函数声明的名称，使用`new Function(...)`语法创建的函数或只是 `Function(...)` create Function对象及其名称为`anonymous`。|objectName.name or functionName.name|
+|prototype|函数对象具有属性`__proto__`，可称为隐式原型，一个对象的隐式原型指向构造该对象的构造函数的原型。|objectName.prototype or functionName.prototype|
+
+## 3.3  字符串的常用属性值
+
+### 3.3.1 constructor
 
 |变量名|调取方式|属性值|
 |:---|:---|:---|
@@ -122,7 +134,7 @@ var tString_4 = tag`Hello ${ a + b } world ${ a * b}hahaha ${ a / b}`;
 |`tString_3`| tString_3.constructor |[Function: String]|
 |`tString_4`| tString_4.constructor |[Function: String]|
 
-> __proto__
+### 3.3.2 __proto__
 
 |变量名|调取方式|属性值|
 |:---|:---|:---|
@@ -133,7 +145,7 @@ var tString_4 = tag`Hello ${ a + b } world ${ a * b}hahaha ${ a / b}`;
 |`tString_3`| `tString_3.__proto__` |[String: '']|
 |`tString_4`| `tString_4.__proto__` |[String: '']|
 
-> length
+### 3.3.3 length
 
 |变量名|调取方式|属性值|解释|
 |:---|:---|:---|:---|
@@ -143,6 +155,18 @@ var tString_4 = tag`Hello ${ a + b } world ${ a * b}hahaha ${ a / b}`;
 |`tString_2`| tString_2.length |41|letter(18)+num(2)+\s(4)+\t(4)+\n(1)|
 |`tString_3`| tString_3.length |25|letter(15)+num(4)+\s(4)+sign(1)+\n(1)|
 |`tString_4`| tString_4.length |10|char(9)+sign(1)|
+
+## 3.4 注意事项
+
+|特性名称| 是否可修改|
+|:---|:---|
+|writable|false|
+|enumerable|false|
+|configurable|false|
+
+> 提示
+
+所有 `String` 的`实例`都继承自 `String.prototype`. 任何`String.prototype`上的改变都会影响到所有的 `String` 实例。
 
 > 但是请注意由于每个`varName`的构造方法不同，所以在`instanceof`时候的结果不同，`instanceof` 运算符用来测试一个`对象`在其`原型链`中是否存在一个`构造函数`的 `prototype` 属性。
 
@@ -166,66 +190,27 @@ or object instanceof(constructor)
 
 # 4. 字符串对象的柔和方法
 
-## 4.1. 强制类型转化
+## 4.1. HTML相关方法
 
-|方法名|描述|使用方法|
-|:---|:---|:---|
-|String|强制类型转化，将其他类型的变量转化成`String`类型|String(varName)|
-
-|参数值|举例|转换结果|
-|:---|:---|:---|
-|负数|-1|-1|
-|空|null|null|
-|未定义|undefined|undefined|
-|非数值|NaN|NaN|
-|对象|new Object()|[object Object]|
-
-```javascript
-  //在大部分情况下String()和toString()效果相同
-  //但是 对 null 和 undefined 值强制类型转换可以生成字符串而不引发错误
-  // 而null 和 undefined 值强制使用toString()，却会引发错误
-  console.log(String(-0))//0
-  console.log(String(-1))//-1
-  console.log(String(null))//null
-  console.log(String(undefined))//undefined
-  console.log(String(NaN))//NaN
-
-  //将其他对象类型化成string类型的时候，其实传入String的值是每个对象原始的默认值
-  //object对象的默认值是object
-  //Boolean对象的默认值是false
-  //Number对象的默认值是0
-  //String对象的默认值是''
-  //Array对象的默认值是[]
-  //日期的默认值是当前日期
-  console.log(String(new Object()))//[object Object]
-  console.log(String(new Boolean()))//false
-  console.log(String(new Number()))//0
-  console.log(String(new String()))//""
-  console.log(String(new Array()))//""
-  console.log(String(new Date()))//Sat Nov 18 2017 15:45:07 GMT+0800 (CST)
-```
-
-## 4.2. HTML相关方法
-
-### 4.2.1 概述
+### 4.1.1 概述
 
 |方法名|描述|参数|
 |:---|:---|:---|
-|big()| 把字符串显示为大号字体，只在页面中才会有大两个字体号效果。|无|
-|small()| 把字符串显示为小号字体，只在页面中才会有小两个字体号效果。|无|
-|blink()| 把字符串显示闪动的字符串，目前没有看到有浏览器支持|无|
-|bold()| 把字符串显示粗体的字符串，只在页面中才会有粗体效果，IE不兼容。|无|
-|italics()|把字符串显示为斜体，只在页面中才会有效果。|无|
-|strike()| 把字符串显示为加了删除线的字符串，只在页面中才会有效果。|无|
-|fixed()| 把字符串显示为打字机文本显示的字符串，只在页面中才会有效果。|无|
-|sub()| 把字符串显示为下标，只在页面中才会有效果。|无|
-|sup()| 把字符串显示为上标，只在页面中才会有效果。|无|
-|anchor(anchorname)| 创建 `HTML` 锚。将字符串输出为有唯一标识的纯粹`a`标签，只在页面中才会有效果。| @para anchorname 必需，为锚定义名称。如果没有传入参数，则会输出一个`name`属性为`undefined`的`a`标签。|
-|link(url)| 把字符串显示为链接，只在页面中才会有效果。如果没有传入参数，则会输出一个href属性为`undefined`的a标签。| @para url必需，规定要链接的 URL。|
-|fontcolor(color)| 返回指定的颜色的字符串。只在页面中才会有效果如果没有传入参数，则会输出一个`color`属性为`undefined`的font标签。| @para  color必需。为字符串规定 font-color。该值必须是颜色名(red)、RGB 值(rgb(255,0,0))或者十六进制数(#FF0000)。|
-|fontsize(size)| 返回指定的字体大小的字符串。只在页面中才会有效果。如果没有传入参数，则会输出一个`size`属性为`undefined`的`font`标签。|  @para size 参数必须是从 1 至 7 的数字，数字越大字体越大。|
+|big()|  `不推荐使用`，把字符串显示为大号字体，只在页面中才会有大两个字体号效果。|无|
+|small()| `不推荐使用`， 把字符串显示为小号字体，只在页面中才会有小两个字体号效果。|无|
+|blink()| `不推荐使用`， 把字符串显示闪动的字符串，目前没有看到有浏览器支持|无|
+|bold()| `不推荐使用`， 把字符串显示粗体的字符串，只在页面中才会有粗体效果，IE不兼容。|无|
+|italics()| `不推荐使用`，把字符串显示为斜体，只在页面中才会有效果。|无|
+|strike()| `不推荐使用`， 把字符串显示为加了删除线的字符串，只在页面中才会有效果。|无|
+|fixed()| `不推荐使用`， 把字符串显示为打字机文本显示的字符串，只在页面中才会有效果。|无|
+|sub()|  `不推荐使用`，把字符串显示为下标，只在页面中才会有效果。|无|
+|sup()| `不推荐使用`， 把字符串显示为上标，只在页面中才会有效果。|无|
+|anchor(anchorname)|  `不推荐使用`，创建 `HTML` 锚。将字符串输出为有唯一标识的纯粹`a`标签，只在页面中才会有效果。| @para anchorname 必需，为锚定义名称。如果没有传入参数，则会输出一个`name`属性为`undefined`的`a`标签。|
+|link(url)| `不推荐使用`， 把字符串显示为链接，只在页面中才会有效果。如果没有传入参数，则会输出一个href属性为`undefined`的a标签。| @para url必需，规定要链接的 URL。|
+|fontcolor(color)| `不推荐使用`，返回指定的颜色的字符串。只在页面中才会有效果如果没有传入参数，则会输出一个`color`属性为`undefined`的font标签。| @para  color必需。为字符串规定 font-color。该值必须是颜色名(red)、RGB 值(rgb(255,0,0))或者十六进制数(#FF0000)。|
+|fontsize(size)| `不推荐使用`， 返回指定的字体大小的字符串。只在页面中才会有效果。如果没有传入参数，则会输出一个`size`属性为`undefined`的`font`标签。|  @para size 参数必须是从 1 至 7 的数字，数字越大字体越大。|
 
-### 4.2.2 详细
+### 4.1.2 详细
 
 > 1 big()
 
@@ -305,9 +290,68 @@ or object instanceof(constructor)
 |:---|:---|
 |varName.fontsize(param1)|`<font size="param1">varName_val</font>`|
 
-## 4.3. 数据比较相关方法
+## 4.2. 转换字符串大小写
+
+toLocaleLowerCase()   用于把字符串转换为小写，用于把字符串转换为小写，返回值 一个新的字符串，在其中 stringObject 的所有大写字符全部被转换为了小写字符，与 toLowerCase() 不同的是，toLocaleLowerCase() 方法按照本地方式把字符串转换为小写，只有几种语言（如土耳其语）具有地方特有的大小写映射，所有该方法的返回值通常与 toLowerCase() 一样。
+
+toLowerCase()   用于把字符串转换为小写，返回值 一个新的字符串，在其中 stringObject 的所有大写字符全部被转换为了小写字符。
+
+toLocaleUpperCase()  用于把字符串转换为大写，返回值 一个新的字符串，在其中 stringObject 的所有大写字符全部被转换为了大写字符，与 toUpperCase() 不同的是，toLocaleUpperCase() 方法按照本地方式把字符串转换为大写，只有几种语言（如土耳其语）具有地方特有的大小写映射，所有该方法的返回值通常与 toUpperCase() 一样。
+
+toUpperCase()  用于把字符串转换为大写，返回值 一个新的字符串，在其中 stringObject 的所有大写字符全部被转换为了大写字符。
+
+## 4.3. 字符串编码转换
+
+charAt() 返回在指定位置的字符，不提供参数就返回第一个字符的字符，提供游标值，就返回指定游标的字符
+
+charCodeAt() 返回在指定的位置的字符的 Unicode 编码，不提供参数就返回第一个字符的编码值，提供游标值，就返回指定游标的编码值
+
+## 4.4. 字符串数据比较
 
 # 5. 字符串对象的强硬方法
+
+## 5.1. 强制类型转化
+
+|方法名|描述|使用方法|
+|:---|:---|:---|
+|String|强制类型转化，将其他类型的变量转化成`String`类型|String(varName)|
+
+|参数值|举例|转换结果|
+|:---|:---|:---|
+|负数|-1|-1|
+|空|null|null|
+|未定义|undefined|undefined|
+|非数值|NaN|NaN|
+|对象|new Object()|[object Object]|
+
+```javascript
+  //在大部分情况下String()和toString()效果相同
+  //但是 对 null 和 undefined 值强制类型转换可以生成字符串而不引发错误
+  // 而null 和 undefined 值强制使用toString()，却会引发错误
+  console.log(String(-0))//0
+  console.log(String(-1))//-1
+  console.log(String(null))//null
+  console.log(String(undefined))//undefined
+  console.log(String(NaN))//NaN
+
+  //将其他对象类型化成string类型的时候，其实传入String的值是每个对象原始的默认值
+  //object对象的默认值是object
+  //Boolean对象的默认值是false
+  //Number对象的默认值是0
+  //String对象的默认值是''
+  //Array对象的默认值是[]
+  //日期的默认值是当前日期
+  console.log(String(new Object()))//[object Object]
+  console.log(String(new Boolean()))//false
+  console.log(String(new Number()))//0
+  console.log(String(new String()))//""
+  console.log(String(new Array()))//""
+  console.log(String(new Date()))//Sat Nov 18 2017 15:45:07 GMT+0800 (CST)
+```
+
+## 5.2. 强制类型转化
+
+### 5.3. 强制类型转化
 
 |方法名|描述|使用方法|
 |:---|:---|:---|

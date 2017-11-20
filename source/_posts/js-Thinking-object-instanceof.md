@@ -6,7 +6,7 @@ tags:
   - watermelon
   - 强制类型转换  
   - js_thinking
-date: 2017-10-22 00:00:00
+date: 2017-10-21 00:00:00
 ---
 # 1 js中强制类型转换
 
