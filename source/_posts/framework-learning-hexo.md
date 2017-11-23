@@ -206,7 +206,7 @@ subnav:
 
 ```bash
   # 现在本地预览效果
-  PS x:\xx\xxxx>hexo s
+  PS x:\xx\xxxx>hexo s --watch
   INFO  Start processing
   INFO  Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.
 
@@ -220,11 +220,11 @@ subnav:
 
 ## 3.1 git指令无效
 
-  环境变量没有正确配置
+  环境变量没有正确配置，请将git路径所在文件夹，配置到环境变量中
 
 ## 3.2 hexo指令无效
 
-  环境变量没有正确配置
+  环境变量没有正确配置，请将hexo路径所在文件夹，配置到环境变量中
 
 ## 3.3 上传到github上之后页面404
 
@@ -233,7 +233,6 @@ subnav:
     "dependencies": {
     "hexo": "^3.2.0",
     "hexo-deployer-git": "^0.3.1",
-    "hexo-deployer-heroku": "^0.1.2",
     "hexo-deployer-openshift": "^0.1.2",
     "hexo-deployer-rsync": "^0.1.3",
     "hexo-generator-archive": "^0.1.4",
@@ -279,6 +278,12 @@ subnav:
   cd themes/melon
   git pull
   ```
+
+## 3.5 全局安装了hexo但是命令无效
+
+我最近电脑刚换了系统（2017-11-23），全局安装的`hexo`是比较新的，全局安装完成之后，我在`cmd`中执行`hexo -v`，是正常的，但是在进入`blog`所在文件夹的时候，`hexo s --watch`指令不能正常使用，当时以为我打开文件夹的方式不对，最后测试得出，是一个`hexo`相关环境包`hexo-deployer-heroku`有问题，主要问题是`hexo-deployer-heroku`所依赖包中一个叫`swig`的包已经找不到了，所以这边找`hexo-deployer-heroku`的就找不到，然后导致`hexo`看到自己所依赖的包找不到，特别委屈巴巴，他就不想运行了，把`package.json`中`hexo-deployer-heroku`删掉就好了。
+
+这次错误主要是我使用指令的时候一般只关注`error`，不关注`warning`，其实在将远程仓库`clone`到本地之后，使用`cnpm install`的时候，就看到安装了17个环境包，没有关注下面的`warning`，再次执行`cnpm install`，`warning`不会再次出现，所以在第一次`warning`警告出现的时候，就需要仔细看一下，可能以后就不出现了，那之后就发现不了问题实质了。
 
 # 4. hexo的相关指令和参数
 
