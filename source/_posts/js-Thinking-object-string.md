@@ -95,7 +95,7 @@ var tString_4 = tag`Hello ${ a + b } world ${ a * b}hahaha ${ a / b}`;
 |子字符串|传入需要检索或者替换的参数值|就像上面`js`代码中`hello watermelon`|
 |不推荐使用|该特性是非标准的，请尽量不要在生产环境中使用它。|如果下面属性和方法的描述中出现这五个字，意思最好不要使用这个属性或者这个方法。|
 |已废弃|目前现行的几大主流浏览器都不支持了|如果下面属性和方法的描述中出现这三个字，意思你使用了这个一般会报错，或者直接返回undefined。|
-
+|测试中|此功能某些浏览器尚在开发中，请参考浏览器兼容性表格以得到在不同浏览器中适合使用的前缀。由于该功能对应的标准文档可能被重新修订，所以在未来版本的浏览器中该功能的语法和行为可能随之改变。|如果下面属性和方法的描述中出现这三个字，意思你使用了这个不一定被所有浏览器都兼容，最好不要使用这个属性或者这个方法。|
 # 3. 字符串的属性
 
 ## 3.1 继承对象的属性
@@ -290,23 +290,62 @@ or object instanceof(constructor)
 |:---|:---|
 |varName.fontsize(param1)|`<font size="param1">varName_val</font>`|
 
-## 4.2. 转换字符串大小写
+## 4.2. 编码
 
-toLocaleLowerCase()   用于把字符串转换为小写，用于把字符串转换为小写，返回值 一个新的字符串，在其中 stringObject 的所有大写字符全部被转换为了小写字符，与 toLowerCase() 不同的是，toLocaleLowerCase() 方法按照本地方式把字符串转换为小写，只有几种语言（如土耳其语）具有地方特有的大小写映射，所有该方法的返回值通常与 toLowerCase() 一样。
+String.prototype.charAt()
+返回特定位置的字符。
+String.prototype.charCodeAt()
+返回表示给定索引的字符的Unicode的值。
+String.prototype.codePointAt()
+返回使用UTF-16编码的给定位置的值的非负整数。
+String.prototype.normalize()
+返回调用字符串值的Unicode标准化形式。
+String.prototype.toSource() `test`
+返回一个对象文字代表着特定的对象。你可以使用这个返回值来创建新的对象。重写 Object.prototype.toSource 方法。
 
-toLowerCase()   用于把字符串转换为小写，返回值 一个新的字符串，在其中 stringObject 的所有大写字符全部被转换为了小写字符。
+## 4.3. 检索
 
-toLocaleUpperCase()  用于把字符串转换为大写，返回值 一个新的字符串，在其中 stringObject 的所有大写字符全部被转换为了大写字符，与 toUpperCase() 不同的是，toLocaleUpperCase() 方法按照本地方式把字符串转换为大写，只有几种语言（如土耳其语）具有地方特有的大小写映射，所有该方法的返回值通常与 toUpperCase() 一样。
+String.prototype.includes()
+判断一个字符串里是否包含其他字符串。
+String.prototype.endsWith()
+判断一个字符串的结尾是否包含其他字符串中的字符。
+String.prototype.indexOf()
+从字符串对象中返回首个被发现的给定值的索引值，如果没有找到则返回-1。
+String.prototype.lastIndexOf()
+从字符串对象中返回最后一个被发现的给定值的索引值，如果没有找到则返回-1。
+String.prototype.startsWith()
+判断字符串的起始位置是否匹配其他字符串中的字符。
 
-toUpperCase()  用于把字符串转换为大写，返回值 一个新的字符串，在其中 stringObject 的所有大写字符全部被转换为了大写字符。
+## 4.4. 比较
 
-## 4.3. 字符串编码转换
+String.prototype.localeCompare()
+返回一个数字表示是否引用字符串在排序中位于比较字符串的前面，后面，或者二者相同。
+String.prototype.match()
+使用正则表达式与字符串相比较。
 
-charAt() 返回在指定位置的字符，不提供参数就返回第一个字符的字符，提供游标值，就返回指定游标的字符
+## 4.5. 拼接
 
-charCodeAt() 返回在指定的位置的字符的 Unicode 编码，不提供参数就返回第一个字符的编码值，提供游标值，就返回指定游标的编码值
+String.prototype.concat()
+连接两个字符串文本，并返回一个新的字符串。
+String.prototype.padEnd()`warning`
+Pads the current string from the end with a given string to create a new string from a given length.
+String.prototype.padStart()`warning`
+Pads the current string from the start with a given string to create a new string from a given length.
+String.prototype.repeat()
+返回指定重复次数的由元素组成的字符串对象。
+String.prototype.quote()   `Delete`
+Wraps the string in double quotes (""").
 
-## 4.4. 字符串数据比较
+## 4.6. 大小写转换
+
+String.prototype.toLocaleLowerCase()
+根据当前区域设置，将符串中的字符转换成小写。对于大多数语言来说，toLowerCase的返回值是一致的。
+String.prototype.toLocaleUpperCase()
+根据当前区域设置，将字符串中的字符转换成大写，对于大多数语言来说，toUpperCase的返回值是一致的。
+String.prototype.toLowerCase()
+将字符串转换成小写并返回。
+String.prototype.toUpperCase()
+将字符串转换成大写并返回。
 
 # 5. 字符串对象的强硬方法
 
@@ -349,13 +388,41 @@ charCodeAt() 返回在指定的位置的字符的 Unicode 编码，不提供参�
   console.log(String(new Date()))//Sat Nov 18 2017 15:45:07 GMT+0800 (CST)
 ```
 
-## 5.2. 强制类型转化
+## 5.2. 替换
 
-### 5.3. 强制类型转化
+String.prototype.replace()
+被用来在正则表达式和字符串直接比较，然后用新的子串来替换被匹配的子串。
+String.prototype.search()
+对正则表达式和指定字符串进行匹配搜索，返回第一个出现的匹配项的下标。
 
-|方法名|描述|使用方法|
-|:---|:---|:---|
-|slice| 返回对应字符串中下标从param1到param2的的元素|varName.slice(param1,param2)|
+## 5.3. 分割
+
+String.prototype.slice()
+摘取一个字符串区域，返回一个新的字符串。
+String.prototype.split()
+通过分离字符串成字串，将字符串对象分割成字符串数组。
+String.prototype.substr()
+通过指定字符数返回在指定位置开始的字符串中的字符。
+String.prototype.substring()
+返回在字符串中指定两个下标之间的字符。
+
+## 5.4. 格式转化
+
+String.prototype.trim()
+从字符串的开始和结尾去除空格。参照部分 ECMAScript 5 标准。
+String.prototype.trimLeft()  `warning`
+从字符串的左侧去除空格。
+String.prototype.trimRight()  `warning`
+从字符串的右侧去除空格。
+
+String.prototype.toString()
+返回用字符串表示的特定对象。重写 Object.prototype.toString 方法。
+
+String.prototype.valueOf()
+返回特定对象的原始值。重写 Object.prototype.valueOf 方法。
+
+String.prototype[@@iterator]()
+Returns a new Iterator object that iterates over the code points of a String value, returning each code point as a String value.
 
 # 6. 字符串字面量的原型方法
 
