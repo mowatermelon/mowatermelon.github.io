@@ -5,25 +5,25 @@ tags:
   - string
   - watermelon
   - js_thinking
-date: 2017-10-22 00:00:00
+date: 2017-10-25 00:00:00
 ---
 # 1. 定义
 
-> 基本字符串
+## 1.1 基本字符串
 
-字符串字面量 (通过`单引号`或`双引号`定义) 和 直接调用 `String` 方法(没有通过 `new` 生成字符串对象实例)的字符串都是`基本字符串`。`基本字符串`是没有相关扩展方法，只有将`基本字符串`可转化为`字符串对象`之后才可以使用`字符串对象`的方法，当`基本字符串`需要调用一个`字符串对象`才有的`方法`或者查询`值`的时候，`JavaScript`会自动将`基本字符串`转换为`字符串对象`，并且调用相应的`方法`或者执行`查询`。
+字符串字面量 (通过单引号或双引号定义) 和 直接调用 String方法(没有通过 new 生成字符串对象实例)的字符串都是基本字符串。基本字符串是没有相关扩展方法，只有将基本字符串可转化为字符串对象之后才可以使用字符串对象的方法，当基本字符串需要调用一个字符串对象才有的方法或者查询值的时候，JavaScript会自动将基本字符串转换为字符串对象，并且调用相应的方法或者执行查询。
 
 <!-- more -->
 
-> 字符串对象
+## 1.2 字符串对象
 
-一个用于`字符串`或一个`字符序列`的`构造函数`。`字符串`对于可以保存以文本形式表示的数据非常有用。 一些常用的`字符串`操作有：查询字符串长度，使用 `+` 和 `+=` 运算符来`构建`和`连接字符串`，使用 `indexOf` 方法检查某一`子字符串`在`父字符串`中的位置，又或是使用 `substring` 方法提取从`父字符串`中提取`子字符串`。
+一个用于字符串或一个字符序列的构造函数。字符串对于可以保存以文本形式表示的数据非常有用。 一些常用的字符串操作有：查询字符串长度，使用 `+` 和 `+=` 运算符来构建和连接字符串，使用 indexOf 方法检查某一子字符串在父字符串中的位置，又或是使用substring方法提取从父字符串中提取子字符串。
 
-> 模板字符串
+## 1.3 模板字符串
 
-`模板字面量`/`Template literals` 是允许嵌入表达式的`字符串字面量`。你可以使用`多行字符串`和`字符串插值`功能。它们在`ES2015`规范的先前版本中被称为`模板字符串`/`template strings`。
+模板字面量/Template literals 是允许嵌入表达式的字符串字面量。你可以使用多行字符串和字符串插值功能。它们在ES2015规范的先前版本中被称为模板字符串/template strings。
 
-`模板字符串`使用反引号 (\` \`) 来代替`普通字符串`中的用`双引号`和`单引号`。`模板字符串`可以包含特定语法(`${expression}`)的`占位符`。`占位符`中的`表达式`和周围的`文本`会一起传递给一个`默认函数`，该函数负责将所有的部分连接起来，如果一个模板字符串由`表达式`开头，则该字符串被称为`带标签`的`模板字符串`，该表达式通常是一个`函数`，它会在模板字符串处理后被调用，在输出最终结果前，你都可以通过该`函数`来对模板字符串进行操作处理。在`模版字符串`内使用`反引号`（\`）时，需要在它前面加`转义符`（\）。
+模板字符串使用反引号 (\` \`) 来代替普通字符串中的用双引号和单引号。模板字符串可以包含特定语法(`${expression}`)的占位符。占位符中的表达式和周围的文本会一起传递给一个默认函数，该函数负责将所有的部分连接起来，如果一个模板字符串由表达式开头，则该字符串被称为带标签的模板字符串，该表达式通常是一个函数，它会在模板字符串处理后被调用，在输出最终结果前，你都可以通过该函数来对模板字符串进行操作处理。在模版字符串内使用反引号（\`）时，需要在它前面加转义符（\）。
 
 ```javascript
 `\`` === "`" // --> true
@@ -96,6 +96,7 @@ var tString_4 = tag`Hello ${ a + b } world ${ a * b}hahaha ${ a / b}`;
 |不推荐使用|该特性是非标准的，请尽量不要在生产环境中使用它。|如果下面属性和方法的描述中出现这五个字，意思最好不要使用这个属性或者这个方法。|
 |已废弃|目前现行的几大主流浏览器都不支持了|如果下面属性和方法的描述中出现这三个字，意思你使用了这个一般会报错，或者直接返回undefined。|
 |测试中|此功能某些浏览器尚在开发中，请参考浏览器兼容性表格以得到在不同浏览器中适合使用的前缀。由于该功能对应的标准文档可能被重新修订，所以在未来版本的浏览器中该功能的语法和行为可能随之改变。|如果下面属性和方法的描述中出现这三个字，意思你使用了这个不一定被所有浏览器都兼容，最好不要使用这个属性或者这个方法。|
+
 # 3. 字符串的属性
 
 ## 3.1 继承对象的属性
@@ -106,7 +107,7 @@ var tString_4 = tag`Hello ${ a + b } world ${ a * b}hahaha ${ a / b}`;
 |`__proto__`|对象具有属性`__proto__`，可称为隐式原型，一个对象的隐式原型指向构造该对象的构造函数的原型。|`varName.__proto__`|
 |length|字符串的长度。|varName.length|
 |`__count__`| `已废弃`，用来存放对象的可枚举的属性的个数|`varName.__count__`|
-|`__noSuchMethod__`|`已废弃`，属性曾经是指当调用某个对象里不存在的方法时即将被执行的函数，在`__noSuchMethod__`属性被移除之后，`ECMAScript 2015 (ES6)` 规范转而采用 `Proxy` 对象， 可以实现下面的效果（以及更多）。|`varName.__noSuchMethod__ = fun(id, args){}` @param1 id 调用的不存在的方法名 @param2 args 传递给该方法的参数数组|
+|`__noSuchMethod__`|`已废弃`，属性曾经是指当调用某个对象里不存在的方法时即将被执行的函数，在`__noSuchMethod__`属性被移除之后，`ECMAScript 2015 (ES6)` 规范转而采用 `Proxy` 对象。|`varName.__noSuchMethod__ = fun(id, args){}` @param1 id 调用的不存在的方法名 @param2 args 传递给该方法的参数数组|
 |`__parent__`|`已废弃`，指向一个对象的上下文，对于最顶层对象来说,这个属性的值就是全局对象`window`。|`varName.__parent__`|
 
 ## 3.2 继承funciton的属性
@@ -292,60 +293,195 @@ or object instanceof(constructor)
 
 ## 4.2. 编码
 
-String.prototype.charAt()
-返回特定位置的字符。
-String.prototype.charCodeAt()
-返回表示给定索引的字符的Unicode的值。
-String.prototype.codePointAt()
-返回使用UTF-16编码的给定位置的值的非负整数。
-String.prototype.normalize()
-返回调用字符串值的Unicode标准化形式。
-String.prototype.toSource() `test`
-返回一个对象文字代表着特定的对象。你可以使用这个返回值来创建新的对象。重写 Object.prototype.toSource 方法。
+### 4.2.1 概述
+
+|方法名|描述|参数|
+|:---|:---|:---|
+|charAt()|  `不推荐使用`，返回特定位置的字符。|无|
+|charCodeAt()| `不推荐使用`， 返回表示给定索引的字符的Unicode的值。|无|
+|codePointAt()| `不推荐使用`， 返回使用UTF-16编码的给定位置的值的非负整数。|无|
+|normalize()| `不推荐使用`， 返回调用字符串值的Unicode标准化形式。|无|
+|toSource()| `测试中`，返回一个对象文字代表着特定的对象。你可以使用这个返回值来创建新的对象。重写 `Object.prototype.toSource` 方法。|无|
+
+### 4.2.2 详细
+
+> 1 charAt()
+
+|使用方法|结果|
+|:---|:---|
+|varName.charAt()||
+
+> 2 charCodeAt()
+
+|使用方法|结果|
+|:---|:---|
+|varName.charCodeAt()||
+
+> 3 codePointAt()
+
+|使用方法|结果|
+|:---|:---|
+|varName.codePointAt()||
+
+> 4 normalize()
+
+|使用方法|结果|
+|:---|:---|
+|varName.normalize()||
+
+> 5 toSource()
+
+|使用方法|结果|
+|:---|:---|
+|varName.toSource()||
 
 ## 4.3. 检索
 
-String.prototype.includes()
-判断一个字符串里是否包含其他字符串。
-String.prototype.endsWith()
-判断一个字符串的结尾是否包含其他字符串中的字符。
-String.prototype.indexOf()
-从字符串对象中返回首个被发现的给定值的索引值，如果没有找到则返回-1。
-String.prototype.lastIndexOf()
-从字符串对象中返回最后一个被发现的给定值的索引值，如果没有找到则返回-1。
-String.prototype.startsWith()
-判断字符串的起始位置是否匹配其他字符串中的字符。
+### 4.3.1 概述
+
+|方法名|描述|参数|
+|:---|:---|:---|
+|includes()|  `不推荐使用`，判断一个字符串里是否包含其他字符串。|无|
+|endsWith()| `不推荐使用`， 判断一个字符串的结尾是否包含其他字符串中的字符。|无|
+|indexOf()| 从字符串对象中返回首个被发现的给定值的索引值，如果没有找到则返回-1。|无|
+|lastIndexOf()|  从字符串对象中返回最后一个被发现的给定值的索引值，如果没有找到则返回-1。|无|
+|startsWith()| `不推荐使用`，判断字符串的起始位置是否匹配其他字符串中的字符。|无|
+
+### 4.3.2 详细
+
+> 1 includes()
+
+|使用方法|结果|
+|:---|:---|
+|varName.includes()||
+
+> 2 endsWith()
+
+|使用方法|结果|
+|:---|:---|
+|varName.endsWith()||
+
+> 3 indexOf()
+
+|使用方法|结果|
+|:---|:---|
+|varName.indexOf()||
+
+> 4 lastIndexOf()
+
+|使用方法|结果|
+|:---|:---|
+|varName.lastIndexOf()||
+
+> 5 startsWith()
+
+|使用方法|结果|
+|:---|:---|
+|varName.startsWith()||
 
 ## 4.4. 比较
 
-String.prototype.localeCompare()
-返回一个数字表示是否引用字符串在排序中位于比较字符串的前面，后面，或者二者相同。
-String.prototype.match()
-使用正则表达式与字符串相比较。
+### 4.4.1 概述
+
+|方法名|描述|参数|
+|:---|:---|:---|
+|localeCompare()|  返回一个数字表示是否引用字符串在排序中位于比较字符串的前面，后面，或者二者相同。|无|
+|match()| 使用正则表达式与字符串相比较。|无|
+
+### 4.4.2 详细
+
+> 1 localeCompare()
+
+|使用方法|结果|
+|:---|:---|
+|varName.localeCompare()||
+
+> 2 match()
+
+|使用方法|结果|
+|:---|:---|
+|varName.match()||
 
 ## 4.5. 拼接
 
-String.prototype.concat()
-连接两个字符串文本，并返回一个新的字符串。
-String.prototype.padEnd()`warning`
-Pads the current string from the end with a given string to create a new string from a given length.
-String.prototype.padStart()`warning`
-Pads the current string from the start with a given string to create a new string from a given length.
-String.prototype.repeat()
-返回指定重复次数的由元素组成的字符串对象。
-String.prototype.quote()   `Delete`
-Wraps the string in double quotes (""").
+### 4.5.1 概述
+
+|方法名|描述|参数|
+|:---|:---|:---|
+|concat()|  连接两个字符串文本，并返回一个新的字符串。|无|
+|padEnd()| `不推荐使用`， 从给定字符串的末端填充当前字符串，以从给定长度创建新字符串。|无|
+|padStart()| `不推荐使用`， 从一个给定字符串开始填充当前字符串，从给定长度创建一个新字符串。|无|
+|repeat()| `不推荐使用`，返回指定重复次数的由元素组成的字符串对象。|无|
+|quote()| `已废弃`，用双引号（“”）包装字符串。|无|
+
+### 4.5.2 详细
+
+> 1 concat()
+
+|使用方法|结果|
+|:---|:---|
+|varName.concat()||
+
+> 2 padEnd()
+
+|使用方法|结果|
+|:---|:---|
+|varName.padEnd()||
+
+> 3 padStart()
+
+|使用方法|结果|
+|:---|:---|
+|varName.padStart()||
+
+> 4 repeat()
+
+|使用方法|结果|
+|:---|:---|
+|varName.repeat()||
+
+> 5 quote()
+
+|使用方法|结果|
+|:---|:---|
+|varName.quote()||
 
 ## 4.6. 大小写转换
 
-String.prototype.toLocaleLowerCase()
-根据当前区域设置，将符串中的字符转换成小写。对于大多数语言来说，toLowerCase的返回值是一致的。
-String.prototype.toLocaleUpperCase()
-根据当前区域设置，将字符串中的字符转换成大写，对于大多数语言来说，toUpperCase的返回值是一致的。
-String.prototype.toLowerCase()
-将字符串转换成小写并返回。
-String.prototype.toUpperCase()
-将字符串转换成大写并返回。
+### 4.6.1 概述
+
+|方法名|描述|参数|
+|:---|:---|:---|
+|toLowerCase()| 将字符串转换成小写并返回。|无|
+|toLocaleLowerCase()|根据当前区域设置，将符串中的字符转换成小写。对于大多数语言来说，toLowerCase的返回值是一致的。|无|
+|toUpperCase()| 将字符串转换成大写并返回。|无|
+|toLocaleUpperCase()| 根据当前区域设置，将字符串中的字符转换成大写，对于大多数语言来说，toUpperCase的返回值是一致的。|无|
+
+### 4.6.2 详细
+
+> 1 toLowerCase()
+
+|使用方法|结果|
+|:---|:---|
+|varName.toLowerCase()||
+
+> 2 toLocaleLowerCase()
+
+|使用方法|结果|
+|:---|:---|
+|varName.toLocaleLowerCase()||
+
+> 3 toUpperCase()
+
+|使用方法|结果|
+|:---|:---|
+|varName.toUpperCase()||
+
+> 4 toLocaleUpperCase()
+
+|使用方法|结果|
+|:---|:---|
+|varName.toLocaleUpperCase()||
 
 # 5. 字符串对象的强硬方法
 
@@ -390,39 +526,123 @@ String.prototype.toUpperCase()
 
 ## 5.2. 替换
 
-String.prototype.replace()
-被用来在正则表达式和字符串直接比较，然后用新的子串来替换被匹配的子串。
-String.prototype.search()
-对正则表达式和指定字符串进行匹配搜索，返回第一个出现的匹配项的下标。
+### 5.2.1 概述
+
+|方法名|描述|参数|
+|:---|:---|:---|
+|replace()|  被用来在正则表达式和字符串直接比较，然后用新的子串来替换被匹配的子串。|无|
+|search()| 对正则表达式和指定字符串进行匹配搜索，返回第一个出现的匹配项的下标。|无|
+
+### 5.2.2 详细
+
+> 1 replace()
+
+|使用方法|结果|
+|:---|:---|
+|varName.replace()||
+
+> 2 search()
+
+|使用方法|结果|
+|:---|:---|
+|varName.search()||
 
 ## 5.3. 分割
 
-String.prototype.slice()
-摘取一个字符串区域，返回一个新的字符串。
-String.prototype.split()
-通过分离字符串成字串，将字符串对象分割成字符串数组。
-String.prototype.substr()
-通过指定字符数返回在指定位置开始的字符串中的字符。
-String.prototype.substring()
-返回在字符串中指定两个下标之间的字符。
+### 5.3.1 概述
+
+|方法名|描述|参数|
+|:---|:---|:---|
+|slice()|  摘取一个字符串区域，返回一个新的字符串。|无|
+|split()| 通过分离字符串成字串，将字符串对象分割成字符串数组。|无|
+|substr()| 通过指定字符数返回在指定位置开始的字符串中的字符。|无|
+|substring()| 返回在字符串中指定两个下标之间的字符。|无|
+
+### 5.3.2 详细
+
+> 1 slice()
+
+|使用方法|结果|
+|:---|:---|
+|varName.slice()||
+
+> 2 split()
+
+|使用方法|结果|
+|:---|:---|
+|varName.split()||
+
+> 3 substr()
+
+|使用方法|结果|
+|:---|:---|
+|varName.substr()||
+
+> 4 substring()
+
+|使用方法|结果|
+|:---|:---|
+|varName.substring()||
 
 ## 5.4. 格式转化
 
-String.prototype.trim()
-从字符串的开始和结尾去除空格。参照部分 ECMAScript 5 标准。
-String.prototype.trimLeft()  `warning`
-从字符串的左侧去除空格。
-String.prototype.trimRight()  `warning`
-从字符串的右侧去除空格。
+### 5.4.1 概述
 
-String.prototype.toString()
-返回用字符串表示的特定对象。重写 Object.prototype.toString 方法。
+|方法名|描述|参数|
+|:---|:---|:---|
+|trim()|  `不推荐使用`，从字符串的开始和结尾去除空格。参照部分 ECMAScript 5 标准。|无|
+|trimLeft()| `不推荐使用`， 从字符串的左侧去除空格。|无|
+|trimRight()| `不推荐使用`， 从字符串的右侧去除空格。|无|
 
-String.prototype.valueOf()
-返回特定对象的原始值。重写 Object.prototype.valueOf 方法。
+### 5.4.2 详细
 
-String.prototype[@@iterator]()
-Returns a new Iterator object that iterates over the code points of a String value, returning each code point as a String value.
+> 1 trim()
+
+|使用方法|结果|
+|:---|:---|
+|varName.trim()||
+
+> 2 trimLeft()
+
+|使用方法|结果|
+|:---|:---|
+|varName.trimLeft()||
+
+> 3 trimRight()
+
+|使用方法|结果|
+|:---|:---|
+|varName.trimRight()||
+
+## 5.5. 对象通用方法
+
+### 5.5.1 概述
+
+|方法名|描述|参数|
+|:---|:---|:---|
+|toString()|  `不推荐使用`，返回用字符串表示的特定对象。重写 Object.prototype.toString 方法。|无|
+|valueOf()| `不推荐使用`， 返回特定对象的原始值。重写 Object.prototype.valueOf 方法。|无|
+|`[@@iterator]()`| `不推荐使用`，返回一个新的迭代器对象遍历一个字符串值的代码，每个代码点返回一个字符串值。|无|
+
+### 5.5.2 详细
+
+> 1 toString()
+
+|使用方法|结果|
+|:---|:---|
+|varName.toString()||
+
+> 2 valueOf()
+
+|使用方法|结果|
+|:---|:---|
+|varName.valueOf()||
+
+> 3 `[@@iterator]()`
+
+|使用方法|结果|
+|:---|:---|
+|varName[0]||
 
 # 6. 字符串字面量的原型方法
 
