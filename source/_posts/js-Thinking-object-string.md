@@ -301,7 +301,8 @@ or object instanceof(constructor)
 |charCodeAt()| `不推荐使用`， 返回表示给定索引的字符的Unicode的值。|无|
 |codePointAt()| `不推荐使用`， 返回使用UTF-16编码的给定位置的值的非负整数。|无|
 |normalize()| `不推荐使用`， 返回调用字符串值的Unicode标准化形式。|无|
-|toSource()| `测试中`，返回一个对象文字代表着特定的对象。你可以使用这个返回值来创建新的对象。重写 `Object.prototype.toSource` 方法。|无|
+|fromCharCode()| `不推荐使用`， 返回一个字符串，而不是一个 String 对象。由于 fromCharCode 是 String 的静态方法，所以应该像这样使用：String.fromCharCode()，而不是作为你创建的 String 对象的方法。|num1, ..., numN|
+|fromCodePoint()| `不推荐使用`， 返回使用 Unicode 编码创建的字符串，如果传入无效的 Unicode 编码，将会抛出一个RangeError (例如： "RangeError: NaN is not a valid code point")。。|num1, ..., numN|
 
 ### 4.2.2 详细
 
@@ -329,11 +330,20 @@ or object instanceof(constructor)
 |:---|:---|
 |varName.normalize()||
 
-> 5 toSource()
+> 5 fromCharCode()
+
+尽管绝大部分常用的 Unicode 值可以用一个 16-bit 数字表示（正如 JavaScript 标准化过程早期），并且对于绝大部分值 fromCharCode() 返回一个字符（即对于绝大部分字符 UCS-2 值是 UTF-16 的子集），但是为了处理所有的 Unicode 值（至 21 bits），只用 fromCharCode() 是不足的。
+由于高位编码字符是用两个低位编码（lower value）表示形成的一个字符，因此String.fromCodePoint() （ES6 草案的一部分）被用来返回这样一对低位编码，从而可以完全表示这些高位编码字符。
 
 |使用方法|结果|
 |:---|:---|
-|varName.toSource()||
+|objectName.fromCharCode(num1[, ...[, numN]])||
+
+> 6 fromCodePoint()
+
+|使用方法|结果|
+|:---|:---|
+|objectName.fromCodePoint(num1[, ...[, numN]])||
 
 ## 4.3. 检索
 
@@ -621,8 +631,20 @@ or object instanceof(constructor)
 |方法名|描述|参数|
 |:---|:---|:---|
 |toString()|  `不推荐使用`，返回用字符串表示的特定对象。重写 Object.prototype.toString 方法。|无|
+|toLocaleString()|  `不推荐使用`，返回用字符串表示的特定对象。|无|
 |valueOf()| `不推荐使用`， 返回特定对象的原始值。重写 Object.prototype.valueOf 方法。|无|
+|toSource()| `测试中`，返回一个对象文字代表着特定的对象。你可以使用这个返回值来创建新的对象。重写 `Object.prototype.toSource` 方法。|无|
 |`[@@iterator]()`| `不推荐使用`，返回一个新的迭代器对象遍历一个字符串值的代码，每个代码点返回一个字符串值。|无|
+|`__defineGetter__()`|  `不推荐使用`|无|
+|`__defineSetter__()`|  `不推荐使用`|无|
+|`__lookupGetter__()`|  `不推荐使用`|无|
+|`__lookupSetter__()`|   `不推荐使用`|无|
+|hasOwnProperty()|   `不推荐使用`|无|
+|isPrototypeOf()|   `不推荐使用`|无|
+|setPrototypeOf()|   `不推荐使用`|无|
+|unwatch()|   `不推荐使用`|无|
+|watch()|   `不推荐使用`|无|
+|propertyIsEnumerable()|   `不推荐使用`|无|
 
 ### 5.5.2 详细
 
@@ -632,19 +654,107 @@ or object instanceof(constructor)
 |:---|:---|
 |varName.toString()||
 
-> 2 valueOf()
+> 2 toLocaleString()
+
+|使用方法|结果|
+|:---|:---|
+|varName.toLocaleString()||
+
+> 3 valueOf()
 
 |使用方法|结果|
 |:---|:---|
 |varName.valueOf()||
 
-> 3 `[@@iterator]()`
+> 4 `[@@iterator]()`
 
 |使用方法|结果|
 |:---|:---|
 |varName[0]||
 
+> 5 toSource()
+
+|使用方法|结果|
+|:---|:---|
+|varName.toSource()||
+
+> 6 `__defineGetter__()`
+
+|使用方法|结果|
+|:---|:---|
+|varName.toString()||
+
+> 7 `__defineSetter__()`
+
+|使用方法|结果|
+|:---|:---|
+|varName.valueOf()||
+
+> 8 `__lookupGetter__()`
+
+|使用方法|结果|
+|:---|:---|
+|varName[0]||
+
+> 9 `__lookupSetter__()`
+
+|使用方法|结果|
+|:---|:---|
+|varName.toSource()||
+
+> 10 hasOwnProperty()
+
+|使用方法|结果|
+|:---|:---|
+|varName.toString()||
+
+> 11 isPrototypeOf()
+
+|使用方法|结果|
+|:---|:---|
+|varName.valueOf()||
+
+> 12 setPrototypeOf()
+
+|使用方法|结果|
+|:---|:---|
+|varName[0]||
+
+> 13 unwatch()
+
+|使用方法|结果|
+|:---|:---|
+|varName.toSource()||
+
+> 14 watch()
+
+|使用方法|结果|
+|:---|:---|
+|varName[0]||
+
+> 15 propertyIsEnumerable()
+
+|使用方法|结果|
+|:---|:---|
+|varName.toSource()||
+
 # 6. 字符串字面量的原型方法
+
+## 6.1 概述
+
+|方法名|描述|参数|
+|:---|:---|:---|
+|raw()|  一个模板字符串的标签函数，它的作用类似于 Python 中的字符串前缀 r 和 C# 中的字符串前缀 @，是用来获取一个模板字符串的原始字面量值的。|@param1 callSite 一个模板字符串的`调用点对象`。@param2 ...substitutions 任意个可选的参数，表示任意个内插表达式对应的值。|
+
+## 6.2 详细
+
+> 1 raw()
+
+如果第一个参数没有传入一个格式良好的调用点对象，则会抛出 TypeError 异常。
+
+|使用方法|结果|
+|:---|:---|
+|objectName.raw(callSite, ...substitutions)||
 
 # 7 参考网站
 

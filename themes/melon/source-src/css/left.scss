@@ -1,6 +1,7 @@
 .left-col {
-	background: #fff;
-	width: 300px;
+  background: #ffffff;
+  box-shadow: 0 0 9px #696969;
+	width: 250px;
 	position:fixed;
 	opacity:1;
 	transition:all .2s ease-in;
@@ -59,7 +60,7 @@
 				cursor: default;
 				a{
 					font-size: 14px;
-					min-width: 300px;
+					min-width: 250px;
 				}
 			}
 		}

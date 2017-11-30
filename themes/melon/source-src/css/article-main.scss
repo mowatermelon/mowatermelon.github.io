@@ -57,10 +57,10 @@
 .article {
   margin: 30px;
   position: relative;
-  border: 1px solid #ddd;
+  /*border: 1px dotted rgba(7, 148, 199, 0.25882352941176473);
   border-top: 1px solid #fff;
-  border-bottom: 1px solid #fff;
-  background: #fff;
+  border-bottom: 1px solid #fff;*/
+  background: #ffffff;
   transition: all 0.2s ease-in;
 /*   &.show{
     visibility: visible;
@@ -79,20 +79,23 @@
 .article-inner h1.article-title, .article-title {
   color: #696969;
   margin-left: 0px;
-  font-weight: 300;
   line-height: 35px;
   margin-bottom: 20px;
   font-size: 26px;
+  font-weight: bolder;
+  letter-spacing: 0.2em;
   -webkit-transition: color 0.3s;
   -moz-transition: color 0.3s;
   -o-transition: color 0.3s;
   transition: color 0.3s;
+  text-align: center;
 }
 
 .article-header{
   border-left: 5px solid #0794c7;
   padding: 30px 0px 15px 25px;
-  padding-left: 7.6923%;
+  padding-left: $articlePadding;
+  text-align: center;
 }
 
 .article-meta{

@@ -29,6 +29,41 @@ git pull
 
 # 4 完整配置说明
 
+- 1、请确保node版本大于6.2
+- 2、在博客根目录（注意不是melon根目录）执行以下命令：
+
+```bash
+npm i hexo-generator-json-content --save
+```
+
+- 3、在根目录`_config.yml`里添加配置：
+
+__请根据自己的实际情况进行配置参数的值，除去一定要配置成`false`或者`true`的，其他的如果不想显示可以设置为`false`。__
+
+```bash
+# melon plug
+jsonContent:
+  meta: false # 这个值一定要设置为false，要不然文章页面列表不会正常显示
+  pages: false # 这个值一定要设置为false，要不然文章页面列表不会正常显示
+  posts:
+    title: true # 是否显示文章标题，这个值一定要设置为true，否则页面会显示内容找不到模块缺少
+    date: true # 是否显示文章编写日期，这个值一定要设置为true，否则页面会显示NaN-NaN-NaN
+    path: true # 是否关联文章路径，这个值一定要设置为true，要不然在点击文章列表是不能进行页面跳转的
+    text: true
+    raw: true
+    content: true
+    slug: true
+    updated: true # 是否显示文章提交日期
+    comments: true
+    link: true
+    permalink: true
+    excerpt: true #是否能够进行链接跳转
+    categories: true # 预留的是否支持通过categories类别进行搜索，目前没有实现
+    tags: true # 是否显示文章所包含的tags标签，这个一定要设置为true，如果设置为false之后通过标签云搜索功能就没有了
+```
+
+- 4、在`melon`文件夹下`_config.yml`的配置说明
+
 ```bash
 # Header
 
@@ -46,7 +81,7 @@ subnav:
   github: "https://github.com/mowatermelon"
   #weibo: "#"
   #rss: "#"
-  zhihu: "https://www.zhihu.com/people/wu-mo-61-63/activities"
+  #zhihu: ""
   #qq: "#"
   #weixin: "#"
   #jianshu: "#"
@@ -149,7 +184,7 @@ disqus: false
 # 样式定制 - 一般不需要修改，除非有很强的定制欲望…
 style:
   # 头像上面的背景颜色
-  header: '##00bcd4'
+  header: '#00bcd4'
   # 右滑板块背景
   slider: 'linear-gradient(200deg,#a0cfe4,#e8c37e)'
 
@@ -198,10 +233,33 @@ aboutme: welcome to my home
       <% if (asset.indexOf('demo') >= 0) { %>
       <% var demo = asset %>
       <% } %>
-      
+
     <% } %>
     loadScript("<%= left %>config.root<%= right %><%= right2 %><%= slider %>")
     loadScript("<%= left %>config.root<%= right %><%= right2 %><%= demo %>")
 ```
 
-# 6 欢迎前来进行交流沟通
+# 6 搜索框支持搜索方式
+
+- 直接输入文字，是进行文章标题匹配
+- 先输入`#`，然后再输入文字，是进行文章tag匹配
+
+# 7 添加了一个功能-----20170910
+
+- 添加了通过文章内容进行检索，在搜索框下先使用`/`，就是告诉现在是要对文章内容进行匹配搜索
+- 修改了`gitment`和返回顶部的样式冲突
+- 修改了`code`高亮的效果
+- 修改了默认的`上一页`和`下一页`的`提示效果`
+- 修改了文字截断部分的`提示效果`
+
+# 8 解决bug-----20170913
+
+- 解决了`gitment`文字内容和`返回顶部`与`toc按钮`位置冲突的问题
+- 统一了页面整体效果，大部分有背景色的内容弯曲弧度都是百分百。
+- 修改了`toc弹窗`默认的高度，减去不用的高度
+
+# 9 尝试重新配色-----20171130
+
+- 修改了页面一些样式展示，修改了主色调，嗯，感觉越改越。
+
+# 10 欢迎前来进行交流沟通
