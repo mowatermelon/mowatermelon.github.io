@@ -37,7 +37,15 @@ date: 2017-10-25 00:00:00
 var a = 4;
 var b = 8;
 var strString = "hello watermelon";
+var oo = new Object();
 var oString = new String("hello world");
+var oBool = new Boolean(true);
+var oNum = new Number(68);
+var oArray = new Array("demo","melon","water");
+var oDate = new Date();
+//D800-DBFF UTF-16的高半区 High-half zone of UTF-16
+//DC00-DFFF UTF-16的低半区 Low-half zone of UTF-16
+var oString_1 = 'A \uD87E\uDC04 Z';
 var tString_1 =`hello Template`;
 var tString_2 =`hello line 1
  hello line 2`;
@@ -60,6 +68,7 @@ function tag(strings, ...values) {
 
 console.log(strString);//hello watermelon
 console.log(oString);//[String: 'hello world']
+console.log(oString_1);//A 你 Z   中间不在BMP中的字符，会显示乱码
 console.log(tString_1);//hello Template
 //打印出来会保留原格式 比如原有的换行和缩进
 console.log(tString_2);//hello Template line 1 \n \t hello Template line 2
@@ -81,6 +90,8 @@ var tString_4 = tag`Hello ${ a + b } world ${ a * b}hahaha ${ a / b}`;
 |varName| 相关对象类型实例化后的变量名 |就像上面`js`代码中`strString`,`oString`,`tString_1`|
 |varName_val| 相关对象类型实例化后的实际内容 |就像上面`js`代码中`hello watermelon`|
 |functionName|函数名称|就像上文的`tag`|
+|BMP|基本多文种平面（Basic Multilingual Plane），或称第0平面或0号平面（Plane 0），是`Unicode`中的一个编码区段。编码从`U+0000`至`U+FFFF`。
+现版本为修订10.0.0版，2017年6月20日出版。|无举例|
 |letter|字母|letter(8) 代表八个子母，一个字母长度为一|
 |char|汉字|char(8) 代表八个汉字，一个汉字长度为一|
 |num|数字|num(8) 代表八个数字，一个数字长度为一|
@@ -88,11 +99,13 @@ var tString_4 = tag`Hello ${ a + b } world ${ a * b}hahaha ${ a / b}`;
 |\s|空格符|\s(8) 代表八个空格符，一个空格符长度为一|
 |\t|缩进符|\t(8) 代表八个缩进符，一个缩进符长度为四|
 |\n|换行符|\n(8) 代表八个换行符，一个换行符长度为一|
+|\u|换行符|\u(8) 代表八个非BMP字符，一个非BMP字符长度为二|
 |param1,param2,param3,...,paramN|函数中需要传入第一个到第N个的参数值 |就像上面`js`代码中`hello world`|
 |柔和方法|不会改变字符串原始值|就是执行某个方法之后，`varName`原本所包含的内容不会变化|
 |强硬方法|会改变字符串原始值|就是执行某个方法之后，`varName`原本所包含的内容会变化|
 |父字符串|原始的对象内容|就像上面`js`代码中`strString`,`oString`,`tString_1`|
 |子字符串|传入需要检索或者替换的参数值|就像上面`js`代码中`hello watermelon`|
+|接受负值参|函数接受负值的参数，并且可以正常处理返回对应的值|如果方法的描述中出现这五个字，则代表这个方法接受负值参数，如果没有出现，则代表不接受，请注意|
 |不推荐使用|该特性是非标准的，请尽量不要在生产环境中使用它。|如果下面属性和方法的描述中出现这五个字，意思最好不要使用这个属性或者这个方法。|
 |已废弃|目前现行的几大主流浏览器都不支持了|如果下面属性和方法的描述中出现这三个字，意思你使用了这个一般会报错，或者直接返回undefined。|
 |测试中|此功能某些浏览器尚在开发中，请参考浏览器兼容性表格以得到在不同浏览器中适合使用的前缀。由于该功能对应的标准文档可能被重新修订，所以在未来版本的浏览器中该功能的语法和行为可能随之改变。|如果下面属性和方法的描述中出现这三个字，意思你使用了这个不一定被所有浏览器都兼容，最好不要使用这个属性或者这个方法。|
@@ -130,6 +143,7 @@ var tString_4 = tag`Hello ${ a + b } world ${ a * b}hahaha ${ a / b}`;
 |:---|:---|:---|
 |strString| strString.constructor |[Function: String]|
 |oString| oString.constructor |[Function: String]|
+|`oString_1`| oString_1.constructor |[Function: String]|
 |`tString_1`| tString_1.constructor |[Function: String]|
 |`tString_2`| tString_2.constructor |[Function: String]|
 |`tString_3`| tString_3.constructor |[Function: String]|
@@ -141,6 +155,7 @@ var tString_4 = tag`Hello ${ a + b } world ${ a * b}hahaha ${ a / b}`;
 |:---|:---|:---|
 |strString| `strString.__proto__` |[String: '']|
 |oString| `oString.__proto__` |[String: '']|
+|`oString_1`| `oString_1.__proto__` |[String: '']|
 |`tString_1`| `tString_1.__proto__` |[String: '']|
 |`tString_2`| `tString_2.__proto__` |[String: '']|
 |`tString_3`| `tString_3.__proto__` |[String: '']|
@@ -152,6 +167,7 @@ var tString_4 = tag`Hello ${ a + b } world ${ a * b}hahaha ${ a / b}`;
 |:---|:---|:---|:---|
 |strString| strString.length |16|letter(15)+\s(1)|
 |oString| oString.length |11|letter(10)+\s(1)|
+|`oString_1`| oString_1.length |6|letter(2)+\s(2)+\u(1)|
 |`tString_1`| tString_1.length |14|letter(13)+\s(1)|
 |`tString_2`| tString_2.length |41|letter(18)+num(2)+\s(4)+\t(4)+\n(1)|
 |`tString_3`| tString_3.length |25|letter(15)+num(4)+\s(4)+sign(1)+\n(1)|
@@ -297,8 +313,8 @@ or object instanceof(constructor)
 
 |方法名|描述|参数|
 |:---|:---|:---|
-|charAt()|  `不推荐使用`，返回特定位置的字符。|无|
-|charCodeAt()| `不推荐使用`， 返回表示给定索引的字符的Unicode的值。|无|
+|charAt(index)|  返回特定位置的字符，不提供参数就返回第一个字符的字符，提供游标值，就返回指定游标的字符| @para index 非必需，一个介于0 和字符串长度减1之间的正整数。 (0~varName.length-1)。|
+|charCodeAt()| 返回0到65535之间的整数，表示给定索引处的`UTF-16`代码单元 (在 `Unicode` 编码单元表示一个单一的 `UTF-16` 编码单元的情况下，`UTF-16` 编码单元匹配 `Unicode` 编码单元。但在——例如 `Unicode` 编码单元 > `0x10000` 的这种——不能被一个 `UTF-16` 编码单元单独表示的情况下，只能匹配 `Unicode` 代理对的第一个编码单元) 。如果你想要整个代码点的值，使用 `codePointAt()`。|无|
 |codePointAt()| `不推荐使用`， 返回使用UTF-16编码的给定位置的值的非负整数。|无|
 |normalize()| `不推荐使用`， 返回调用字符串值的Unicode标准化形式。|无|
 |fromCharCode()| `不推荐使用`， 返回一个字符串，而不是一个 String 对象。由于 fromCharCode 是 String 的静态方法，所以应该像这样使用：String.fromCharCode()，而不是作为你创建的 String 对象的方法。|num1, ..., numN|
@@ -306,17 +322,45 @@ or object instanceof(constructor)
 
 ### 4.2.2 详细
 
-> 1 charAt()
+> 1 charAt(index)
+
+字符串中的字符从左向右索引，第一个字符的索引值为`0`，最后一个字符（假设该字符位于字符串 `varName` 中）的索引值为`varName.length - 1`。 如果指定的`index`值超出了该范围，则返回一个空字符串。而且本方法不管你传入多少参数，这边只会处理传入的第一个参数值，如果传进来为小数，这个方法是向上取整，举个栗子，你传入的值是`1.2`,这边就认为你传入的是`2`。
+
+但是请注意，这个方法只能检测打印包含基本多文种平面（BMP）中的字符，如果字符串中包含的内容不在BMP中，打印的结果就会乱码。
 
 |使用方法|结果|
 |:---|:---|
-|varName.charAt()||
+|oString.charAt()|h|
+|oString.charAt(oString.length-1)|d|
+
+> 错误示例
+
+|使用方法|结果|
+|:---|:---|
+|oString.charAt(1.2)|e|
+|oString.charAt(1,2,3)|h|
+|oString.charAt(-2)|空字符串|
+|oString.charAt(oString)|h|
+|oString.charAt(true)|e|
+|oString.charAt(false)|h|
+|oString.charAt(null)|h|
+|oString.charAt(undefined)|h|
+|oString.charAt(oo)|h|
+|oString.charAt(oNum)|空字符串|
+|oString.charAt(oArray)|h|
+|oString.charAt(oDate)|空字符串|
+|oString.charAt(oString.length)|空字符串|
 
 > 2 charCodeAt()
 
 |使用方法|结果|
 |:---|:---|
-|varName.charCodeAt()||
+|oString.charCodeAt()||
+|oString.charCodeAt(1.2)|e|
+|oString.charCodeAt(1,2,3)|h|
+|oString.charCodeAt(-2)|空字符串|
+|oString.charCodeAt(oString.length-1)|d|
+|oString.charCodeAt(oString.length)|空字符串|
 
 > 3 codePointAt()
 
@@ -763,3 +807,5 @@ or object instanceof(constructor)
 - [MDN-模板字符串](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/template_strings)
 
 - [MDN-String-prototype](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/prototype)
+
+- [Unicode字符平面映射](https://zh.wikipedia.org/wiki/Unicode%E5%AD%97%E7%AC%A6%E5%B9%B3%E9%9D%A2%E6%98%A0%E5%B0%84#.E5.9F.BA.E6.9C.AC.E5.A4.9A.E6.96.87.E7.A7.8D.E5.B9.B3.E9.9D.A2)

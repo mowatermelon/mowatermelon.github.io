@@ -5,7 +5,9 @@
 }
 
 .article-inner {
-  box-shadow: 0 0 9px #696969;
+  /*box-shadow: 0 0 9px #696969;*/
+  padding-bottom: 1em;
+  border-bottom: 1px dotted #0794c7;
 }
 
 .article-inner h1 {
