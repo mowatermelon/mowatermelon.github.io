@@ -313,9 +313,9 @@ or object instanceof(constructor)
 
 |方法名|描述|参数|
 |:---|:---|:---|
-|charAt(index)|  返回特定位置的字符，不提供参数就返回第一个字符的字符，提供游标值，就返回指定游标的字符| @para index 非必需，一个介于0 和字符串长度减1之间的正整数。 (0~varName.length-1)。|
-|charCodeAt()| 返回0到65535之间的整数，表示给定索引处的`UTF-16`代码单元 (在 `Unicode` 编码单元表示一个单一的 `UTF-16` 编码单元的情况下，`UTF-16` 编码单元匹配 `Unicode` 编码单元。但在——例如 `Unicode` 编码单元 > `0x10000` 的这种——不能被一个 `UTF-16` 编码单元单独表示的情况下，只能匹配 `Unicode` 代理对的第一个编码单元) 。如果你想要整个代码点的值，使用 `codePointAt()`。|无|
-|codePointAt()| `不推荐使用`， 返回使用UTF-16编码的给定位置的值的非负整数。|无|
+|charAt(index)|  返回特定位置的字符，不提供参数就返回第一个字符的字符，提供游标值，就返回指定游标的字符| @para index 非必需，一个介于0 和字符串长度减1之间的正整数。 (0~varName.length-1)，如果不是一个数值，则默认为 0。|
+|charCodeAt(index)| 返回0到65535之间的整数，表示给定索引处的`UTF-16`代码单元 (在 `Unicode` 编码单元表示一个单一的 `UTF-16` 编码单元的情况下，`UTF-16` 编码单元匹配 `Unicode` 编码单元。但在——例如 `Unicode` 编码单元 > `0x10000` 的这种——不能被一个 `UTF-16` 编码单元单独表示的情况下，只能匹配 `Unicode` 代理对的第一个编码单元) 。|@para index 一个大于等于 0，小于字符串长度的整数。(0~varName.length-1)，如果不是一个数值，则默认为 0。|
+|codePointAt()| `不推荐使用`， 返回使用UTF-16编码的给定位置的值的非负整数。|@para pos 这个字符串中需要转码的元素的位置。|
 |normalize()| `不推荐使用`， 返回调用字符串值的Unicode标准化形式。|无|
 |fromCharCode()| `不推荐使用`， 返回一个字符串，而不是一个 String 对象。由于 fromCharCode 是 String 的静态方法，所以应该像这样使用：String.fromCharCode()，而不是作为你创建的 String 对象的方法。|num1, ..., numN|
 |fromCodePoint()| `不推荐使用`， 返回使用 Unicode 编码创建的字符串，如果传入无效的 Unicode 编码，将会抛出一个RangeError (例如： "RangeError: NaN is not a valid code point")。。|num1, ..., numN|
@@ -345,6 +345,7 @@ or object instanceof(constructor)
 |oString.charAt(false)|h|
 |oString.charAt(null)|h|
 |oString.charAt(undefined)|h|
+|oString.charAt(NaN)|h|
 |oString.charAt(oo)|h|
 |oString.charAt(oNum)|空字符串|
 |oString.charAt(oArray)|h|
@@ -353,14 +354,92 @@ or object instanceof(constructor)
 
 > 2 charCodeAt()
 
+Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）。开头的 128 个 Unicode 编码单元和 ASCII 字符编码一样。关于 Unicode 的更多信息，可查看 JavaScript Guide。
+
+注意，`charCodeAt` 总是返回一个小于 65,536 的值。这是因为高位编码单元（higher code point）使用一对（低位编码（lower valued））代理伪字符（"surrogate" pseudo-characters）来表示，从而构成一个真正的字符。因此，为了查看或复制（reproduce）65536 及以上编码字符的完整字符，需要在获取 `charCodeAt(i)` 的值的同时获取 `charCodeAt(i+1)` 的值（如同查看/reproducing 拥有两个字符的字符串一样），或者改为获取 codePointAt(i) 的值
+
+如果指定的 index 小于 0 或不小于字符串的长度，则 `charCodeAt` 返回 `NaN`。返回值是一表示给定索引处（`varName`中`index`索引处）字符的 `UTF-16` 代码单元值的数字；如果索引超出范围，则返回 `NaN`。如果你想要整个代码点的值，使用 `codePointAt()`。
+
+向后兼容：在历史版本中（如 JavaScript 1.2），`charCodeAt` 返回一个数字，表示给定 `index` 处字符的 `ISO-Latin-1` 编码值。`ISO-Latin-1`编码集范围从 0 到 255。开头的 0 到 127 直接匹配 `ASCII` 字符集。
+
 |使用方法|结果|
 |:---|:---|
-|oString.charCodeAt()||
-|oString.charCodeAt(1.2)|e|
-|oString.charCodeAt(1,2,3)|h|
-|oString.charCodeAt(-2)|空字符串|
+|oString.charCodeAt()|104|
 |oString.charCodeAt(oString.length-1)|d|
-|oString.charCodeAt(oString.length)|空字符串|
+
+> 错误示例
+
+|使用方法|结果|
+|:---|:---|
+|oString.charCodeAt(1.2)|101|
+|oString.charCodeAt(1,2,3)|104|
+|oString.charCodeAt(-2)|NaN|
+|oString.charCodeAt(oString)|104|
+|oString.charCodeAt(true)|101|
+|oString.charCodeAt(false)|104|
+|oString.charCodeAt(null)|104|
+|oString.charCodeAt(undefined)|104|
+|oString.charCodeAt(NaN)|104|
+|oString.charCodeAt(oo)|104|
+|oString.charCodeAt(oNum)|NaN|
+|oString.charCodeAt(oArray)|104|
+|oString.charCodeAt(oDate)|NaN|
+|oString.charCodeAt(oString.length)|NaN|
+
+> 常用的编码表
+
+|字符|对应的unicode值|
+|:---|:---|
+|\t(水平制表符)|9|
+|\n(换行符)|10|
+|\s(空格)|32|
+|\!(感叹号)|33|
+|\"|34|
+|\#|35|
+|\$|36|
+|\%|37|
+|\&|38|
+|\'|39|
+|\(|40|
+|\)|41|
+|\*|42|
+|+|43|
+|,|44|
+|-|45|
+|.(英文句号)|46|
+|/|47|
+|0|48|
+|1|49|
+|2|50|
+|3|51|
+|4|52|
+|5|53|
+|6|54|
+|7|55|
+|8|56|
+|9|57|
+|:|58|
+|;|59|
+|<|60|
+|=|61|
+|>|62|
+|?|63|
+|@|64|
+|A|65|
+|Z|90|
+|[|91|
+|\|92|
+|]|93|
+|^|94|
+|_|95|
+|`|96|
+|a|97|
+|z|122|
+|{|123|
+|||124|
+|}|125|
+|~|126|
+|;|127|
 
 > 3 codePointAt()
 
@@ -800,7 +879,34 @@ or object instanceof(constructor)
 |:---|:---|
 |objectName.raw(callSite, ...substitutions)||
 
-# 7 参考网站
+# 7 总结
+
+## 7.1 返回值为`string`的方法
+
+|方法名|描述|参数|
+|:---|:---|:---|
+|big()|  `不推荐使用`，把字符串显示为大号字体，只在页面中才会有大两个字体号效果。|无|
+|small()| `不推荐使用`， 把字符串显示为小号字体，只在页面中才会有小两个字体号效果。|无|
+|blink()| `不推荐使用`， 把字符串显示闪动的字符串，目前没有看到有浏览器支持|无|
+|bold()| `不推荐使用`， 把字符串显示粗体的字符串，只在页面中才会有粗体效果，IE不兼容。|无|
+|italics()| `不推荐使用`，把字符串显示为斜体，只在页面中才会有效果。|无|
+|strike()| `不推荐使用`， 把字符串显示为加了删除线的字符串，只在页面中才会有效果。|无|
+|fixed()| `不推荐使用`， 把字符串显示为打字机文本显示的字符串，只在页面中才会有效果。|无|
+|sub()|  `不推荐使用`，把字符串显示为下标，只在页面中才会有效果。|无|
+|sup()| `不推荐使用`， 把字符串显示为上标，只在页面中才会有效果。|无|
+|anchor(anchorname)|  `不推荐使用`，创建 `HTML` 锚。将字符串输出为有唯一标识的纯粹`a`标签，只在页面中才会有效果。| @para anchorname 必需，为锚定义名称。如果没有传入参数，则会输出一个`name`属性为`undefined`的`a`标签。|
+|link(url)| `不推荐使用`， 把字符串显示为链接，只在页面中才会有效果。如果没有传入参数，则会输出一个href属性为`undefined`的a标签。| @para url必需，规定要链接的 URL。|
+|fontcolor(color)| `不推荐使用`，返回指定的颜色的字符串。只在页面中才会有效果如果没有传入参数，则会输出一个`color`属性为`undefined`的font标签。| @para  color必需。为字符串规定 font-color。该值必须是颜色名(red)、RGB 值(rgb(255,0,0))或者十六进制数(#FF0000)。|
+|fontsize(size)| `不推荐使用`， 返回指定的字体大小的字符串。只在页面中才会有效果。如果没有传入参数，则会输出一个`size`属性为`undefined`的`font`标签。|  @para size 参数必须是从 1 至 7 的数字，数字越大字体越大。|
+|charAt(index)|  返回特定位置的字符，不提供参数就返回第一个字符的字符，提供游标值，就返回指定游标的字符| @para index 非必需，一个介于0 和字符串长度减1之间的正整数。 (0~varName.length-1)。|
+
+## 7.2 返回值为`int`的方法
+
+|方法名|描述|参数|
+|:---|:---|:---|
+|charCodeAt(index)| 返回0到65535之间的整数，表示给定索引处的`UTF-16`代码单元 (在 `Unicode` 编码单元表示一个单一的 `UTF-16` 编码单元的情况下，`UTF-16` 编码单元匹配 `Unicode` 编码单元。但在——例如 `Unicode` 编码单元 > `0x10000` 的这种——不能被一个 `UTF-16` 编码单元单独表示的情况下，只能匹配 `Unicode` 代理对的第一个编码单元) 。|@para index 一个大于等于 0，小于字符串长度的整数。(0~varName.length-1)，如果不是一个数值，则默认为 0。|
+
+# 8 参考网站
 
 - [MDN-String](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String)
 
@@ -809,3 +915,5 @@ or object instanceof(constructor)
 - [MDN-String-prototype](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/prototype)
 
 - [Unicode字符平面映射](https://zh.wikipedia.org/wiki/Unicode%E5%AD%97%E7%AC%A6%E5%B9%B3%E9%9D%A2%E6%98%A0%E5%B0%84#.E5.9F.BA.E6.9C.AC.E5.A4.9A.E6.96.87.E7.A7.8D.E5.B9.B3.E9.9D.A2)
+
+- [ASCII码查询](http://www.asciima.com/)
