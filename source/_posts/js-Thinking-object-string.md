@@ -90,8 +90,10 @@ var tString_4 = tag`Hello ${ a + b } world ${ a * b}hahaha ${ a / b}`;
 |varName| 相关对象类型实例化后的变量名 |就像上面`js`代码中`strString`,`oString`,`tString_1`|
 |varName_val| 相关对象类型实例化后的实际内容 |就像上面`js`代码中`hello watermelon`|
 |functionName|函数名称|就像上文的`tag`|
-|BMP|基本多文种平面（Basic Multilingual Plane），或称第0平面或0号平面（Plane 0），是`Unicode`中的一个编码区段。编码从`U+0000`至`U+FFFF`。
-现版本为修订10.0.0版，2017年6月20日出版。|无举例|
+|BMP|基本多文种平面（Basic Multilingual Plane），或称第0平面或0号平面（Plane 0），是`Unicode`中的一个编码区段。编码从`U+0000`至`U+FFFF`。现版本为修订10.0.0版，2017年6月20日出版。|无举例|
+|ES5|ECMAScript第五版，发布为ECMAScript 2015，最初发布第一版时间为2009年12月发布，后来在发布时间2015年6月进行了大量修改|无举例|
+|ES6|ECMAScript第六版（发布为ECMAScript 2016），发布时间2016年|无举例|
+|ES7|ECMAScript第七版（发布为ECMAScript 2017），发布时间2017年|无举例|
 |letter|字母|letter(8) 代表八个子母，一个字母长度为一|
 |char|汉字|char(8) 代表八个汉字，一个汉字长度为一|
 |num|数字|num(8) 代表八个数字，一个数字长度为一|
@@ -315,7 +317,7 @@ or object instanceof(constructor)
 |:---|:---|:---|
 |charAt(index)|  返回特定位置的字符，不提供参数就返回第一个字符的字符，提供游标值，就返回指定游标的字符| @para index 非必需，一个介于0 和字符串长度减1之间的正整数。 (0~varName.length-1)，如果不是一个数值，则默认为 0。|
 |charCodeAt(index)| 返回0到65535之间的整数，表示给定索引处的`UTF-16`代码单元 (在 `Unicode` 编码单元表示一个单一的 `UTF-16` 编码单元的情况下，`UTF-16` 编码单元匹配 `Unicode` 编码单元。但在——例如 `Unicode` 编码单元 > `0x10000` 的这种——不能被一个 `UTF-16` 编码单元单独表示的情况下，只能匹配 `Unicode` 代理对的第一个编码单元) 。|@para index 一个大于等于 0，小于字符串长度的整数。(0~varName.length-1)，如果不是一个数值，则默认为 0。|
-|codePointAt()| `不推荐使用`， 返回使用UTF-16编码的给定位置的值的非负整数。|@para pos 这个字符串中需要转码的元素的位置。|
+|codePointAt(pos)| `不推荐使用`， 返回使用UTF-16编码的给定位置的值的非负整数。|@para pos 这个字符串中需要转码的元素的位置。|
 |normalize()| `不推荐使用`， 返回调用字符串值的Unicode标准化形式。|无|
 |fromCharCode()| `不推荐使用`， 返回一个字符串，而不是一个 String 对象。由于 fromCharCode 是 String 的静态方法，所以应该像这样使用：String.fromCharCode()，而不是作为你创建的 String 对象的方法。|num1, ..., numN|
 |fromCodePoint()| `不推荐使用`， 返回使用 Unicode 编码创建的字符串，如果传入无效的 Unicode 编码，将会抛出一个RangeError (例如： "RangeError: NaN is not a valid code point")。。|num1, ..., numN|
@@ -356,16 +358,18 @@ or object instanceof(constructor)
 
 Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）。开头的 128 个 Unicode 编码单元和 ASCII 字符编码一样。关于 Unicode 的更多信息，可查看 JavaScript Guide。
 
-注意，`charCodeAt` 总是返回一个小于 65,536 的值。这是因为高位编码单元（higher code point）使用一对（低位编码（lower valued））代理伪字符（"surrogate" pseudo-characters）来表示，从而构成一个真正的字符。因此，为了查看或复制（reproduce）65536 及以上编码字符的完整字符，需要在获取 `charCodeAt(i)` 的值的同时获取 `charCodeAt(i+1)` 的值（如同查看/reproducing 拥有两个字符的字符串一样），或者改为获取 codePointAt(i) 的值
+注意，`charCodeAt` 总是返回一个小于 65,536 的值。这是因为高位编码单元（higher code point）使用一对（低位编码（lower valued））代理伪字符（"surrogate" pseudo-characters）来表示，从而构成一个真正的字符。因此，为了查看或复制（reproduce）65536 及以上编码字符的完整字符，需要在获取 `charCodeAt(i)` 的值的同时获取 `charCodeAt(i+1)` 的值（如同查看/reproducing 拥有两个字符的字符串一样），或者改为获取 codePointAt(i) 的值。
 
-如果指定的 index 小于 0 或不小于字符串的长度，则 `charCodeAt` 返回 `NaN`。返回值是一表示给定索引处（`varName`中`index`索引处）字符的 `UTF-16` 代码单元值的数字；如果索引超出范围，则返回 `NaN`。如果你想要整个代码点的值，使用 `codePointAt()`。
+如果指定的 index 小于 0 或不小于字符串的长度，则 `charCodeAt` 返回 `NaN`。而且本方法不管你传入多少参数，这边只会处理传入的第一个参数值，如果传进来为小数，这个方法是向上取整，举个栗子，你传入的值是`1.2`,这边就认为你传入的是`2`。
+
+返回值是一表示给定索引处（`varName`中`index`索引处）字符的 `UTF-16` 代码单元值的数字；如果索引超出范围，则返回 `NaN`。如果你想要整个代码点的值，使用 `codePointAt()`。
 
 向后兼容：在历史版本中（如 JavaScript 1.2），`charCodeAt` 返回一个数字，表示给定 `index` 处字符的 `ISO-Latin-1` 编码值。`ISO-Latin-1`编码集范围从 0 到 255。开头的 0 到 127 直接匹配 `ASCII` 字符集。
 
 |使用方法|结果|
 |:---|:---|
 |oString.charCodeAt()|104|
-|oString.charCodeAt(oString.length-1)|d|
+|oString.charCodeAt(oString.length-1)|100|
 
 > 错误示例
 
@@ -394,15 +398,15 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |\n(换行符)|10|
 |\s(空格)|32|
 |\!(感叹号)|33|
-|\"|34|
-|\#|35|
-|\$|36|
-|\%|37|
-|\&|38|
-|\'|39|
-|\(|40|
-|\)|41|
-|\*|42|
+|"|34|
+|#|35|
+|$|36|
+|%|37|
+|&|38|
+|'|39|
+|(|40|
+|)|41|
+|*|42|
 |+|43|
 |,|44|
 |-|45|
@@ -436,16 +440,45 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |a|97|
 |z|122|
 |{|123|
-|||124|
+|(中竖线)|124|
 |}|125|
 |~|126|
-|;|127|
 
-> 3 codePointAt()
+> 3 codePointAt(pos)
+
+返回值是在字符串中的给定索引的编码单元体现的数字，如果指定的 `index` 小于 0 或不小于字符串的长度则返回 `undefined` 。如果，则 `codePointAt` 返回 `undefined`。而且本方法不管你传入多少参数，这边只会处理传入的第一个参数值，如果传进来为小数，这个方法是向上取整，举个栗子，你传入的值是`1.2`,这边就认为你传入的是`2`。
+
+如果在索引处开始没有`UTF-16` 代理对，将直接返回在那个索引处的编码单元。可以将`codePointAt()`看成更完整版本的`charCodeAt()`，因为对于`BMP`中的所有字符，这俩方法执行结果相同，只有传递`非BMP`的码位作用参数时，二者执行结果才有可能不同。
+
+`codePointAt()`对于`非BMP`会返回完整的码位，即使这个码位包含多个编码单元，但是`charCodeAt()`仅仅返回位置`pos`处的第一个编码单元。
+
+`Surrogate Pair`是`UTF-16`中用于扩展字符而使用的编码方式，是一种采用四个字节(两个`UTF-16`编码)来表示一个字符，称作代理对。
+
+但是请注意，由于`codePointAt()`是ES5开始提出来的，所以在`Safari`浏览器不支持，其他浏览器比较新的版本才支持。
 
 |使用方法|结果|
 |:---|:---|
-|varName.codePointAt()||
+|oString.codePointAt()|104|
+|oString.codePointAt(oString.length-1)|100|
+
+> 错误示例
+
+|使用方法|结果|
+|:---|:---|
+|oString.codePointAt(1.2)|101|
+|oString.codePointAt(1,2,3)|104|
+|oString.codePointAt(-2)|undefined|
+|oString.codePointAt(oString)|104|
+|oString.codePointAt(true)|101|
+|oString.codePointAt(false)|104|
+|oString.codePointAt(null)|104|
+|oString.codePointAt(undefined)|104|
+|oString.codePointAt(NaN)|104|
+|oString.codePointAt(oo)|104|
+|oString.codePointAt(oNum)|undefined|
+|oString.codePointAt(oArray)|104|
+|oString.codePointAt(oDate)|undefined|
+|oString.codePointAt(oString.length)|undefined|
 
 > 4 normalize()
 
@@ -905,6 +938,8 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |方法名|描述|参数|
 |:---|:---|:---|
 |charCodeAt(index)| 返回0到65535之间的整数，表示给定索引处的`UTF-16`代码单元 (在 `Unicode` 编码单元表示一个单一的 `UTF-16` 编码单元的情况下，`UTF-16` 编码单元匹配 `Unicode` 编码单元。但在——例如 `Unicode` 编码单元 > `0x10000` 的这种——不能被一个 `UTF-16` 编码单元单独表示的情况下，只能匹配 `Unicode` 代理对的第一个编码单元) 。|@para index 一个大于等于 0，小于字符串长度的整数。(0~varName.length-1)，如果不是一个数值，则默认为 0。|
+|codePointAt(pos)| `不推荐使用`， 返回使用UTF-16编码的给定位置的值的非负整数。|@para pos 这个字符串中需要转码的元素的位置。|
+
 
 # 8 参考网站
 
