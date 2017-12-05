@@ -317,10 +317,10 @@ or object instanceof(constructor)
 |:---|:---|:---|
 |charAt(index)|  返回特定位置的字符，不提供参数就返回第一个字符的字符，提供游标值，就返回指定游标的字符| @para index 非必需，一个介于0 和字符串长度减1之间的正整数。 (0~varName.length-1)，如果不是一个数值，则默认为 0。|
 |charCodeAt(index)| 返回0到65535之间的整数，表示给定索引处的`UTF-16`代码单元 (在 `Unicode` 编码单元表示一个单一的 `UTF-16` 编码单元的情况下，`UTF-16` 编码单元匹配 `Unicode` 编码单元。但在——例如 `Unicode` 编码单元 > `0x10000` 的这种——不能被一个 `UTF-16` 编码单元单独表示的情况下，只能匹配 `Unicode` 代理对的第一个编码单元) 。|@para index 一个大于等于 0，小于字符串长度的整数。(0~varName.length-1)，如果不是一个数值，则默认为 0。|
-|codePointAt(pos)| `不推荐使用`， 返回使用UTF-16编码的给定位置的值的非负整数。|@para pos 这个字符串中需要转码的元素的位置。|
-|normalize()| `不推荐使用`， 返回调用字符串值的Unicode标准化形式。|无|
-|fromCharCode()| `不推荐使用`， 返回一个字符串，而不是一个 String 对象。由于 fromCharCode 是 String 的静态方法，所以应该像这样使用：String.fromCharCode()，而不是作为你创建的 String 对象的方法。|num1, ..., numN|
-|fromCodePoint()| `不推荐使用`， 返回使用 Unicode 编码创建的字符串，如果传入无效的 Unicode 编码，将会抛出一个RangeError (例如： "RangeError: NaN is not a valid code point")。。|num1, ..., numN|
+|codePointAt(pos)| `测试中`， 返回使用UTF-16编码的给定位置的值的非负整数。|@para pos 这个字符串中需要转码的元素的位置。|
+|normalize([form])| `测试中`， 返回调用字符串值的Unicode标准化形式。|@para form 四种 Unicode 正规形式 "NFC", "NFD", "NFKC", 以及 "NFKD" 其中的一个, 默认值为 "NFC".|
+|fromCharCode(num1, ..., numN)|返回一个字符串，而不是一个 String 对象。由于 fromCharCode 是 String 的静态方法，所以应该像这样使用：String.fromCharCode()，而不是作为你创建的 String 对象的方法。|@para num1, ..., numN 一组序列数字，表示 Unicode 值。|
+|fromCodePoint(num1, …, numN)| `不推荐使用`， 返回使用 Unicode 编码创建的字符串，如果传入无效的 Unicode 编码，将会抛出一个RangeError (例如： "RangeError: NaN is not a valid code point")。。|num1, ..., numN|
 
 ### 4.2.2 详细
 
@@ -480,26 +480,93 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |oString.codePointAt(oDate)|undefined|
 |oString.codePointAt(oString.length)|undefined|
 
-> 4 normalize()
+> 4 normalize([form])
+
+|参数缩写|参数全称|参数中文含义|
+|:---|:---|:---|
+|NFC|Normalization Form Canonical Composition|规范化形式规范组合|
+|NFD|Normalization Form Canonical Decomposition|规范化形式规范分解|
+|NFKC|Normalization Form Compatibility Composition|规范化形式兼容性组合|
+|NFKD|Normalization Form Compatibility Decomposition|规范化形式兼容性分解|
+
+> 警告
+
+如果给 `form` 传入了非法的参数值, 则会直接抛出 `RangeError` 异常，`RangeError: The normalization form should be one of NFC, NFD, NFKC, NFKD`，不会自行处理，是一个很高冷的方法哦！
+
+而且这个和`DOM`方法中的`normalize()`没有任何关联哦，不要弄混了。
+
+如果你字符串中没有什么`非BMP`的内容，那么你使用这个方法其实没有什么效果，返回的就是varName的varName_val没有做什么改变的。目前我主要测试的样例使用这个方法之后，没有什么直观的感受，如果之后遇见了不同的效果，我再来补充。
 
 |使用方法|结果|
 |:---|:---|
-|varName.normalize()||
+|varName.normalize()|varName_val|
+|varName.normalize("NFC")|varName_val|
+|varName.normalize("NFD")|varName_val|
+|varName.normalize("NFKC")|varName_val|
+|varName.normalize("NFKD")|varName_val|
 
-> 5 fromCharCode()
+> 5 fromCharCode(num1, …, numN)
 
-尽管绝大部分常用的 Unicode 值可以用一个 16-bit 数字表示（正如 JavaScript 标准化过程早期），并且对于绝大部分值 fromCharCode() 返回一个字符（即对于绝大部分字符 UCS-2 值是 UTF-16 的子集），但是为了处理所有的 Unicode 值（至 21 bits），只用 fromCharCode() 是不足的。
-由于高位编码字符是用两个低位编码（lower value）表示形成的一个字符，因此String.fromCodePoint() （ES6 草案的一部分）被用来返回这样一对低位编码，从而可以完全表示这些高位编码字符。
+尽管绝大部分常用的 `Unicode` 值可以用一个 `16-bit` 数字表示（正如 `JavaScript` 标准化过程早期），并且对于绝大部分值 `fromCharCode()` 返回一个字符（即对于绝大部分字符 `UCS-2` 值是 `UTF-16` 的子集），但是为了处理所有的 `Unicode` 值（至 `21 bits`），只用 `fromCharCode()` 是不足的。
+由于高位编码字符是用两个低位编码（`lower value`）表示形成的一个字符，因此`String.fromCodePoint()` （ES6 草案的一部分）被用来返回这样一对`低位编码`，从而可以完全表示这些`高位编码字符`。
+
+如果传进来参数为小数，这个方法是向上取整，举个栗子，你传入的值是`1.2`,这边就认为你传入的是`2`，不传参数的时候或者传一些不能识别的参数会方法返回`空字符串`。
 
 |使用方法|结果|
 |:---|:---|
-|objectName.fromCharCode(num1[, ...[, numN]])||
+|objectName.fromCharCode(65)|A|
 
-> 6 fromCodePoint()
+> 错误示例
 
 |使用方法|结果|
 |:---|:---|
-|objectName.fromCodePoint(num1[, ...[, numN]])||
+|objectName.fromCharCode()|空字符串|
+|objectName.fromCharCode(65.2)|A|
+|objectName.fromCharCode(65.8,66,67)|ABC|
+|objectName.fromCharCode(-2)|空字符串|
+|objectName.fromCharCode(oString)|空字符串|
+|objectName.fromCharCode(true)|乱码|
+|objectName.fromCharCodet(false)|空字符串|
+|objectName.fromCharCode(null)|空字符串|
+|objectName.fromCharCode(undefined)|空字符串|
+|objectName.fromCharCode(NaN)|空字符串|
+|objectName.fromCharCode(oo)|空字符串|
+|objectName.fromCharCode(oNum)|D|
+|objectName.fromCharCode(oArray)|空字符串|
+|objectName.fromCharCode(oDate)|乱码|
+
+> 6 fromCodePoint(num1, …, numN)
+
+因为`fromCodePoint()`是`String`的一个静态方法，所以只能通过 `String.fromCodePoint()`这样的方式来使用，不能在你创建的`String`对象实例上直接调用。
+
+相当是`fromCharCode()`升级版，在处理`非BMP`内容功能包容性更强些，但是对传入的参数要求更严格一些。
+
+> 警告
+
+如果传入无效的 `Unicode` 编码，将会抛出一个`RangeError` (例如： `RangeError: NaN is not a valid code point`)。比如像小数，科学计数，undefined，负数，字符串，数组，时间戳等等，如果传入这些值，方法体会直接报错，不会再执行下面的，不会自行处理，是一个很高冷的方法哦！
+
+|使用方法|结果|
+|:---|:---|
+|objectName.fromCodePoint(65)|A|
+|objectName.fromCodePoint()|空字符串|
+|objectName.fromCodePoint(oNum)|D|
+|objectName.fromCodePoint(true)|乱码|
+|objectName.fromCodePoint(false)|乱码|
+|objectName.fromCodePoint(null)|乱码|
+
+> 错误示例
+
+|使用方法|结果|
+|:---|:---|
+|objectName.fromCodePoint(65.2)|RangeError|
+|objectName.fromCodePoint(65.8,66,67)|RangeError|
+|objectName.fromCodePoint(-2)|RangeError|
+|objectName.fromCodePoint(oString)|RangeError|
+|objectName.fromCodePoint(undefined)|RangeError|
+|objectName.fromCodePoint(NaN)|RangeError|
+|objectName.fromCodePoint(oo)|RangeError|
+|objectName.fromCodePoint(oArray)|RangeError|
+|objectName.fromCodePoint(oDate)|RangeError|
 
 ## 4.3. 检索
 
@@ -914,7 +981,7 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 
 # 7 总结
 
-## 7.1 返回值为`string`的方法
+## 7.1 返回值为字符串的方法
 
 |方法名|描述|参数|
 |:---|:---|:---|
@@ -932,14 +999,16 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |fontcolor(color)| `不推荐使用`，返回指定的颜色的字符串。只在页面中才会有效果如果没有传入参数，则会输出一个`color`属性为`undefined`的font标签。| @para  color必需。为字符串规定 font-color。该值必须是颜色名(red)、RGB 值(rgb(255,0,0))或者十六进制数(#FF0000)。|
 |fontsize(size)| `不推荐使用`， 返回指定的字体大小的字符串。只在页面中才会有效果。如果没有传入参数，则会输出一个`size`属性为`undefined`的`font`标签。|  @para size 参数必须是从 1 至 7 的数字，数字越大字体越大。|
 |charAt(index)|  返回特定位置的字符，不提供参数就返回第一个字符的字符，提供游标值，就返回指定游标的字符| @para index 非必需，一个介于0 和字符串长度减1之间的正整数。 (0~varName.length-1)。|
+|normalize([form])| `测试中`， 返回调用字符串值的Unicode标准化形式。|@para form 四种 Unicode 正规形式 "NFC", "NFD", "NFKC", 以及 "NFKD" 其中的一个, 默认值为 "NFC".|
+|fromCharCode(num1, ..., numN)|返回一个字符串，而不是一个 String 对象。由于 fromCharCode 是 String 的静态方法，所以应该像这样使用：String.fromCharCode()，而不是作为你创建的 String 对象的方法。|@para num1, ..., numN 一组序列数字，表示 Unicode 值。|
+|fromCodePoint(num1, …, numN)| `不推荐使用`， 返回使用 Unicode 编码创建的字符串，如果传入无效的 Unicode 编码，将会抛出一个RangeError (例如： "RangeError: NaN is not a valid code point")。。|num1, ..., numN|
 
-## 7.2 返回值为`int`的方法
+## 7.2 返回值为数值的方法
 
 |方法名|描述|参数|
 |:---|:---|:---|
 |charCodeAt(index)| 返回0到65535之间的整数，表示给定索引处的`UTF-16`代码单元 (在 `Unicode` 编码单元表示一个单一的 `UTF-16` 编码单元的情况下，`UTF-16` 编码单元匹配 `Unicode` 编码单元。但在——例如 `Unicode` 编码单元 > `0x10000` 的这种——不能被一个 `UTF-16` 编码单元单独表示的情况下，只能匹配 `Unicode` 代理对的第一个编码单元) 。|@para index 一个大于等于 0，小于字符串长度的整数。(0~varName.length-1)，如果不是一个数值，则默认为 0。|
 |codePointAt(pos)| `不推荐使用`， 返回使用UTF-16编码的给定位置的值的非负整数。|@para pos 这个字符串中需要转码的元素的位置。|
-
 
 # 8 参考网站
 
