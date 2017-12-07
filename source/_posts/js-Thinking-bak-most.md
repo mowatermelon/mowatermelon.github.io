@@ -290,3 +290,27 @@ function Format(val) {
   }
 }
 ```
+
+# 3 浏览器判断
+
+```javascript
+function isIE() {
+  if(!!window.ActiveXObject || "ActiveXObject" in window){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+function isIE11(){
+  // 之前的判断浏览器的方法据说已经失效了，原因是IE11使用了和之前版本不一样的User-agent
+
+  // Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv 11.0) like Gecko
+  // 而 IE10 是：
+
+  // Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)
+  // 做法是通过正则判断 User-agent：
+  var isIE11 = (/Trident\/7\./).test(navigator.userAgent);
+  return isIE11;
+}
+```
