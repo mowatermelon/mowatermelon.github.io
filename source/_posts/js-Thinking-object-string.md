@@ -495,7 +495,7 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 
 而且这个和`DOM`方法中的`normalize()`没有任何关联哦，不要弄混了。
 
-如果你字符串中没有什么`非BMP`的内容，那么你使用这个方法其实没有什么效果，返回的就是varName的varName_val没有做什么改变的。目前我主要测试的样例使用这个方法之后，没有什么直观的感受，如果之后遇见了不同的效果，我再来补充。
+如果你字符串中没有什么`非BMP`的内容，那么你使用这个方法其实没有什么效果，返回的就是`varName`的`varName_val`没有做什么改变的。目前我主要测试的样例使用这个方法之后，没有什么直观的感受，如果之后遇见了不同的效果，我再来补充。
 
 |使用方法|结果|
 |:---|:---|
@@ -574,7 +574,7 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 
 |方法名|描述|参数|
 |:---|:---|:---|
-|includes()|  `不推荐使用`，判断一个字符串里是否包含其他字符串。|无|
+|includes(searchString[, position])|  `不推荐使用`，判断一个字符串是否包含在另一个字符串中，根据情况返回true或false。|@para searchString 要在此字符串中搜索的字符串。@para position 可选。从当前字符串的哪个索引位置开始搜寻子字符串；默认值为0。|
 |endsWith()| `不推荐使用`， 判断一个字符串的结尾是否包含其他字符串中的字符。|无|
 |indexOf()| 从字符串对象中返回首个被发现的给定值的索引值，如果没有找到则返回-1。|无|
 |lastIndexOf()|  从字符串对象中返回最后一个被发现的给定值的索引值，如果没有找到则返回-1。|无|
@@ -582,7 +582,17 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 
 ### 4.3.2 详细
 
-> 1 includes()
+> 1 includes(searchString[, position])
+
+这个方法已经被加入到 `ECMAScript 6`标准中，但未必在所有的`JavaScript`实现中都可以使用。
+
+在进行内容匹配的时候，这个方法是区分大小写的。
+
+在 `Firefox 18 - 39`中，这个方法的名称叫`contains()`。由于下面的理由，在`bug 1102219`中，它被重命名为`includes()` ：
+
+据报道，在`Firefox 17`上，一些使用`MooTools 1.2`的网站会崩溃掉。这个版本的`MooTools`会检查函数`String.prototype.contains()`是否存在，如果不存在的话，`MooTools`就添加它自己的函数。 通过在`Firefox 17`中引入这个函数，检查更改的行为在一定程度上导致了基于`MooTools`的`String.prototype.contains()`函数的代码实现中断。结果是，当`MooTools`的拓展导致`MooTools 1.2.6`版本的发布，此实现在`Firefox 17`中不可用和`String.prototype.contains()`在随后一个版本`Firefox 18`上是可用的。
+
+`MooTools 1.3`会强制使用它自己版本的函数`String.prototype.contains()`，因此，依赖它的网站不会崩溃掉。然而，你应该注意此方法在`MooTools 1.3` 签名和`ECMAScript 6` 签名中的不同（在第二个参数）。后来，为了与`ES6`标准一致在`MooTools 1.5`版本及以上更改了签名。
 
 |使用方法|结果|
 |:---|:---|
@@ -1010,6 +1020,11 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |charCodeAt(index)| 返回0到65535之间的整数，表示给定索引处的`UTF-16`代码单元 (在 `Unicode` 编码单元表示一个单一的 `UTF-16` 编码单元的情况下，`UTF-16` 编码单元匹配 `Unicode` 编码单元。但在——例如 `Unicode` 编码单元 > `0x10000` 的这种——不能被一个 `UTF-16` 编码单元单独表示的情况下，只能匹配 `Unicode` 代理对的第一个编码单元) 。|@para index 一个大于等于 0，小于字符串长度的整数。(0~varName.length-1)，如果不是一个数值，则默认为 0。|
 |codePointAt(pos)| `不推荐使用`， 返回使用UTF-16编码的给定位置的值的非负整数。|@para pos 这个字符串中需要转码的元素的位置。|
 
+## 7.3 返回值为布尔值的方法
+
+|方法名|描述|参数|
+|:---|:---|:---|
+|includes(searchString[, position])|  `不推荐使用`，判断一个字符串是否包含在另一个字符串中，根据情况返回true或false。|@para searchString 要在此字符串中搜索的字符串。@para position 可选。从当前字符串的哪个索引位置开始搜寻子字符串；默认值为0。|
 # 8 参考网站
 
 - [MDN-String](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String)
