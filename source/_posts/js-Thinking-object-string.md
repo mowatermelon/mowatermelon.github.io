@@ -5,7 +5,7 @@ tags:
   - string
   - watermelon
   - js_thinking
-date: 2017-10-27 00:00:00
+date: 2017-10-28 00:00:00
 ---
 # 1. 定义
 
@@ -1025,6 +1025,7 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |方法名|描述|参数|
 |:---|:---|:---|
 |includes(searchString[, position])|  `不推荐使用`，判断一个字符串是否包含在另一个字符串中，根据情况返回true或false。|@para searchString 要在此字符串中搜索的字符串。@para position 可选。从当前字符串的哪个索引位置开始搜寻子字符串；默认值为0。|
+
 # 8 参考网站
 
 - [MDN-String](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String)
