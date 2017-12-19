@@ -22,7 +22,6 @@ date: 2017-10-29 00:00:00
 |features| 数据集 |array|默认为空|
 |feature| 数据集点 |json|详细参考`1.3 feature`|
 
-
 ```javascript
   //举个栗子
   var t_GeoJson={

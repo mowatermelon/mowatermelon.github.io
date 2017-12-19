@@ -63,11 +63,58 @@ date: 2017-10-28 00:00:00
 
 ## 3.1
 
-在`<widgetcontainer>`中添加一个新的widget，`<widget label ="叠加"  visible="true" index="8"   config="Widget.OverlayfileMsg" icon="images/img/sharp.png"/>`，寻找合适的功能按钮图片。
+在`<widgetcontainer>`中添加一个新的`widget`，并寻找合适的功能按钮图片。
 
 ## 3.2
 
 在`项目/javascript/Widget`文件路径中，参考其他组件js模版，新建`OverlayfileMsg.js`。
+
+## 3.3
+
+在页面拼接Template中添加`input[type=file]`的组件，并添加相关样式，优化显示效果。为了更好的提示效果，绑定一个`span`标签实时进行显示上传文件路径。
+
+## 3.4
+
+先将上传文件的类型进行判断，是否为空和或者用户选择的上传类型是否匹配。
+
+## 3.5
+
+将通过判断的数据，读取相关配置，通过`dojo.io.iframe.send()`方法传到对应的`c#`后台，后台通过`HttpFileCollection files = context.Request.Files;HttpPostedFile fileObj = files[i];`进行获取，先判断文件上传格式是否正确，如果都正确，则进行文件保存到服务器指定路径处理，并返回处理结果。
+
+## 3.6
+
+> 后台返回对应规范的结果集
+
+- 文件上传失败！（初始值）
+- 请选择文件。
+- 目录名不正确。
+- 上传文件大小超过限制。
+- 上传文件扩展名是不允许的扩展名。
+- 上传成功
+
+## 3.7
+
+> 前台获取到数据，获取后台实际返回值，判断后台处理状态，根据不同状态做对应处理。
+
+### 3.7.1 上传成功
+
+获取需要的参数，调用相关方法进行页面展示
+
+### 3.7.2 上传失败
+
+对于请求后台失败的情况下进行直接弹窗报错
+
+# 4 开始写代码
+
+  通过对应代码编辑器，编写代码，如果遇见错误，通过相关[开源社区](https://github.com/)，搜索相关案例，了解[dojo实现机制](http://dojotoolkit.org/reference-guide/1.9/)，了解[esri实现机制](https://developers.arcgis.com/javascript/3/jsapi/)。
+
+## 4.1
+
+```xml
+<widget label ="叠加"  visible="true" index="8"   config="Widget.OverlayfileMsg" icon="images/img/sharp.png"/>
+```
+
+## 4.2
 
 ```javascript
   dojo.declare("Widget.OverlayfileMsg", null, {
@@ -108,9 +155,7 @@ date: 2017-10-28 00:00:00
   });
 ```
 
-## 3.3
-
-在页面拼接Template中添加`input[type=file]`的组件，并添加相关样式，优化显示效果。为了更好的提示效果，绑定一个`span`标签实时进行显示上传文件路径。
+## 4.3
 
 ```html
   <a class="l-button" id="addfile"  style="position: relative;display:inline-block;margin:0 auto;line-height: 24px;text-align: center;"><span>选择文件</span><input type="file" name="fileUp" id ="btnLoadFile" style="position: absolute;right: 0;top: 0;opacity: 0;width: 100%;cursor: pointer;text-indent: -2em;"/></a>
@@ -132,9 +177,7 @@ date: 2017-10-28 00:00:00
   },
 ```
 
-## 3.4
-
-先将上传文件的类型进行判断，是否为空和或者用户选择的上传类型是否匹配。
+## 4.4
 
 ```javascript
   var _this = this;
@@ -147,9 +190,9 @@ date: 2017-10-28 00:00:00
       dojo.query(".radio" + obj.srcElement.name).parent().siblings().children().attr("checked", false);
   },
   checkFileType: function () {
-      //debugger;
       if (this.map && this.opened) {
-          var fileType;
+          var fileType = "";
+          var TempText = "";
           var dataHTML = this.dataTemplate();
           var fileTypeL = dataHTML.length;
           if (fileTypeL == 0) {
@@ -161,63 +204,123 @@ date: 2017-10-28 00:00:00
           }
           if (fileType.length > 0) {
               fileType = fileType.toString();
-              var fileObj = dojo.query("input[type='file']");
-              var filePath = fileObj.attr("value");
+              var filePath ="";
+              var fileObj = dojo.byId(this.btnFileLoad);
+              var fileLength =fileObj.files.length;
+              if(fileType!="SHARP"){
+                  filePath = fileObj.files[0].name;
+              }else{
+                  filePath = dojo.byId(this.spanFileLoad).innerHTML;
+              }
+              // debugger;
+
               filePath = filePath.toString();
-              if (filePath.length > 0) {
+              filePath = filePath.toLowerCase();
+              if (fileLength > 0) {
                   // debugger;
-                  this.addFile(fileType, filePath);
+                  this.addFile(fileType, filePath,fileLength);
               } else {
-                  showMessage("必须要选择一个文件");
+                  TempText = "必须要选择一个文件";
               }
           } else {
-              showMessage("必须要选择一个文件类型");
+              TempText = "必须要选择一个文件类型";
           }
 
+          if(TempText.length>0){
+              showMessage(TempText);
+          }
       }
   },
-  addFile: function (fileType, filePath) {
+  checkUnique:function(filePath){
+      var isRight =false;
+      //给数组去重
+      Array.prototype.unique = function () {
+          this.sort(); //先排序
+          var res = [this[0]];
+          for (var i = 1; i < this.length; i++) {
+              if (this[i] !== res[res.length - 1]) {
+                  res.push(this[i]);
+              }
+          }
+          return res;
+      }
+
+      var patt=/\.+[\w]{3}/g
+      var ml = filePath.replace(patt,'');
+      ml = ml.split("，").unique();
+      if(ml.length==1){
+          isRight =true;
+      }
+      // console.log("checkUnique");
+      // console.log(isRight);
+      return isRight;
+  },
+  checkContainer:function(filePath){
+      var isRight =true;
+      var checkType = ["dbf", "shp", "shx"];
+      var patt=/[\w]+\./g;
+      var ml = filePath.replace(patt,'');
+      ml = ml.toLowerCase().split("，");
+      var rightArray = [];
+      for(var i = 0 ; i <ml.length ; i++){
+        var pattern = RegExp(ml[i]);
+        if(pattern.test(checkType)&& ml[i]!==undefined&&!pattern.test(rightArray)){
+          rightArray.push(ml[i]);
+        }
+      }
+      if(rightArray.length!=checkType.length){
+          isRight = false;
+      }
+      // console.log("checkContainer");
+      // console.log(isRight);
+      return isRight;
+  },
+  addFile: function (fileType, filePath,fileLength) {
       //var filePath = dojo.byId(this.btnFileLoad).attr("value");
       var isRight = false;
+      var TempText = "";
+      // debugger;
       switch (fileType) {
           case "SHARP":
-              if (filePath.toLowerCase().indexOf(".shp") == -1 && filePath.toLowerCase().indexOf(".dwg") == -1) {
-                  showMessage("上传文件类型不属于Sharp文件！请重新选择");
-              }else{
-                  isRight = true;
-              }      //判断Shape文件
+              // debugger;
+              var TempTxt = "请上传同一个Sharp文件，并且至少要选择后缀名为.shp、.dbf和.shx这三种格式，请重新选择！";
+              if(fileLength<3){
+                  TempText = TempTxt;
+              }else if(fileLength>=3){
+                  if(this.checkUnique(filePath)){
+                      if (!this.checkContainer(filePath)) {
+                          TempText = TempTxt;
+                      }
+                  }else{
+                      TempText = TempTxt;
+                  }
+              } //判断Shape文件
               break;
           case "CAD":
-              if (filePath.toLowerCase().indexOf(".dwg") == -1 && filePath.toLowerCase().indexOf(".dwt") == -1) {
-                  showMessage("上传文件类型不属于CAD文件！请重新选择");
-              }else{
-                  isRight = true;
+              if (filePath.indexOf(".dwg") == -1||fileLength!=1) {
+                  TempText = "请只上传一个文件，并且上传文件类型属于CAD文件！请重新选择";
               }//判断CAD文件
               break;
           case "TXT":
-              if (filePath.toLowerCase().indexOf(".txt") == -1) {
-                  showMessage("上传文件类型不属于TXT文件！请重新选择");
-              }else{
-                  isRight = true;
-              }      //判断TXT文件
+              if (filePath.indexOf(".txt") == -1||fileLength!=1) {
+                  TempText = "请只上传一个文件，并且上传文件类型属于TXT文件！请重新选择";
+              }//判断TXT文件
               break;
           default:
-              if (filePath.toLowerCase().indexOf(".shp") == -1 && filePath.toLowerCase().indexOf(".dwg") == -1) {
-                  showMessage("上传文件类型不属于Sharp文件！请重新选择");
-              }else{
-                  isRight = true;
-              }      //判断Shape文件
+              if (filePath.indexOf(".txt") == -1) {
+                  TempText = "请只上传一个文件，并且上传文件类型属于TXT文件！请重新选择";
+              }//判断TXT文件
               break;
       }
-      if(isRight){
+      if(TempText.length==0){
           this.setSubmit(fileType);
+      }else{
+          showMessage(TempText);
       }
   }
 ```
 
-## 3.5
-
-将通过判断的数据，读取相关配置，通过`dojo.io.iframe.send()`方法传到对应的`c#`后台，后台通过`HttpPostedFile fileObj = context.Request.Files["fileUp"]`进行获取，并进行文件保存到服务器指定路径处理，并返回处理结果。
+## 4.5
 
 ```javascript
   /*------------------------------layoutOther.js*/
@@ -270,114 +373,212 @@ date: 2017-10-28 00:00:00
       var _this =this;
       if(!!res){
           res = JSON.parse(res);
-          if(res.success){
+          if(res.success!="false"){
               var fileType = _this.content.dir;
-              // console.log(res.msg);
-              _this.content.global.readFile(fileType,res.msg);
+              _this.content.global.readFile(res.msg);
           }else{
               showMessage(res.msg);
           }
       }
   },
   onSubmitError:function(response, ioArgs){
-    // debugger;
-    showMessage(response);
+      // debugger;
+      showMessage(response);
   }
 
 ```
 
-## 3.6
+## 4.6
 
-> 后台返回对应规范的结果集
+```c#
+  private void showSuc(HttpContext context, string message)
+  {
+      string res = "{\"success\":\"true\",\"msg\":" + message + "}";
+      context.Response.AddHeader("Content-Type", "text/html; charset=UTF-8");
+      context.Response.Write(res);
+      context.Response.End();
+  }
 
-- 文件上传失败！（初始值）
-- 请选择文件。
-- 目录名不正确。
-- 上传文件大小超过限制。
-- 上传文件扩展名是不允许的扩展名。
-- 上传成功
+  private void showError(HttpContext context, string message)
+  {
+      string res = "{\"success\":\"false\",\"msg\":\"" + message + "\"}";
+      context.Response.AddHeader("Content-Type", "text/html; charset=UTF-8");
+      context.Response.Write(res);
+      context.Response.End();
+  }
+```
 
-## 3.7
+## 4.7
 
-> 前台获取到数据，获取后台实际返回值，判断后台处理状态，根据不同状态做对应处理。
+### 4.7.1 上传成功
 
-### 3.7.1 上传成功
-
-  获取需要的参数，调用相关方法进行页面展示
-  ```javascript
-    onSubmitted:function(response, ioArgs){
-        var res = response.childNodes[0].innerText;
-        // debugger;
-        var _this =this;
-        if(!!res){
-            res = JSON.parse(res);
-            if(res.success){
-                var fileType = _this.content.dir;
-                // console.log(res.msg);
-                _this.content.global.readFile(fileType,res.msg);
-            }else{
-                showMessage(res.msg);
-            }
+```javascript
+  onSubmitted:function(response, ioArgs){
+      var res = response.childNodes[0].innerText;
+      // debugger;
+      var _this =this;
+      if(!!res){
+          res = JSON.parse(res);
+          if(res.success!="false"){
+              var fileType = _this.content.dir;
+              _this.content.global.readFile(res.msg);
+          }else{
+              showMessage(res.msg);
+          }
+      }
+  },
+  initArcJson:function(data){
+    var starttime =new Date();
+    var getAttr = data;
+    getAttr.spatialReference= this.map.spatialReference;
+    var demo ={
+        "geometry": {},
+        "attributes": {
+            "generated": Number(starttime),
+            "title": "西瓜信息技术股份有限公司",
+            "status": 200
         }
-    },
-    readFile: function (fileType, fileExt) {
-        var isRight = false;
+    };
+    demo.geometry = getAttr;
+    return demo;
+  },
+  readFile: function (data) {
+    // debugger;
+    // var starttime =new Date();
+    // console.log("starttime"+starttime);
+    // console.log(data);
+    this.EmptyGraphicLayer.clear();
+    for(var i=0;i<data.length;i++){
         // debugger;
-        switch (fileType) {
-            case "SHARP":
-                this.readSharp(fileExt);      //加载Shape文件
+        var tempType = data[i].type;
+        var tempData = this.initArcJson(data[i]);
+        switch (tempType)
+        {
+            case "point":
+                this.loadPoint(tempData);      //加载point信息
                 break;
-            case "CAD":
-                this.readCAD(fileExt);      //加载CAD文件
+            case "line":
+                this.loadLine(tempData);      //加载line信息
                 break;
-            case "TXT":
-                this.readTXT(fileExt);      //加载TXT文件
+            case "polygon":
+                this.loadPolyon(tempData);    //加载polygon信息
                 break;
             default:
-                this.readSharp(fileExt);      //加载Shape文件
+                this.loadPoint(tempData);    //加载point信息
                 break;
         }
-        if(isRight){
-            this.setSubmit(fileType);
+
+    }
+    // console.log("this.EmptyGraphicLayer"+this.EmptyGraphicLayer);
+    // console.log("took", new Date - starttime, "milliseconds");
+  },
+  loadPoint: function (data) {
+    try {
+        // debugger;
+        if(!!data){
+            var markerSymbol = new esri.symbol.SimpleMarkerSymbol();
+            markerSymbol.setColor(new esri.Color([192, 64, 223,0.5]));
+            var labelPoint = data.geometry.points;
+            var labelSr =data.geometry.spatialReference;
+            var labelAttr =data.attributes;
+            // debugger;
+            for(var item in labelPoint){
+                    var point = new esri.geometry.Point([Number(labelPoint[item][0]), Number(labelPoint[item][1])], labelSr);
+                    var wmpoint = esri.geometry.webMercatorUtils.geographicToWebMercator(point);
+                    var textSymbol = new esri.symbols.TextSymbol("item: " + item );
+
+                    if (!this.EmptyGraphicLayer){
+                            this.EmptyGraphicLayer = getEmptyGraphicLayer();
+                    }
+                    var grPp = new esri.Graphic(point, markerSymbol);
+                    var grPt = new esri.Graphic(point, textSymbol);
+
+                    if (grPp) {
+                            grPp.visible = true;
+                            grPp.attributes = labelAttr;
+                            grPt.visible = true;
+                            grPt.attributes = labelAttr;
+                            this.EmptyGraphicLayer.add(grPp);
+                            // this.EmptyGraphicLayer.add(grPt);
+                            this.EmptyGraphicLayer.visible = true;
+                    }
+                    if(item==labelPoint.length-1){
+                        // debugger;
+                        this.map.centerAndZoom(point,18);
+                    }
+            }
+
+        }else{
+            showMessage("数据为空");
         }
-    },
-    readSharp: function (fileExt) {
-        // var base = 'UpLoad/demo1.zip';
-        this.map.graphics.clear();
-        var base = 'UpLoad/demo'+fileExt;
-        shapefile = new Shapefile({
-            shp: base,
-            jsRoot:'javascript/fileStream/'
-        }, function (data) {
-          // var starttime =new Date();
-          // console.log("starttime"+starttime);
-          // console.log(data);
-          var s_labelPoint = Terraformer.ArcGIS.convert(data.geojson, {sr:2361})[0];
+    }
+    catch (e) {
+            showMessage("加载点信息错误，错误原因是" + e.message);
+    }
+  },
+  loadLine: function (data) {
+    try {
+        var LineSymbol = new esri.symbols.CartographicLineSymbol();
+        LineSymbol.setWidth(5);
+        var labelAttr =data.attributes;
+        if(!!data){
+            data.visible = true;
+            var t_graphic =new esri.Graphic(data);
+            t_graphic.symbol=LineSymbol;
+            t_graphic.attributes = labelAttr;
+            if (!this.EmptyGraphicLayer){
+                this.EmptyGraphicLayer = getEmptyGraphicLayer();
+            }
+            this.EmptyGraphicLayer.add(t_graphic);
+            var centerPoint =t_graphic.geometry.getExtent().getCenter();
+            console.log(centerPoint);
+            this.map.centerAndZoom(centerPoint,18);
+            this.EmptyGraphicLayer.visible = true;
+            this.EmptyGraphicLayer.opacity=0.75;
+        }else{
+            showMessage("数据为空");
+        }
+    }
+    catch (e) {
+            showMessage("加载线信息错误，错误原因是" + e.message);
+    }
+  },
+  loadPolyon: function (data) {
+    try {
+        var labelAttr =data.attributes;
+        var fillSymbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_NULL,new esri.symbol.SimpleLineSymbol("solid", new esri.Color([82, 158, 229, 0.7]), 5),null);
+        if (!!data) {
+            data.visible = true;
+            var t_graphic =new esri.Graphic(data);
+            t_graphic.symbol=fillSymbol;
+            t_graphic.attributes = labelAttr;
+            if (!this.EmptyGraphicLayer){
+                this.EmptyGraphicLayer = getEmptyGraphicLayer();
+            }
+            this.EmptyGraphicLayer.add(t_graphic);
+            var centerPoint =t_graphic.geometry.getExtent().getCenter();
+            // debugger;
+            this.map.centerAndZoom(centerPoint,18);
+            // var markerSymbol = new esri.symbol.SimpleMarkerSymbol();
+            // var textSymbol = new esri.symbols.TextSymbol("中心点");
+            // var grPt = new esri.Graphic(centerPoint, textSymbol);
+            // var grPm = new esri.Graphic(centerPoint, markerSymbol);
 
-          var fillSymbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_NULL,new esri.symbol.SimpleLineSymbol("solid", new esri.Color([82, 158, 229, 0.7]), 5),null);
-          if (s_labelPoint) {
-              s_labelPoint.visible = true;
-              s_labelPoint.type="polygon";
-              var t_graphic =new esri.Graphic(s_labelPoint);
-              t_graphic.symbol=fillSymbol;
-              this.EmptyGraphicLayer.add(t_graphic);
-              var centerPoint =t_graphic.geometry.getExtent().getCenter();
-              this.map.centerAndZoom(centerPoint,18);
-              this.EmptyGraphicLayer.visible = true;
-              this.EmptyGraphicLayer.opacity=0.75;
-          }
-          // console.log("took", new Date - starttime, "milliseconds");
-        })
-    },
-    readCAD: function (filePath) {
-        showMessage(filePath);
-    },
-    readTXT: function (filePath) {
-        showMessage(filePath);
-    },
-  ```
+            // this.EmptyGraphicLayer.add(grPt);
+            // this.EmptyGraphicLayer.add(grPm);
+            this.EmptyGraphicLayer.visible = true;
+            this.EmptyGraphicLayer.opacity=0.75;
+        }else{
+            showMessage("数据为空");
+        }
+    }
+    catch (e) {
+            showMessage("加载面信息错误，错误原因是" + e.message);
+    }
+  }
+```
 
-### 3.7.2 上传失败
+### 4.7.2 上传失败
 
 ```javascript
   //提示错误原因
@@ -387,14 +588,16 @@ date: 2017-10-28 00:00:00
   }
 ```
 
-# 4 开始写代码
-
-  通过对应代码编辑器，编写代码，如果遇见错误，通过相关[开源社区](https://github.com/)，搜索相关案例，了解[dojo实现机制](http://dojotoolkit.org/reference-guide/1.9/)，了解[esri实现机制](https://developers.arcgis.com/javascript/3/jsapi/)。
-
 # 5 测试代码运行效果
 
   在本地部署项目，利用后台断点和前台debugger进行相关排错。
 
 # 6 保证代码持续运行
 
-  部署项目到线上，进行多次容错测试
+- 上传文件格式错误，进行合理报错
+- 上传文件过多，进行合理报错
+- 上传文件中包含正确的文件，但是也包含不正确的文件，进行合理报错
+- 解析图形文件是否正确绘制在页面，进行合理报错
+- 三种类型文件上传解析是否都正确，进行合理报错
+- 后续需要处理大文件上传的文件，前后台是否存在异步，进行合理报错
+- 后续补充
