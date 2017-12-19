@@ -67,8 +67,16 @@ Java（对Javascript）的影响，主要是把数据分成基本类型（primit
 作为设计者，他一点也不喜欢自己的这个把`Java`作为`Javascript`设计原型的产品
 
 ```text
-与其说我爱Javascript，不如说我恨它。它是C语言和Self语言一夜情的产物。十八世纪英国文学家约翰逊博士说得好：‘它的优秀之处并非原创，它的原创之处并不优秀。’（the part that is good is not original, and the part that is original is not good.
+与其说我爱Javascript，不如说我恨它。它是C语言和Self语言一夜情的产物。十八世纪英国文学家约翰逊博士说得好：‘它的优秀之处并非原创，它的原创之处并不优秀。’（the part that is good is not original, and the part that is original is not good.)
 ```
+
+> JavaScript 和 Java 的对比
+
+|JavaScript|Java|
+|:---|:---|
+|面向对象。不区分对象类型。通过原型机制继承，任何对象的属性和方法均可以被动态添加。|基于类系统。分为类和实例，通过类层级的定义实现继承。不能动态增加对象或类的属性或方法。|
+|变量类型不需要提前声明(动态类型)。|变量类型必须提前声明(静态类型)。|
+|不能直接自动写入硬盘。|可以直接自动写入硬盘。|
 
 # 3 开发版本迭代
 

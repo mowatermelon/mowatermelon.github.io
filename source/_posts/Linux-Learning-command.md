@@ -50,8 +50,7 @@ date: 2017-10-13 00:00:00
 | ln         |          创建链接文件
 | more、less |  分页显示文本文件内容
 | head、tail  |   显示文件头、尾内容
-| ctrl+alt+F1 |  命令行全屏模式
-
+| ctrl+alt+F1 |  命令行全屏模式s
 
 # 3 系统管理命令
 
@@ -98,7 +97,6 @@ tar -jcvf /home/abc.tar.bz2 /home/abc      #打包，并用bzip2压缩
 
 当然，如果想解压缩，就直接替换上面的命令  `tar -cvf  / tar -zcvf  / tar -jcvf` 中的`c` 换成`x` 就可以了。
 
- 
 # 5 关机/重启机器
 
 | 指令名称  | 指令含义 |
@@ -166,7 +164,6 @@ vim三种模式：`命令模式`、`插入模式`、`编辑模式`。使用`ESC`
 |k    |     上一行↑
 |l    |     右移一个字符→
 
-
 # 8 用户及用户组管理
 
 | 账号地址  | 地址含义 |
@@ -230,7 +227,7 @@ sudo chown root:root jdk-7u21-linux-i586.tar.gz
 > 更改权限
 
 ```bash
-sudo chmod [u所属用户  g所属组  o其他用户  a所有用户]  [+增加权限  -减少权限]  [r  w  x]   目录名 
+sudo chmod [u所属用户  g所属组  o其他用户  a所有用户]  [+增加权限  -减少权限]  [r  w  x]   目录名
 ```
 
 例如：有一个文件`filename`，权限为`-rw-r----x` ,将权限值改为`-rwxrw-r-x`，用数值表示为`765`
