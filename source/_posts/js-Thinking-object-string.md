@@ -575,10 +575,10 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |方法名|描述|参数|
 |:---|:---|:---|
 |includes(searchString[, position])|  `不推荐使用`，判断一个字符串是否包含在另一个字符串中，根据情况返回true或false。|@para searchString 要在此字符串中搜索的字符串。@para position 可选。从当前字符串的哪个索引位置开始搜寻子字符串；默认值为0。|
-|endsWith()| `不推荐使用`， 判断一个字符串的结尾是否包含其他字符串中的字符。|无|
 |indexOf()| 从字符串对象中返回首个被发现的给定值的索引值，如果没有找到则返回-1。|无|
 |lastIndexOf()|  从字符串对象中返回最后一个被发现的给定值的索引值，如果没有找到则返回-1。|无|
 |startsWith()| `不推荐使用`，判断字符串的起始位置是否匹配其他字符串中的字符。|无|
+|endsWith(searchString [, position])| `不推荐使用`， 判断一个字符串的结尾是否包含其他字符串中的字符。|@para searchString 要搜索的子字符串。@para position 在 str 中搜索 searchString 的结束位置，默认值为 str.length，也就是真正的字符串结尾处。|
 
 ### 4.3.2 详细
 
@@ -642,7 +642,7 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 
 - 索引值的范围是`0~varName.length-1`。
 - 传入的数字是向下取整的，只取数字的整数部分，举个栗子，比如传入2.1-2.9，`includes方法`是当作`2`进行处理。
-- 对于传入的负值整数，`includes方法`是当作0进行处理。
+- 对于传入的负值整数，`includes方法`是当作`0`进行处理。
 - 对于传入的`String`，`Object`，`Array`和`Boolean`类型的值，`includes方法`是当作`0`进行处理。
 - 对于传入的`Date`类型的值，`includes方法`会自动转成对应的时间戳数值，进行检索匹配。
 - 对于`Number.NaN`，`Number.MIN_VALUE`和`Number.NEGATIVE_INFINITY`，`includes方法`是当作`0`进行处理。
@@ -674,29 +674,96 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |oString.includes("llo",Number.NEGATIVE_INFINITY)|true|
 |oString.includes("llo",Number.POSITIVE_INFINITY)|false|
 
-> 2 endsWith()
-
-|使用方法|结果|
-|:---|:---|
-|varName.endsWith()||
-
-> 3 indexOf()
+> 2 indexOf()
 
 |使用方法|结果|
 |:---|:---|
 |varName.indexOf()||
 
-> 4 lastIndexOf()
+> 3 lastIndexOf()
 
 |使用方法|结果|
 |:---|:---|
 |varName.lastIndexOf()||
 
-> 5 startsWith()
+> 4 startsWith()
 
 |使用方法|结果|
 |:---|:---|
 |varName.startsWith()||
+
+> 5 endsWith(searchString [, position])
+
+|使用方法|结果|
+|:---|:---|
+|oString.endsWith("world")|true|
+|oString.endsWith("worl")|false|
+|oString.endsWith("worl",oString.length-1)|true|
+
+> 第一个参数错误示例
+
+- 进行匹配的时候，只要原始值是定义好的，加没加双引号都可以被正常检测出来。
+- 布尔值字符串可以判断是否包含布尔值对象。
+- 自己判断是否完全包含自己是可以正常检测的。
+- 传入空字符串的时候，`endsWith方法`会直接返回`true`。
+- 对于特殊的字面量，`true`，`false`，`null`，`undefined`和`NaN`，`endsWith方法`会当作普通字符串进行完全匹配
+
+|使用方法|结果|
+|:---|:---|
+|"true".endsWith(true)|true|
+|"true".endsWith("true")|true|
+|"true".endsWith(oBool)|true|
+|"false".endsWith(false)|true|
+|"false".endsWith("false")|true|
+|"false".endsWith(oBool)|false|
+|"null".endsWith(null)|true|
+|"null".endsWith("null")|true|
+|"undefined".endsWith(undefined)|true|
+|"undefined".endsWith("undefined")|true|
+|"NaN".endsWith(NaN)|true|
+|"NaN".endsWith("NaN")|true|
+|oString.endsWith("")|true|
+|oString.endsWith(oString)|true|
+|oString.endsWith(true)|false|
+|oString.endsWith(false)|false|
+|oString.endsWith(null)|false|
+|oString.endsWith(undefined)|false|
+|oString.endsWith(NaN)|false|
+
+> 第二个参数错误示例
+
+- 索引值的范围是`1~varName.length`。
+- 传入的数字是向下取整的，只取数字的整数部分，举个栗子，比如传入10.1-10.9，`endsWith方法`是当作`10`进行处理。
+- 对于传入的负值整数，`endsWith方法`是当作`1`进行处理，`endsWith方法`是当作`1`进行处理，相当于就是从字符串的索引值为`1`的到索引值为`1`中间的字符串，检索结尾是不是对应的传入的字符串。
+- 对于传入的`String`，`Object`，`Array`和`Boolean`类型的值，`endsWith方法`是当作`1`进行处理，相当于就是从字符串的索引值为`1`的到索引值为`1`中间的字符串，检索结尾是不是对应的传入的字符串。
+- 对于传入的`Date`类型的值，`endsWith方法`会自动转成对应的时间戳数值，相当于就是从字符串的索引值为`varName.length`的到索引值为`1`中间的字符串，检索结尾是不是对应的传入的字符串。
+- 对于`Number.NaN`，`Number.MIN_VALUE`和`Number.NEGATIVE_INFINITY`，`endsWith方法`是当作`1`进行处理，相当于就是从字符串的索引值为`1`的到索引值为`1`中间的字符串检索内容。
+- 对于`Number.MAX_VALUE`和`Number.POSITIVE_INFINITY`，`endsWith方法`是当作超出`varName.length`进行处理，相当于就是从字符串的索引值为`varName.length`的到索引值为`1`中间的字符串，检索结尾是不是对应的传入的字符串。
+
+|使用方法|结果|
+|:---|:---|
+|oString.endsWith("world",10.1)|false|
+|oString.endsWith("world",10.5)|false|
+|oString.endsWith("world",10.8)|false|
+|oString.endsWith("world",11)|true|
+|oString.endsWith("world",11.1)|true|
+|oString.endsWith("world",11.5)|true|
+|oString.endsWith("world",11.8)|true|
+|oString.endsWith("world",-10)|false|
+|oString.endsWith("world",-11)|false|
+|oString.endsWith("world",true)|false|
+|oString.endsWith("world",false)|false|
+|oString.endsWith("world","true")|false|
+|oString.endsWith("world","false")|false|
+|oString.endsWith("world",oo)|false|
+|oString.endsWith("world",oBool)|false|
+|oString.endsWith("world",oArray)|false|
+|oString.endsWith("world",oDate)|true|
+|oString.endsWith("world",Number.NaN)|false|
+|oString.endsWith("world",Number.MAX_VALUE)|true|
+|oString.endsWith("world",Number.MIN_VALUE)|false|
+|oString.endsWith("world",Number.NEGATIVE_INFINITY)|false|
+|oString.endsWith("world",Number.POSITIVE_INFINITY)|true|
 
 ## 4.4. 比较
 
@@ -1101,6 +1168,7 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |方法名|描述|参数|
 |:---|:---|:---|
 |includes(searchString[, position])|  `不推荐使用`，判断一个字符串是否包含在另一个字符串中，根据情况返回true或false。|@para searchString 要在此字符串中搜索的字符串。@para position 可选。从当前字符串的哪个索引位置开始搜寻子字符串；默认值为0。|
+|endsWith(searchString [, position])| `不推荐使用`， 判断一个字符串的结尾是否包含其他字符串中的字符。|@para searchString 要搜索的子字符串。@para position 在 str 中搜索 searchString 的结束位置，默认值为 str.length，也就是真正的字符串结尾处。|
 
 # 8 参考网站
 
