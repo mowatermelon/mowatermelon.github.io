@@ -594,9 +594,85 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 
 `MooTools 1.3`会强制使用它自己版本的函数`String.prototype.contains()`，因此，依赖它的网站不会崩溃掉。然而，你应该注意此方法在`MooTools 1.3` 签名和`ECMAScript 6` 签名中的不同（在第二个参数）。后来，为了与`ES6`标准一致在`MooTools 1.5`版本及以上更改了签名。
 
+- 对于字符串中原本包含空格，tab缩进，tab键和空格键产生的空白占位格是不同的，`includes方法`会进行严格的匹配。
+- 对于字符串中原本包含字母，`includes方法`会进行严格的大小写匹配。
+- 对于字符串中包含的BMP字符，不会自动转译成对应的中文，`includes方法`会当成普通字符串进行严格的匹配。
+
 |使用方法|结果|
 |:---|:---|
-|varName.includes()||
+|oString.includes(" ")|true|
+|oString.includes("llo")|true|
+|oString.includes("lLo")|false|
+|oString.includes("llo",3)|false|
+|oString_1.includes("\uD87E\uDC04")|true|
+|oString_1.includes("你")|false|
+|tString_2.includes("  ")//空格键产生的空白占位格|false|
+|tString_2.includes("	")//tab键产生的空白占位格|false|
+|oString_1.includes("\uD87E\uDC04")|true|
+|oString_1.includes("你")|false|
+|oString_1.includes("sss")|false|
+
+> 第一个参数错误示例
+
+- 进行匹配的时候，只要原始值是定义好的，加没加双引号都可以被正常检测出来。
+- 布尔值字符串可以判断是否包含布尔值对象。
+- 自己判断是否完全包含自己是可以正常检测的。
+- contains()已经废弃。
+- 传入空字符串的时候，`includes方法`会直接返回`true`。
+
+|使用方法|结果|
+|:---|:---|
+|"true".includes(true)|true|
+|"true".includes("true")|true|
+|"true".includes(oBool)|true|
+|"false".includes(false)|true|
+|"false".includes("false")|true|
+|"false".includes(oBool)|false|
+|"null".includes(null)|true|
+|"null".includes("null")|true|
+|"undefined".includes(undefined)|true|
+|"undefined".includes("undefined")|true|
+|"NaN".includes(NaN)|true|
+|"NaN".includes("NaN")|true|
+|oString.includes("")|true|
+|oString.includes(oString)|true|
+|varName.contains()|直接报错|
+
+> 第二个参数错误示例
+
+- 索引值的范围是`0~varName.length-1`。
+- 传入的数字是向下取整的，只取数字的整数部分，举个栗子，比如传入2.1-2.9，`includes方法`是当作`2`进行处理。
+- 对于传入的负值整数，`includes方法`是当作0进行处理。
+- 对于传入的`String`，`Object`，`Array`和`Boolean`类型的值，`includes方法`是当作`0`进行处理。
+- 对于传入的`Date`类型的值，`includes方法`会自动转成对应的时间戳数值，进行检索匹配。
+- 对于`Number.NaN`，`Number.MIN_VALUE`和`Number.NEGATIVE_INFINITY`，`includes方法`是当作`0`进行处理。
+- 对于`Number.MAX_VALUE`和`Number.POSITIVE_INFINITY`，`includes方法`是当作超出`varName.length`进行处理。
+
+|使用方法|结果|
+|:---|:---|
+|oString.includes("llo",2.1)|true|
+|oString.includes("llo",2.5)|true|
+|oString.includes("llo",2.8)|true|
+|oString.includes("llo",3)|false|
+|oString.includes("llo",3.1)|false|
+|oString.includes("llo",3.5)|false|
+|oString.includes("llo",3.8)|false|
+|oString.includes("llo",oString.length)|false|
+|oString.includes("llo",-2)|true|
+|oString.includes("llo",-3)|true|
+|oString.includes("llo",true)|true|
+|oString.includes("llo",false)|true|
+|oString.includes("llo","true")|true|
+|oString.includes("llo","false")|true|
+|oString.includes("llo",oo)|true|
+|oString.includes("llo",oBool)|true|
+|oString.includes("llo",oArray)|true|
+|oString.includes("llo",oDate)|false|
+|oString.includes("llo",Number.NaN)|true|
+|oString.includes("llo",Number.MAX_VALUE)|false|
+|oString.includes("llo",Number.MIN_VALUE)|true|
+|oString.includes("llo",Number.NEGATIVE_INFINITY)|true|
+|oString.includes("llo",Number.POSITIVE_INFINITY)|false|
 
 > 2 endsWith()
 
