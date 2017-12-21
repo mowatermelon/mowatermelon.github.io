@@ -19,8 +19,8 @@ String引用类型方法速览表
 |方法分类|含义|方法名|
 |:---|:---|:---|
 |编码| 返回字符串内容中对应位置的值或者编码单元 |charAt(index),charCodeAt(index),codePointAt(pos),normalize([form]),fromCharCode(num1, ..., numN),fromCodePoint(num1, …, numN)|
-|检索| 将字符串中内容进行检索返回对应结果 |includes(),endsWith(),indexOf(),lastIndexOf(),startsWith()|
-|比较| 将字符串中的内容进行比较返回对应值 |localeCompare(),match()|
+|检索| 将字符串中内容进行检索返回对应结果 |indexOf(searchValue[, fromIndex]),lastIndexOf(searchValue[, fromIndex]),search(regexp),includes(searchString[, position]),startsWith(searchString [, position]),endsWith(searchString [, position]),match(regexp)|
+|排序| 将字符串中的内容按照ACSII码值进行排序之后返回 |localeCompare()|
 |拼接| 将字符串和其他内容进行拼接 |concat(),padEnd(),padStart()|
 |大小写转换| 将字符串中的字母进行大小写转换 |toLowerCase(),toLocaleLowerCase(),toUpperCase(),toLocaleUpperCase()|
 |HTML相关方法| 将字符串转成对应的Dom内容 |big(),small(),blink(),bold(),italics(),strike(),fixed(),sub(),sup(),anchor(anchorname),link(url),fontcolor(color),fontsize(size)|
@@ -29,7 +29,7 @@ String引用类型方法速览表
 
 |方法分类|含义|方法名|
 |:---|:---|:---|
-|替换| 相关对象类型名称 |replace(),search()|
+|替换| 相关对象类型名称 |replace()|
 |分割| 相关对象类型名称 |slice(),split(),substr(),substring()|
 |格式转化| 相关对象类型名称 |trim(),trimLeft(),trimRight()|
 |对象通用方法| 相关对象类型名称 |valueOf(),hasOwnProperty(),isPrototypeOf(),setPrototypeOf(),unwatch(),watch(),propertyIsEnumerable()|
