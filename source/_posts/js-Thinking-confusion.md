@@ -48,7 +48,7 @@ console.log(noArr.__proto__); //[Number: 0]
 
 ### 2.1.1 正则与undefined
 
-为何所有字符串中都可以检测到`undefined`，其他特殊字面量明明都可以正常转成正则对象，然后进行检测。
+其他特殊字面量明明都可以正常转成正则对象，但是`undefined`却会转成`/(?:)/`然后进行检测。
 
 ```javascript
 var a = 4;
@@ -77,6 +77,16 @@ console.log(oString.search(true));//-1
 console.log(oString.search(false));//-1
 console.log(oString.search(null));//-1
 console.log(oString.search(NaN));//-1
+
+console.log(new RegExp(true));//  /true/
+
+console.log(new RegExp(false));// /false/
+
+console.log(new RegExp(undefined));// /(?:)/
+
+console.log(new RegExp(null));// /null/
+
+console.log(new RegExp(NaN));// /NaN/
 
 ```
 
