@@ -102,6 +102,14 @@ var tString_2 =`hello line 1
 var tString_3 =`Fifteen is ${a + b} and\nnot ${2 * a + b}.`;
 var tString_4 = "大吉大利今晚吃西瓜!";
 
+// function search(regexp){
+//   // debugger;
+//   console.log(regexp);
+//   return this.search(regexp);
+// }
+
+// String.prototype.search =search;
+
 console.log(strString.search(oo));//1   位置对应的字母是 e
 console.log(strString.charAt(1));//e
 
@@ -122,4 +130,8 @@ console.log(tString_3.charAt(3));//t
 
 console.log(tString_4.search(oo));//-1
 
+console.log(strString.search(oBool));//-1
+console.log(strString.search(oNum));//-1
+console.log(strString.search(oArray));//-1
+console.log(strString.search(oDate));//-1
 ```
