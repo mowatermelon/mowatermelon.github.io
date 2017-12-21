@@ -41,3 +41,85 @@ console.log(doArr.__proto__); //[String: '']  为何啊  明明这两个数据�
 console.log(noArr.constructor);//[Function:Number]
 console.log(noArr.__proto__); //[Number: 0]
 ```
+
+# 2 正则匹配
+
+## 2.1 search
+
+### 2.1.1 正则与undefined
+
+为何所有字符串中都可以检测到`undefined`，其他特殊字面量明明都可以正常转成正则对象，然后进行检测。
+
+```javascript
+var a = 4;
+var b = 8;
+var strString = "hello watermelon";
+var oo = new Object();
+var oString = new String("hello world");
+var oBool = new Boolean(true);
+var oNum = new Number(68);
+var oArray = new Array("demo","melon","water");
+var oDate = new Date();
+var oString_1 = 'A \uD87E\uDC04 Z';
+var tString_1 =`hello Template`;
+var tString_2 =`hello line 1
+				hello line 2`;
+//`string text ${expression} string text`  在模版字符串中使用表达式
+var tString_3 =`Fifteen is ${a + b} and\nnot ${2 * a + b}.`;
+console.log(strString.search(undefined));//0
+console.log(oString.search(undefined));//0
+console.log(oString_1.search(undefined));//0
+console.log(tString_1.search(undefined));//0
+console.log(tString_2.search(undefined));//0
+console.log(tString_3.search(undefined));//0
+
+console.log(oString.search(true));//-1
+console.log(oString.search(false));//-1
+console.log(oString.search(null));//-1
+console.log(oString.search(NaN));//-1
+
+```
+
+### 2.1.2 正则与Object
+
+对应的字母有`e`，`t`，和`空格`，这个和`oo`有什么关系，`oo`是一个空对象啊，它的字面量是`{}`。
+
+```javascript
+var a = 4;
+var b = 8;
+var strString = "hello watermelon";
+var oo = new Object();
+var oString = new String("hello world");
+var oBool = new Boolean(true);
+var oNum = new Number(68);
+var oArray = new Array("demo","melon","water");
+var oDate = new Date();
+var oString_1 = 'A \uD87E\uDC04 Z';
+var tString_1 =`hello Template`;
+var tString_2 =`hello line 1
+				hello line 2`;
+//`string text ${expression} string text`  在模版字符串中使用表达式
+var tString_3 =`Fifteen is ${a + b} and\nnot ${2 * a + b}.`;
+var tString_4 = "大吉大利今晚吃西瓜!";
+
+console.log(strString.search(oo));//1   位置对应的字母是 e
+console.log(strString.charAt(1));//e
+
+console.log(oString.search(oo));//1   位置对应的字母是 e
+console.log(oString.charAt(1));//e
+
+console.log(oString_1.search(oo));//1   位置对应的字母是 空格
+console.log(oString_1.charAt(1));//\s  位置对应的字母是 空格
+
+console.log(tString_1.search(oo));//1   位置对应的字母是 e
+console.log(tString_1.charAt(1));//e
+
+console.log(tString_2.search(oo));//1   位置对应的字母是 e
+console.log(tString_2.charAt(1));//e
+
+console.log(tString_3.search(oo));//3   位置对应的字母是 t
+console.log(tString_3.charAt(3));//t
+
+console.log(tString_4.search(oo));//-1
+
+```
