@@ -5,7 +5,7 @@ tags:
   - string
   - watermelon
   - js_thinking
-date: 2017-10-30 00:00:00
+date: 2017-10-31 00:00:00
 ---
 # 1. 定义
 
@@ -320,7 +320,7 @@ or object instanceof(constructor)
 |codePointAt(pos)| `测试中`， 返回使用UTF-16编码的给定位置的值的非负整数。|@para pos 这个字符串中需要转码的元素的位置。|
 |normalize([form])| `测试中`， 返回调用字符串值的Unicode标准化形式。|@para form 四种 Unicode 正规形式 "NFC", "NFD", "NFKC", 以及 "NFKD" 其中的一个, 默认值为 "NFC".|
 |fromCharCode(num1, ..., numN)|返回一个字符串，而不是一个 String 对象。由于 fromCharCode 是 String 的静态方法，所以应该像这样使用：String.fromCharCode()，而不是作为你创建的 String 对象的方法。|@para num1, ..., numN 一组序列数字，表示 Unicode 值。|
-|fromCodePoint(num1, …, numN)| `不推荐使用`， 返回使用 Unicode 编码创建的字符串，如果传入无效的 Unicode 编码，将会抛出一个RangeError (例如： "RangeError: NaN is not a valid code point")。。|num1, ..., numN|
+|fromCodePoint(num1, …, numN)| `不推荐使用`， 返回使用 Unicode 编码创建的字符串，如果传入无效的 Unicode 编码，将会抛出一个RangeError (例如： "RangeError: NaN is not a valid code point")。|@para num1, ..., numN 一组序列数字，表示 Unicode 值。|
 
 ### 4.2.2 详细
 
@@ -574,15 +574,187 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 
 |方法名|描述|参数|
 |:---|:---|:---|
+|indexOf(searchValue[, fromIndex])| 从字符串对象中返回首个被发现的给定值的索引值开始在 fromIndex进行搜索。如果未找到该值，则返回-1。|@para searchValue 一个字符串表示被查找的值。@para fromIndex 可选 表示调用该方法的字符串中开始查找的位置。可以是任意整数。默认值为 0。如果 fromIndex < 0 则查找整个字符串（如同传进了 0）。如果 fromIndex >= varName.length，则该方法返回 -1，除非被查找的字符串是一个空字符串，此时返回 varName.length。|
+|lastIndexOf(searchValue[, fromIndex])| 返回指定值在调用该方法的字符串中最后出现的位置，如果没找到则返回 -1。从该字符串的后面向前查找，从 fromIndex 处开始。|@para searchValue 一个字符串，表示被查找的值。@para fromIndex 从调用该方法字符串的此位置处开始查找。可以是任意整数。默认值为 str.length。如果为负值，则被看作 0。如果 fromIndex > str.length，则 fromIndex 被看作 str.length。|
 |includes(searchString[, position])|  `不推荐使用`，判断一个字符串是否包含在另一个字符串中，根据情况返回true或false。|@para searchString 要在此字符串中搜索的字符串。@para position 可选。从当前字符串的哪个索引位置开始搜寻子字符串；默认值为0。|
-|indexOf()| 从字符串对象中返回首个被发现的给定值的索引值，如果没有找到则返回-1。|无|
-|lastIndexOf()|  从字符串对象中返回最后一个被发现的给定值的索引值，如果没有找到则返回-1。|无|
-|startsWith()| `不推荐使用`，判断字符串的起始位置是否匹配其他字符串中的字符。|无|
-|endsWith(searchString [, position])| `不推荐使用`， 判断一个字符串的结尾是否包含其他字符串中的字符。|@para searchString 要搜索的子字符串。@para position 在 str 中搜索 searchString 的结束位置，默认值为 str.length，也就是真正的字符串结尾处。|
+|startsWith(searchString [, position])| `不推荐使用`，判断字符串的起始位置是否匹配其他字符串中的字符。|@para searchString 要搜索的子字符串。@para position 在 varName 中搜索 searchString 的开始位置，默认值为 0，也就是真正的字符串开头处。|
+|endsWith(searchString [, position])| `不推荐使用`， 判断一个字符串的结尾是否包含其他字符串中的字符。|@para searchString 要搜索的子字符串。@para position 在 varName 中搜索 searchString 的结束位置，默认值为 varName.length，也就是真正的字符串结尾处。|
+|search(regexp)| 对正则表达式和指定字符串进行匹配搜索，返回第一个出现的匹配项的下标。如果匹配成功，则 search() 返回正则表达式在字符串中首次匹配项的索引。否则，返回 -1。|@para regexp 一个正则表达式（regular expression）对象。如果传入一个非正则表达式对象，则会使用 new RegExp(obj) 隐式地将其转换为正则表达式对象。|
+|match()| 使用正则表达式与字符串相比较。|无|
 
 ### 4.3.2 详细
 
-> 1 includes(searchString[, position])
+> 1 indexOf(searchValue[, fromIndex])
+
+- 指定值的第一次出现的索引; 如果没有找到 -1。
+- 对于字符串中原本包含空格，tab缩进，tab键和空格键产生的空白占位格是不同的，`indexOf方法`会进行严格的匹配。
+- 对于字符串中原本包含字母，`indexOf方法`会进行严格的大小写匹配。
+- 对于字符串中包含的BMP字符，不会自动转译成对应的中文，`indexOf方法`会当成普通字符串进行严格的匹配。
+
+|使用方法|结果|
+|:---|:---|
+|oString.indexOf(" ")|5|
+|oString.indexOf("hell")|0|
+|oString.indexOf("helLo")|-1|
+|oString.indexOf("hell",3)|-1|
+|oString_1.indexOf("\uD87E\uDC04")|2|
+|oString_1.indexOf("你")|-1|
+|tString_2.indexOf("  ")//空格键产生的空白占位格|-1|
+|tString_2.indexOf("	")//tab键产生的空白占位格|13|
+|oString_1.indexOf("sss")|-1|
+
+> 第一个参数错误示例
+
+- 进行匹配的时候，只要原始值是定义好的，加没加双引号都可以被正常检测出来。
+- 布尔值字符串可以判断是否包含布尔值对象。
+- 自己判断是否完全包含自己是可以正常检测的。
+- 传入空字符串的时候，`indexOf方法`会直接返回`0`。
+
+|使用方法|结果|
+|:---|:---|
+|"true".indexOf(true)|0|
+|"true".indexOf("true")|0|
+|"true".indexOf(oBool)|0|
+|"false".indexOf(false)|0|
+|"false".indexOf("false")|0|
+|"false".indexOf(oBool)|-1|
+|"null".indexOf(null)|0|
+|"null".indexOf("null")|0|
+|"undefined".indexOf(undefined)|0|
+|"undefined".indexOf("undefined")|0|
+|"NaN".indexOf(NaN)|0|
+|"NaN".indexOf("NaN")|0|
+|oString.indexOf("")|0|
+|oString.indexOf(oString)|0|
+|oString.indexOf(true)|-1|
+|oString.indexOf(false)|-1|
+|oString.indexOf(null)|-1|
+|oString.indexOf(undefined)|-1|
+|oString.indexOf(NaN)|-1|
+
+> 第二个参数错误示例
+
+- 索引值的范围是`0~varName.length-1`。
+- 传入的数字是向下取整的，只取数字的整数部分，举个栗子，比如传入0.1-0.9，`indexOf方法`是当作`0`进行处理。
+- 对于传入的负值整数，`indexOf方法`是当作`0`进行处理。
+- 对于传入的`String`，`Object`和`Array`类型的值，`indexOf方法`是当作`0`进行处理。
+- 对于`Boolean`类型的值，`indexOf方法`会将`true`转化成`1`，`false`转化成`0`，进行处理。
+- 对于传入的`Date`类型的值，`indexOf方法`会自动转成对应的时间戳数值，进行检索匹配。
+- 对于`Number.NaN`，`Number.MIN_VALUE`和`Number.NEGATIVE_INFINITY`，`indexOf方法`是当作`0`进行处理。
+- 对于`Number.MAX_VALUE`和`Number.POSITIVE_INFINITY`，`indexOf方法`是当作超出`varName.length`进行处理。
+
+|使用方法|结果|
+|:---|:---|
+|oString.indexOf("hell",0.1)|0|
+|oString.indexOf("hell",0.5)|0|
+|oString.indexOf("hell",0.8)|0|
+|oString.indexOf("hell",1)|0|
+|oString.indexOf("hell",1.1)|0|
+|oString.indexOf("hell",1.5)|0|
+|oString.indexOf("hell",1.8)|0|
+|oString.indexOf("hell",oString.length)|-1|
+|oString.indexOf("hell",-2)|0|
+|oString.indexOf("hell",-3)|0|
+|oString.indexOf("hell",true)|-1|
+|oString.indexOf("hell",false)|0|
+|oString.indexOf("hell","true")|0|
+|oString.indexOf("hell","false")|0|
+|oString.indexOf("hell",oo)|0|
+|oString.indexOf("hell",oBool)|-1|
+|oString.indexOf("hell",oArray)|0|
+|oString.indexOf("hell",oDate)|-1|
+|oString.indexOf("hell",Number.NaN)|0|
+|oString.indexOf("hell",Number.MAX_VALUE)|-1|
+|oString.indexOf("hell",Number.MIN_VALUE)|0|
+|oString.indexOf("hell",Number.NEGATIVE_INFINITY)|0|
+|oString.indexOf("hell",Number.POSITIVE_INFINITY)|-1|
+
+> 2 lastIndexOf(searchValue[, fromIndex])
+
+- 对于字符串中原本包含空格，tab缩进，tab键和空格键产生的空白占位格是不同的，`lastIndexOf方法`会进行严格的匹配。
+- 对于字符串中原本包含字母，`lastIndexOf方法`会进行严格的大小写匹配。
+- 对于字符串中包含的BMP字符，不会自动转译成对应的中文，`lastIndexOf方法`会当成普通字符串进行严格的匹配。
+- 与`indexOf方法`相比，`lastIndexOf方法`有更好的容错性，会对第二个参数做更多的处理。
+
+|使用方法|结果|
+|:---|:---|
+|oString.lastIndexOf(" ")|5|
+|oString.lastIndexOf("hell")|0|
+|oString.lastIndexOf("helLo")|-1|
+|oString.lastIndexOf("hell",3)|-1|
+|oString_1.lastIndexOf("\uD87E\uDC04")|2|
+|oString_1.lastIndexOf("你")|-1|
+|tString_2.lastIndexOf("  ")//空格键产生的空白占位格|-1|
+|tString_2.lastIndexOf("	")//tab键产生的空白占位格|13|
+|oString_1.lastIndexOf("sss")|-1|
+
+> 第一个参数错误示例
+
+- 进行匹配的时候，只要原始值是定义好的，加没加双引号都可以被正常检测出来。
+- 布尔值字符串可以判断是否包含布尔值对象。
+- 自己判断是否完全包含自己是可以正常检测的。
+- 传入空字符串的时候，`lastIndexOf方法`会直接返回`varName.length`。
+
+|使用方法|结果|
+|:---|:---|
+|"true".lastIndexOf(true)|0|
+|"true".lastIndexOf("true")|0|
+|"true".lastIndexOf(oBool)|0|
+|"false".lastIndexOf(false)|0|
+|"false".lastIndexOf("false")|0|
+|"false".lastIndexOf(oBool)|-1|
+|"null".lastIndexOf(null)|0|
+|"null".lastIndexOf("null")|0|
+|"undefined".lastIndexOf(undefined)|0|
+|"undefined".lastIndexOf("undefined")|0|
+|"NaN".lastIndexOf(NaN)|0|
+|"NaN".lastIndexOf("NaN")|0|
+|oString.lastIndexOf("")|11|
+|oString.lastIndexOf(oString)|0|
+|oString.lastIndexOf(true)|-1|
+|oString.lastIndexOf(false)|-1|
+|oString.lastIndexOf(null)|-1|
+|oString.lastIndexOf(undefined)|-1|
+|oString.lastIndexOf(NaN)|-1|
+
+> 第二个参数错误示例
+
+- 索引值的范围是`1~varName.length`。
+- 传入的大于`0`的数字是向下取整的，只取数字的整数部分，举个栗子，比如传入1.1-1.9，`lastIndexOf方法`是当作`1`进行处理。
+- 对于传入的`0`和负值整数，`lastIndexOf方法`是当作`1`进行处理。
+- 对于传入的`String`，`Object`和`Array`类型的值，`lastIndexOf方法`是当作`1`进行处理。
+- 对于`Boolean`类型的值，`indexOf方法`会将`true`转化成`1`，`false`转化成`0`，进行处理。
+- 对于传入的`Date`类型的值，`lastIndexOf方法`会自动转成对应的时间戳数值，进行检索匹配。
+- 对于`Number.NaN`，`Number.MIN_VALUE`和`Number.NEGATIVE_INFINITY`，`indexOf方法`是当作`1`进行处理。
+- 对于`Number.MAX_VALUE`和`Number.POSITIVE_INFINITY`，`indexOf方法`是当作`varName.length`进行处理。
+
+|使用方法|结果|
+|:---|:---|
+|oString.lastIndexOf("hell",0.1)|0|
+|oString.lastIndexOf("hell",0.5)|0|
+|oString.lastIndexOf("hell",0.8)|0|
+|oString.lastIndexOf("hell",1)|0|
+|oString.lastIndexOf("hell",1.1)|0|
+|oString.lastIndexOf("hell",1.5)|0|
+|oString.lastIndexOf("hell",1.8)|0|
+|oString.lastIndexOf("hell",oString.length)|0|
+|oString.lastIndexOf("hell",-2)|0|
+|oString.lastIndexOf("hell",-3)|0|
+|oString.lastIndexOf("hell",true)|0|
+|oString.lastIndexOf("hell",false)|0|
+|oString.lastIndexOf("hell","true")|0|
+|oString.lastIndexOf("hell","false")|0|
+|oString.lastIndexOf("hell",oo)|0|
+|oString.lastIndexOf("hell",oBool)|0|
+|oString.lastIndexOf("hell",oArray)|0|
+|oString.lastIndexOf("hell",oDate)|0|
+|oString.lastIndexOf("hell",Number.NaN)|0|
+|oString.lastIndexOf("hell",Number.MAX_VALUE)|0|
+|oString.lastIndexOf("hell",Number.MIN_VALUE)|0|
+|oString.lastIndexOf("hell",Number.NEGATIVE_INFINITY)|0|
+|oString.lastIndexOf("hell",Number.POSITIVE_INFINITY)|0|
+
+> 3 includes(searchString[, position])
 
 这个方法已经被加入到 `ECMAScript 6`标准中，但未必在所有的`JavaScript`实现中都可以使用。
 
@@ -607,9 +779,7 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |oString_1.includes("\uD87E\uDC04")|true|
 |oString_1.includes("你")|false|
 |tString_2.includes("  ")//空格键产生的空白占位格|false|
-|tString_2.includes("	")//tab键产生的空白占位格|false|
-|oString_1.includes("\uD87E\uDC04")|true|
-|oString_1.includes("你")|false|
+|tString_2.includes("	")//tab键产生的空白占位格|true|
 |oString_1.includes("sss")|false|
 
 > 第一个参数错误示例
@@ -674,23 +844,78 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |oString.includes("llo",Number.NEGATIVE_INFINITY)|true|
 |oString.includes("llo",Number.POSITIVE_INFINITY)|false|
 
-> 2 indexOf()
+> 4 startsWith(searchString [, position])
 
 |使用方法|结果|
 |:---|:---|
-|varName.indexOf()||
+|oString.startsWith("hell")|true|
+|oString.startsWith("ell")|false|
+|oString.startsWith("ell",1)|true|
 
-> 3 lastIndexOf()
+> 第一个参数错误示例
+
+- 进行匹配的时候，只要原始值是定义好的，加没加双引号都可以被正常检测出来。
+- 布尔值字符串可以判断是否包含布尔值对象。
+- 自己判断是否完全包含自己是可以正常检测的。
+- 传入空字符串的时候，`startsWith方法`会直接返回`true`。
+- 对于特殊的字面量，`true`，`false`，`null`，`undefined`和`NaN`，`startsWith方法`会当作普通字符串进行完全匹配
 
 |使用方法|结果|
 |:---|:---|
-|varName.lastIndexOf()||
+|"true".startsWith(true)|true|
+|"true".startsWith("true")|true|
+|"true".startsWith(oBool)|true|
+|"false".startsWith(false)|true|
+|"false".startsWith("false")|true|
+|"false".startsWith(oBool)|false|
+|"null".startsWith(null)|true|
+|"null".startsWith("null")|true|
+|"undefined".startsWith(undefined)|true|
+|"undefined".startsWith("undefined")|true|
+|"NaN".startsWith(NaN)|true|
+|"NaN".startsWith("NaN")|true|
+|oString.startsWith("")|true|
+|oString.startsWith(oString)|true|
+|oString.startsWith(true)|false|
+|oString.startsWith(false)|false|
+|oString.startsWith(null)|false|
+|oString.startsWith(undefined)|false|
+|oString.startsWith(NaN)|false|
 
-> 4 startsWith()
+> 第二个参数错误示例
+
+- 索引值的范围是`0~varName.length-1`。
+- 传入的数字是向下取整的，只取数字的整数部分，举个栗子，比如传入0.1-0.9，`startsWith方法`是当作`0`进行处理。
+- 对于传入的负值整数，`startsWith方法`是当作`0`进行处理，`startsWith方法`是当作`0`进行处理，相当于就是从字符串的索引值为`0`的到索引值为`varName.length-1`中间的字符串，检索开头是不是对应的传入的字符串。
+- 对于传入的`String`，`Object`，`Array`和`Boolean`类型的值，`startsWith方法`是当作`0`进行处理，相当于就是从字符串的索引值为`0`的到索引值为`varName.length-1`中间的字符串，检索开头是不是对应的传入的字符串。
+- 对于传入的`Date`类型的值，`startsWith方法`会自动转成对应的时间戳数值，相当于就是从字符串的索引值为`varName.length`的到索引值为`varName.length`中间的字符串，检索开头是不是对应的传入的字符串。
+- 对于`Number.NaN`，`Number.MIN_VALUE`和`Number.NEGATIVE_INFINITY`，`startsWith方法`是当作`0`进行处理，相当于就是从字符串的索引值为`0`的到索引值为`varName.length-1`中间的字符串，检索开头是不是对应的传入的字符串。
+- 对于`Number.MAX_VALUE`和`Number.POSITIVE_INFINITY`，`startsWith方法`是当作超出`varName.length`进行处理，相当于就是从字符串的索引值为`varName.length`的到索引值为`varName.length`中间的字符串，检索开头是不是对应的传入的字符串。
 
 |使用方法|结果|
 |:---|:---|
-|varName.startsWith()||
+|oString.startsWith("hell",10.1)|false|
+|oString.startsWith("hell",10.5)|false|
+|oString.startsWith("hell",10.8)|false|
+|oString.startsWith("hell",11)|true|
+|oString.startsWith("hell",11.1)|true|
+|oString.startsWith("hell",11.5)|true|
+|oString.startsWith("hell",11.8)|true|
+|oString.startsWith("hell",-10)|false|
+|oString.startsWith("hell",-11)|false|
+|oString.startsWith("hell",true)|false|
+|oString.startsWith("hell",false)|false|
+|oString.startsWith("hell","true")|false|
+|oString.startsWith("hell","false")|false|
+|oString.startsWith("hell",oo)|false|
+|oString.startsWith("hell",oBool)|false|
+|oString.startsWith("hell",oArray)|false|
+|oString.startsWith("hell",oDate)|true|
+|oString.startsWith("hell",Number.NaN)|false|
+|oString.startsWith("hell",Number.MAX_VALUE)|true|
+|oString.startsWith("hell",Number.MIN_VALUE)|false|
+|oString.startsWith("hell",Number.NEGATIVE_INFINITY)|false|
+|oString.startsWith("hell",Number.POSITIVE_INFINITY)|true|
 
 > 5 endsWith(searchString [, position])
 
@@ -765,6 +990,78 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |oString.endsWith("world",Number.NEGATIVE_INFINITY)|false|
 |oString.endsWith("world",Number.POSITIVE_INFINITY)|true|
 
+> 6 search(regexp)
+
+当你想要知道字符串中是否存在某个模式`pattern`时可使用 `search`，类似于正则表达式的 `test` 方法。当要了解更多匹配信息时，可使用 `match`会更慢，该方法类似于正则表达式的 `exec` 方法。
+
+- `regexp`该参数可以是需要在`varName`中检索的子串，也可以是需要检索的`RegExp`对象。
+- 要执行忽略大小写的检索，请追加标志`i`。
+- 返回值`varName`中第一个与`regexp`相匹配的子串的起始位置。
+- 如果没有找到任何匹配的子串，则返回`-1`。
+- `search()` 方法不执行全局匹配，它将忽略标志`g`。
+- `regexp` 一个正则表达式（regular expression）对象。如果传入一个非正则表达式对象，则会使用 `new RegExp(obj)` 隐式地将其转换为正则表达式对象。
+
+|使用方法|结果|
+|:---|:---|
+|tString_2.search("  ")//两个空格|-1|
+|tString_2.search(/\s/)|5|
+|tString_2.search("line")|6|
+|tString_2.search("    ")//四个空格|-1|
+|tString_2.search("     ")//五个空格|-1|
+|tString_2.search("	")//一个tab缩进|13|
+|tString_2.search("		")//两个tab缩进|13|
+|tString_2.search(/\t/)//一个tab缩进|13|
+|tString_2.search(/\n/)//一个tab缩进|12|
+
+> 错误示例
+
+- 进行匹配的时候，只要原始值是定义好的，没加双引号都可以被正常检测出来
+- 所有字符串检测是否包含空字符串，都会返回`0`
+- 所有字符串检测是否包含自己，都会返回`0`
+- 对于特殊的字面量，`true`，`false`，`null`和`NaN`，`search方法`会当作普通字符串
+- 所有字符串检测是否包含`undefined`，都会返回`0`
+- 而且本方法不管你传入多少参数，这边只会处理传入的第一个参数值
+- 对于`object`这个对象，`search方法`似乎会转化成`[object Object]`
+- 对于其他除了object之外引用类型对象，`search方法`会按照对象的字面量进行检索
+
+|使用方法|结果|
+|:---|:---|
+|"true".search(true)|0|
+|"true".search("true")|0|
+|"true".search(oBool)|0|
+|"false".search(false)|0|
+|"false".search("false")|0|
+|"false".search(oBool)|-1|
+|"null".search(null)|0|
+|"null".search("null")|0|
+|"undefined".search(undefined)|0|
+|"undefined".search("undefined")|0|
+|"NaN".search(NaN)|0|
+|"NaN".search("NaN")|0|
+|oString.search("")|0|
+|oString.search(oString)|0|
+|oString.search(true)|-1|
+|oString.search(false)|-1|
+|oString.search(null)|-1|
+|oString.search(undefined)|0|
+|oString.search(NaN)|-1|
+|oString.search("llo",10.1)|2|
+|oString.search("llo",10.1,10.5,10.8)|2|
+|strString.search(oo)|1|
+|oString.search(oo)|1|
+|tString_1.search(oo)|1|
+|tString_2.search(oo)|1|
+|tString_3.search(oo)|3|
+|tString_4.search(oo)|-1|
+|oString.search(oBool)|-1|
+|oString.search(oArray)|-1|
+|oString.search(oDate)|-1|
+|oString.search(Number.NaN)|-1|
+|oString.search(Number.MAX_VALUE)|-1|
+|oString.search(Number.MIN_VALUE)|-1|
+|oString.search(Number.NEGATIVE_INFINITY)|-1|
+|oString.search(Number.POSITIVE_INFINITY)|-1|
+
 ## 4.4. 比较
 
 ### 4.4.1 概述
@@ -772,7 +1069,6 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |方法名|描述|参数|
 |:---|:---|:---|
 |localeCompare()|  返回一个数字表示是否引用字符串在排序中位于比较字符串的前面，后面，或者二者相同。|无|
-|match()| 使用正则表达式与字符串相比较。|无|
 
 ### 4.4.2 详细
 
@@ -917,7 +1213,6 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |方法名|描述|参数|
 |:---|:---|:---|
 |replace()|  被用来在正则表达式和字符串直接比较，然后用新的子串来替换被匹配的子串。|无|
-|search()| 对正则表达式和指定字符串进行匹配搜索，返回第一个出现的匹配项的下标。|无|
 
 ### 5.2.2 详细
 
@@ -926,12 +1221,6 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |使用方法|结果|
 |:---|:---|
 |varName.replace()||
-
-> 2 search()
-
-|使用方法|结果|
-|:---|:---|
-|varName.search()||
 
 ## 5.3. 分割
 
@@ -1154,7 +1443,7 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |charAt(index)|  返回特定位置的字符，不提供参数就返回第一个字符的字符，提供游标值，就返回指定游标的字符| @para index 非必需，一个介于0 和字符串长度减1之间的正整数。 (0~varName.length-1)。|
 |normalize([form])| `测试中`， 返回调用字符串值的Unicode标准化形式。|@para form 四种 Unicode 正规形式 "NFC", "NFD", "NFKC", 以及 "NFKD" 其中的一个, 默认值为 "NFC".|
 |fromCharCode(num1, ..., numN)|返回一个字符串，而不是一个 String 对象。由于 fromCharCode 是 String 的静态方法，所以应该像这样使用：String.fromCharCode()，而不是作为你创建的 String 对象的方法。|@para num1, ..., numN 一组序列数字，表示 Unicode 值。|
-|fromCodePoint(num1, …, numN)| `不推荐使用`， 返回使用 Unicode 编码创建的字符串，如果传入无效的 Unicode 编码，将会抛出一个RangeError (例如： "RangeError: NaN is not a valid code point")。。|num1, ..., numN|
+|fromCodePoint(num1, …, numN)| `不推荐使用`， 返回使用 Unicode 编码创建的字符串，如果传入无效的 Unicode 编码，将会抛出一个RangeError (例如： "RangeError: NaN is not a valid code point")。|@para num1, ..., numN 一组序列数字，表示 Unicode 值。|
 
 ## 7.2 返回值为数值的方法
 
@@ -1162,13 +1451,17 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |:---|:---|:---|
 |charCodeAt(index)| 返回0到65535之间的整数，表示给定索引处的`UTF-16`代码单元 (在 `Unicode` 编码单元表示一个单一的 `UTF-16` 编码单元的情况下，`UTF-16` 编码单元匹配 `Unicode` 编码单元。但在——例如 `Unicode` 编码单元 > `0x10000` 的这种——不能被一个 `UTF-16` 编码单元单独表示的情况下，只能匹配 `Unicode` 代理对的第一个编码单元) 。|@para index 一个大于等于 0，小于字符串长度的整数。(0~varName.length-1)，如果不是一个数值，则默认为 0。|
 |codePointAt(pos)| `不推荐使用`， 返回使用UTF-16编码的给定位置的值的非负整数。|@para pos 这个字符串中需要转码的元素的位置。|
+|indexOf(searchValue[, fromIndex])| 从字符串对象中返回首个被发现的给定值的索引值开始在 fromIndex进行搜索。如果未找到该值，则返回-1。|@para searchValue 一个字符串表示被查找的值。@para fromIndex 可选 表示调用该方法的字符串中开始查找的位置。可以是任意整数。默认值为 0。如果 fromIndex < 0 则查找整个字符串（如同传进了 0）。如果 fromIndex >= varName.length，则该方法返回 -1，除非被查找的字符串是一个空字符串，此时返回 varName.length。|
+|lastIndexOf(searchValue[, fromIndex])| 返回指定值在调用该方法的字符串中最后出现的位置，如果没找到则返回 -1。从该字符串的后面向前查找，从 fromIndex 处开始。|@para searchValue 一个字符串，表示被查找的值。@para fromIndex 从调用该方法字符串的此位置处开始查找。可以是任意整数。默认值为 str.length。如果为负值，则被看作 0。如果 fromIndex > str.length，则 fromIndex 被看作 str.length。|
+|search(regexp)| 对正则表达式和指定字符串进行匹配搜索，返回第一个出现的匹配项的下标。如果匹配成功，则 search() 返回正则表达式在字符串中首次匹配项的索引。否则，返回 -1。|@para regexp 一个正则表达式（regular expression）对象。如果传入一个非正则表达式对象，则会使用 new RegExp(obj) 隐式地将其转换为正则表达式对象。|
 
 ## 7.3 返回值为布尔值的方法
 
 |方法名|描述|参数|
 |:---|:---|:---|
 |includes(searchString[, position])|  `不推荐使用`，判断一个字符串是否包含在另一个字符串中，根据情况返回true或false。|@para searchString 要在此字符串中搜索的字符串。@para position 可选。从当前字符串的哪个索引位置开始搜寻子字符串；默认值为0。|
-|endsWith(searchString [, position])| `不推荐使用`， 判断一个字符串的结尾是否包含其他字符串中的字符。|@para searchString 要搜索的子字符串。@para position 在 str 中搜索 searchString 的结束位置，默认值为 str.length，也就是真正的字符串结尾处。|
+|startsWith(searchString [, position])| `不推荐使用`，判断字符串的起始位置是否匹配其他字符串中的字符。|@para searchString 要搜索的子字符串。@para position 在 varName 中搜索 searchString 的开始位置，默认值为 0，也就是真正的字符串开头处。|
+|endsWith(searchString [, position])| `不推荐使用`， 判断一个字符串的结尾是否包含其他字符串中的字符。|@para searchString 要搜索的子字符串。@para position 在 varName 中搜索 searchString 的结束位置，默认值为 varName.length，也就是真正的字符串结尾处。|
 
 # 8 参考网站
 
