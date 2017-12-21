@@ -82,7 +82,7 @@ console.log(oString.search(NaN));//-1
 
 ### 2.1.2 正则与Object
 
-对应的字母有`e`，`t`，和`空格`，这个和`oo`有什么关系，`oo`是一个空对象啊，它的字面量是`{}`。
+`oo`是一个空对象，它的字面量是`{}`，但是传入`search方法`中确是`[object Object]`。
 
 ```javascript
 var a = 4;
@@ -101,14 +101,6 @@ var tString_2 =`hello line 1
 //`string text ${expression} string text`  在模版字符串中使用表达式
 var tString_3 =`Fifteen is ${a + b} and\nnot ${2 * a + b}.`;
 var tString_4 = "大吉大利今晚吃西瓜!";
-
-// function search(regexp){
-//   // debugger;
-//   console.log(regexp);
-//   return this.search(regexp);
-// }
-
-// String.prototype.search =search;
 
 console.log(strString.search(oo));//1   位置对应的字母是 e
 console.log(strString.charAt(1));//e
@@ -134,4 +126,19 @@ console.log(strString.search(oBool));//-1
 console.log(strString.search(oNum));//-1
 console.log(strString.search(oArray));//-1
 console.log(strString.search(oDate));//-1
+
+
+console.log(new RegExp(oo));//  /[object Object]/
+
+console.log(new RegExp(oString));// /hello world/
+
+console.log(new RegExp(oBool));// /true/
+
+console.log(new RegExp(oNum));// /68/
+
+console.log(new RegExp(oArray));// /demo,melon,water/
+
+console.log(new RegExp(oDate));// /Thu Dec 21 2017 19:39:40 GMT+0800 (中国标准时间)/
+
+
 ```

@@ -1021,7 +1021,7 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 - 对于特殊的字面量，`true`，`false`，`null`和`NaN`，`search方法`会当作普通字符串
 - 所有字符串检测是否包含`undefined`，都会返回`0`
 - 而且本方法不管你传入多少参数，这边只会处理传入的第一个参数值
-- 对于`object`这个对象，`search方法`似乎会转化成`[object Object]`
+- 对于`object`这个对象，`search方法`会转化成`[object Object]`
 - 对于其他除了object之外引用类型对象，`search方法`会按照对象的字面量进行检索
 
 |使用方法|结果|
