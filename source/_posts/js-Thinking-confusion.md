@@ -92,7 +92,7 @@ console.log(new RegExp(NaN));// /NaN/
 
 ### 2.1.2 正则与Object
 
-`oo`是一个空对象，它的字面量是`{}`，但是传入`search方法`中确是`[object Object]`。
+`oo`是一个空对象，它的字面量是`{}`，但是传入`search方法`中却是`[object Object]`。
 
 ```javascript
 var a = 4;
