@@ -76,23 +76,55 @@ var str4 = "Windows3.1";
 var str5 ="2000Windows";
 var str6 = "3.1Windows";
 
+//以下都是  获取匹配  的 案例，也就是说，该匹配需要获取供以后使用-------------案例一
+var pattern1 = /Windows(95|98|NT|2000)/;
+console.log(str3.match(pattern1));//["Windows2000", "2000", index: 0, input: "Windows2000"]
+console.log(str4.match(pattern1));//null
+console.log(str5.match(pattern1));//null
+console.log(str6.match(pattern1));//null
+
+//以下都是  非获取匹配  的 案例，也就是说，该匹配不需要获取供以后使用-------------案例二
 var pattern2 = /Windows(?=95|98|NT|2000)/;
 console.log(str3.match(pattern2));//["Windows", index: 0, input: "Windows2000"]
 console.log(str4.match(pattern2));//null
+console.log(str5.match(pattern2));//null
+console.log(str6.match(pattern2));//null
 
 var pattern3 = /Windows(?!95|98|NT|2000)/;
 console.log(str3.match(pattern3));//null
 console.log(str4.match(pattern3));//["Windows", index: 0, input: "Windows3.1"]
+console.log(str5.match(pattern3));//["Windows", index: 4, input: "2000Windows"]
+console.log(str6.match(pattern3));//["Windows", index: 3, input: "3.1Windows"]
 
-var pattern4 = /(?<=95|98|NT|2000)Windows/;
-console.log(str5.match(pattern4));//["Windows", index: 4, input: "2000Windows"]
+var pattern4 = /Windows(?<=95|98|NT|2000)/;
+console.log(str3.match(pattern4));//null
+console.log(str4.match(pattern4));//null
+console.log(str5.match(pattern4));//null
 console.log(str6.match(pattern4));//null
 
-var pattern5 = /(?<!95|98|NT|2000)Windows/;
-console.log(str5.match(pattern5));//null
+var pattern5 = /Windows(?<!95|98|NT|2000)/;
+console.log(str3.match(pattern5));//["Windows", index: 0, input: "Windows2000"]
+console.log(str4.match(pattern5));//["Windows", index: 0, input: "Windows3.1"]
+console.log(str5.match(pattern5));//["Windows", index: 4, input: "2000Windows"]
 console.log(str6.match(pattern5));//["Windows", index: 3, input: "3.1Windows"]
 
+var pattern6 = /(?<=95|98|NT|2000)Windows/;
+console.log(str3.match(pattern6));//null
+console.log(str4.match(pattern6));//null
+console.log(str5.match(pattern6));//["Windows", index: 4, input: "2000Windows"]
+console.log(str6.match(pattern6));//null
+
+var pattern7 = /(?<!95|98|NT|2000)Windows/;
+console.log(str3.match(pattern7));//["Windows", index: 0, input: "Windows2000"]
+console.log(str4.match(pattern7));//["Windows", index: 0, input: "Windows3.1"]
+console.log(str5.match(pattern7));//null
+console.log(str6.match(pattern7));//["Windows", index: 3, input: "3.1Windows"]
 ```
+
+> 小提示：获取匹配和非获取匹配的区别
+
+`获取匹配`的意思是，如果`字符串`匹配到`正则`规范，则会返回`正则`中的`所有内容`，如上面案例中的`案例一`。
+`非获取匹配`的意思是，如果`字符串`匹配到`正则`规范，则会返回`正则`中的`非括号内的内容`，如上面案例中的`案例二`。
 
 # 4 相关方法
 
