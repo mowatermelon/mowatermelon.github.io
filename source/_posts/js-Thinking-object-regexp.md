@@ -231,20 +231,24 @@ var str1 ="dddd（sdfsdfs）";
 var str2 = "dddd（sdfsdfs）dddd（sdfsdfs）dddd（sdfsdfs）";
 var str3 ="dddd（sdfsdfs）dddd（sdfsdfs）dd dd（sdfsdfs）dd dd（sdfsdfs）ddsdd（sdfsdfs）dddd（sdfs dfs）ddd d（sd fsdfs）";
 var str4 ="dddd（sdfsdfs）dddd<sdfsdfs></sdfsdfs>dd dd（<sdfsdfs></sdfsdfs>）dd dd（sdfsdfs）ddsdd（sdfsdfs）dddd（sdfs dfs）ddd d（sd fsdfs）";
-var str5 ="dddd（sdfsdfs）dddd<sdfsdfs></sdfsdfs>dd dd（sdfsdfs）dd dd（sdfsdfs）ddsdd（sdfsdfs）dddd（sdfs dfs）ddd d（sd fsdfs）";
-var pattern = /(?=.*\w)+\（+(\w+)\）+/g;
+var str5 ="dddd（sdfsdfs）dddd<sdfsdfs></sdfsdfs>dd dd（<sdfsdfssdfsdfs）dd dd（sdfsdfs）ddsdd（sdfsdfs）dddd（sdfs dfs）ddd d（sd fsdfs）";
+var str6 ="dddd（sdfsdfs）dddd<sdfsdfs></sdfsdfs>dd dd（sdfsdfssdfsdfs>）dd dd（sdfsdfs）ddsdd（sdfsdfs）dddd（sdfs dfs）ddd d（sd fsdfs）";
+var str7 ="dddd（sdfsdfs）dddd<sdfsdfs></sdfsdfs>dd dd（\sdfsdfssdfsdfs）dd dd（sdfsdfs）ddsdd（sdfsdfs）dddd（sdfs dfs）ddd d（sd fsdfs）";
+var str8 ="dddd（sdfsdfs）dddd<sdfsdfs></sdfsdfs>dd dd（sdfsdfs）dd dd（sdfsdfs）ddsdd（sdfsdfs）dddd（sdfs dfs）ddd d（sd fsdfs）";
+
+// var pattern = /(?=.*\w)+\（+(\w+)\）+/g;//匹配所有中文括号中包含字母的内容
+// var pattern = /\（+(\w+|\s)*s\）+/g;//匹配所有中文括号中包含字母或者空格的内容
+// var pattern = /\（+(\w+|\s+\<+|\>+|\\)*s\）+/g;
+var pattern = /\（+(\w+|\s+|\<+|\>+|\\)*\）+/g;//匹配所有中文括号中包含字母或者空格或者左尖角括号或者右尖角括号或者反斜线的内容
 
 console.log(str1.replace(pattern,'<$1>'));//dddd<sdfsdfs>
 console.log(str2.replace(pattern,'<$1>'));//dddd<sdfsdfs>dddd<sdfsdfs>dddd<sdfsdfs>
-console.log(str3.replace(pattern,'<$1>'));//dddd<sdfsdfs>dddd<sdfsdfs>dd dd<sdfsdfs>dd dd<sdfsdfs>ddsdd<sdfsdfs>dddd（sdfs dfs）ddd d（sd fsdfs）
-console.log(str4.replace(pattern,'<$1>'));//dddd<sdfsdfs>dddd<sdfsdfs></sdfsdfs>dd dd（<sdfsdfs></sdfsdfs>）dd dd<sdfsdfs>ddsdd<sdfsdfs>dddd（sdfs dfs）ddd d（sd fsdfs）
-console.log(str5.replace(pattern,'<$1>'));//dddd<sdfsdfs>dddd<sdfsdfs></sdfsdfs>dd dd<sdfsdfs>dd dd<sdfsdfs>ddsdd<sdfsdfs>dddd（sdfs dfs）ddd d（sd fsdfs）
-
-console.log(str1.replace(/\s/g,'').replace(pattern,'<$1>'));//dddd<sdfsdfs>
-console.log(str2.replace(/\s/g,'').replace(pattern,'<$1>'));//dddd<sdfsdfs>dddd<sdfsdfs>dddd<sdfsdfs>
-console.log(str3.replace(/\s/g,'').replace(pattern,'<$1>'));//ddddd<sdfsdfs>dddd<sdfsdfs>dddd<sdfsdfs>dddd<sdfsdfs>ddsdd<sdfsdfs>dddd<sdfsdfs>dddd<sdfsdfs>
-console.log(str4.replace(/\s/g,'').replace(pattern,'<$1>'));//dddd<sdfsdfs>dddd<sdfsdfs></sdfsdfs>dddd（<sdfsdfs></sdfsdfs>）dddd<sdfsdfs>ddsdd<sdfsdfs>dddd<sdfsdfs>dddd<sdfsdfs>
-console.log(str5.replace(/\s/g,'').replace(pattern,'<$1>'));//dddd<sdfsdfs>dddd<sdfsdfs></sdfsdfs>dddd<sdfsdfs>dddd<sdfsdfs>ddsdd<sdfsdfs>dddd<sdfsdfs>dddd<sdfsdfs>
+console.log(str3.replace(pattern,'<$1>'));//dddd<sdfsdfs>dddd<sdfsdfs>dd dd<sdfsdfs>dd dd<sdfsdfs>ddsdd<sdfsdfs>dddd<dfs>ddd d<fsdfs>
+console.log(str4.replace(pattern,'<$1>'));//dddd<sdfsdfs>dddd<sdfsdfs></sdfsdfs>dd dd（<sdfsdfs></sdfsdfs>）dd dd<sdfsdfs>ddsdd<sdfsdfs>dddd<dfs>ddd d<fsdfs>
+console.log(str5.replace(pattern,'<$1>'));//dddd<sdfsdfs>dddd<sdfsdfs></sdfsdfs>dd dd<sdfsdfssdfsdfs>dd dd<sdfsdfs>ddsdd<sdfsdfs>dddd<dfs>ddd d<fsdfs>
+console.log(str6.replace(pattern,'<$1>'));//dddd<sdfsdfs>dddd<sdfsdfs></sdfsdfs>dd dd<>>dd dd<sdfsdfs>ddsdd<sdfsdfs>dddd<dfs>ddd d<fsdfs>
+console.log(str7.replace(pattern,'<$1>'));//dddd<sdfsdfs>dddd<sdfsdfs></sdfsdfs>dd dd<sdfsdfssdfsdfs>dd dd<sdfsdfs>ddsdd<sdfsdfs>dddd<dfs>ddd d<fsdfs>
+console.log(str8.replace(pattern,'<$1>'));//dddd<sdfsdfs>dddd<sdfsdfs></sdfsdfs>dd dd<sdfsdfs>dd dd<sdfsdfs>ddsdd<sdfsdfs>dddd<dfs>ddd d<fsdfs>
 
 ```
 
