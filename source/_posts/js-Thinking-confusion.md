@@ -83,6 +83,9 @@ console.log(new RegExp(true));//  /true/
 console.log(new RegExp(false));// /false/
 
 console.log(new RegExp(undefined));// /(?:)/
+//原意
+//(?:pattern) 匹配`pattern`但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用。
+//因为上面的pattern值为空，所以上面正则的意思是匹配所有
 
 console.log(new RegExp(null));// /null/
 
@@ -139,6 +142,8 @@ console.log(strString.search(oDate));//-1
 
 
 console.log(new RegExp(oo));//  /[object Object]/
+//中括号的意思是    匹配中括号的任意一个字符
+// 所以对应正则的意思是只要字符串中存在object这几个字母和空格都会被匹配
 
 console.log(new RegExp(oString));// /hello world/
 
