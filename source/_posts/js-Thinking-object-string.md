@@ -580,7 +580,7 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |startsWith(searchString [, position])| `不推荐使用`，判断字符串的起始位置是否匹配其他字符串中的字符。|@para searchString 要搜索的子字符串。@para position 在 varName 中搜索 searchString 的开始位置，默认值为 0，也就是真正的字符串开头处。|
 |endsWith(searchString [, position])| `不推荐使用`， 判断一个字符串的结尾是否包含其他字符串中的字符。|@para searchString 要搜索的子字符串。@para position 在 varName 中搜索 searchString 的结束位置，默认值为 varName.length，也就是真正的字符串结尾处。|
 |search(regexp)| 对正则表达式和指定字符串进行匹配搜索，返回第一个出现的匹配项的下标。如果匹配成功，则 search() 返回正则表达式在字符串中首次匹配项的索引。否则，返回 -1。|@para regexp 一个正则表达式（regular expression）对象。如果传入一个非正则表达式对象，则会使用 new RegExp(obj) 隐式地将其转换为正则表达式对象。|
-|match()| 使用正则表达式与字符串相比较。|无|
+|match(regexp)| 将字符串与正则表达式匹配，并返回一个包含该搜索结果的数组。返回值array，一个包含了整个匹配结果以及任何括号捕获的匹配结果的 Array ；如果没有匹配项，则返回 null 。|@para regexp 一个正则表达式对象。如果传入一个非正则表达式对象，则会隐式地使用 new RegExp(obj) 将其转换为一个 RegExp 。如果你未提供任何参数，直接使用 match() ，那么你会得到一个包含空字符串的 Array ：[""] 。|
 
 ### 4.3.2 详细
 
@@ -1062,6 +1062,83 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |oString.search(Number.NEGATIVE_INFINITY)|-1|
 |oString.search(Number.POSITIVE_INFINITY)|-1|
 
+> 6 match(regexp)
+
+- `regexp`该参数可以是需要在`varName`中检索的子串，也可以是需要检索的`RegExp`对象。
+- `regexp` 一个正则表达式（regular expression）对象。如果传入一个非正则表达式对象，则会使用 `new RegExp(obj)` 隐式地将其转换为正则表达式对象。
+- 要执行忽略大小写的检索，请追加标志`i`。
+- 如果`match()`方法没有找到匹配，将返回 `null`。如果找到匹配，则`match()`方法返回一个数组，并将更新全局 `RegExp` 对象的属性以反映匹配结果。
+- 如果传入空格，制表符和垂直制表符等等，`match()` 方法的`第一个参数`会返回经过正则对象转化之后的值。举个栗子，如果传入"	"（一个tab缩进），`match()`方法返回的数组第一个值是`\t`。
+- 如果字符串中本身包含空格，制表符和垂直制表符等等，`match()` 方法的`第三个参数`的值中会将这些符号转成对应正则值。举个栗子，`tString_2`中包含换行和制表符，`match()`方法返回的数组第三个值是`hello line 1\n\t\t\t\thello line 2`。
+- 如果没有设置全局标志 (`g`)，数组元素`0`包含整个匹配，而元素`1`到`n`包含任何一个`子匹配`。此行为与未设置全局标志时`exec`方法（正则表达式）(`JavaScript`) 的行为相同。
+- 如果未设置全局标志，则 `match()` 方法返回的数组有两个特性：`input` 和 `index`。 `input`属性包含整个被搜索的`字符串`。 `index` 属性包含了在整个被搜索字符串中匹配的子字符串的`位置`。
+- 如果设置了全局标志，则元素`0`到元素`n`包含`所有出现的匹配`，可以用来统计某个内容在字符串中出现的次数。
+
+|使用方法|结果|
+|:---|:---|
+|tString_2.match("  ")//两个空格|null|
+|tString_2.match(/\s/)|[ ' ', index: 5, input: 'hello line 1\n\t\t\t\thello line 2' ]|
+|tString_2.match("line")|[ 'line', index: 6, input: 'hello line 1\n\t\t\t\thello line 2' ]|
+|tString_2.match("    ")//四个空格|null|
+|tString_2.match("     ")//五个空格|null|
+|tString_2.match("	")//一个tab缩进|[ '\t', index: 13, input: 'hello line 1\n\t\t\t\thello line 2' ]|
+|tString_2.match("		")//两个tab缩进|[ '\t\t',index: 13,input: 'hello line 1\n\t\t\t\thello line 2' ]|
+|tString_2.match(/\t/)//一个tab缩进|[ '\t', index: 13, input: 'hello line 1\n\t\t\t\thello line 2' ]|
+|tString_2.match(/\n/)//一个tab缩进|[ '\n', index: 12, input: 'hello line 1\n\t\t\t\thello line 2' ]|
+|oString.match()|[ '', index: 0, input: 'hello world' ]|
+|oString.match(/o/)|[ 'o', index: 4, input: 'hello world' ]|
+|oString.match(/o/g)|[ 'o', 'o' ]|
+
+> 错误示例
+
+- 进行匹配的时候，只要原始值是定义好的，没加双引号都可以被正常检测出来。
+- 所有字符串检测是否包含空字符串，会当作匹配所有，返回的数组中的第一个值都是`''`，第二个值都是`index:0`。
+- 所有字符串检测是否包含自己，都会正常返回。
+- 对于特殊的字面量，`true`，`false`，`null`和`NaN`，`match方法`会当作普通字符串。
+- 除了字符串本身值包含`undefined`这个值，其他字符串使用`match方法`检测是否包含`undefined`，返回的数组中的第一个值都是`''`，第二个值都是`index:0`。
+- 对于本身包含`undefined`这个值的字符串，返回的数组中第一个值是`'undefined'`。
+- 而且本方法不管你传入多少参数，这边只会处理传入的第一个参数值。
+- 对于`object`这个对象，`match方法`会转化成`[object Object]`，再进行匹配处理。
+- 对于其他除了`object`之外引用类型对象，`match方法`会按照对象的字面量进行检索。
+
+|使用方法|结果|
+|:---|:---|
+|"true".match(true)|[ 'true', index: 0, input: 'true' ]|
+|"true".match("true")|[ 'true', index: 0, input: 'true' ]|
+|"true".match(oBool)|[ 'true', index: 0, input: 'true' ]|
+|"false".match(false)|[ 'false', index: 0, input: 'false' ]|
+|"false".match("false")|[ 'false', index: 0, input: 'false' ]|
+|"false".match(oBool)|null|
+|"null".match(null)|[ 'null', index: 0, input: 'null' ]|
+|"null".match("null")|[ 'null', index: 0, input: 'null' ]|
+|"undefined".match(undefined)|[ 'undefined', index: 0, input: 'undefined' ]|
+|"undefined".match("undefined")|[ 'undefined', index: 0, input: 'undefined' ]|
+|"NaN".match(NaN)|[ 'NaN', index: 0, input: 'NaN' ]|
+|"NaN".match("NaN")|[ 'NaN', index: 0, input: 'NaN' ]|
+|oString.match("")|[ '', index: 0, input: 'hello world' ]|
+|oString.match(oString)|[ 'hello world', index: 0, input: 'hello world' ]|
+|oString.match(true)|null|
+|oString.match(false)|null|
+|oString.match(null)|null|
+|oString.match(undefined)|[ '', index: 0, input: 'hello world' ]|
+|oString.match(NaN)|null|
+|oString.match("llo",10.1)|[ 'llo', index: 2, input: 'hello watermelon' ]|
+|oString.match("llo",10.1,10.5,10.8)|[ 'llo', index: 2, input: 'hello watermelon' ]|
+|strString.match(oo)|[ 'e', index: 1, input: 'hello watermelon' ]|
+|oString.match(oo)|[ 'e', index: 1, input: 'hello world' ]|
+|tString_1.match(oo)|[ 'e', index: 1, input: 'hello Template' ]|
+|tString_2.match(oo)|[ 'e', index: 1, input: 'hello line 1\n\t\t\t\thello line 2' ]|
+|tString_3.match(oo)|[ 't', index: 3, input: 'Fifteen is 12 and\nnot 16.' ]|
+|tString_4.match(oo)|null|
+|oString.match(oBool)|null|
+|oString.match(oArray)|null|
+|oString.match(oDate)|null|
+|oString.match(Number.NaN)|null|
+|oString.match(Number.MAX_VALUE)|null|
+|oString.match(Number.MIN_VALUE)|null|
+|oString.match(Number.NEGATIVE_INFINITY)|null|
+|oString.match(Number.POSITIVE_INFINITY)|null|
+
 ## 4.4. 比较
 
 ### 4.4.1 概述
@@ -1462,6 +1539,12 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |includes(searchString[, position])|  `不推荐使用`，判断一个字符串是否包含在另一个字符串中，根据情况返回true或false。|@para searchString 要在此字符串中搜索的字符串。@para position 可选。从当前字符串的哪个索引位置开始搜寻子字符串；默认值为0。|
 |startsWith(searchString [, position])| `不推荐使用`，判断字符串的起始位置是否匹配其他字符串中的字符。|@para searchString 要搜索的子字符串。@para position 在 varName 中搜索 searchString 的开始位置，默认值为 0，也就是真正的字符串开头处。|
 |endsWith(searchString [, position])| `不推荐使用`， 判断一个字符串的结尾是否包含其他字符串中的字符。|@para searchString 要搜索的子字符串。@para position 在 varName 中搜索 searchString 的结束位置，默认值为 varName.length，也就是真正的字符串结尾处。|
+
+## 7.3 返回值为数组的方法
+
+|方法名|描述|参数|
+|:---|:---|:---|
+|match(regexp)| 将字符串与正则表达式匹配，并返回一个包含该搜索结果的数组。返回值array，一个包含了整个匹配结果以及任何括号捕获的匹配结果的 Array ；如果没有匹配项，则返回 null 。|@para regexp 一个正则表达式对象。如果传入一个非正则表达式对象，则会隐式地使用 new RegExp(obj) 将其转换为一个 RegExp 。如果你未提供任何参数，直接使用 match() ，那么你会得到一个包含空字符串的 Array ：[""] 。|
 
 # 8 参考网站
 
