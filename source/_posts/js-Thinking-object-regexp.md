@@ -369,7 +369,37 @@ console.log(checkContainer(filePath3));//true
 |\nml|如果`n`为八进制数字`（0-3）`，且`m`和`l`均为八进制数字`（0-7）`，则匹配八进制转义值`nml`。|
 |\un|匹配`n`，其中`n`是一个用四个十六进制数字表示的`Unicode`字符。例如，`\u00A9`匹配版权符号`（©）`。|
 
-# 7 常用正则表达式
+# 7 特殊值正则转换表
+
+```javascript
+var strString = "hello watermelon";
+var oo = new Object();
+var oString = new String("hello world");
+var oBool = new Boolean(true);
+var oNum = new Number(68);
+var oArray = new Array("demo","melon","water");
+var oDate = new Date();//Thu Dec 21 2017 19:39:40 GMT+0800 (中国标准时间)
+```
+
+|原始值|使用方法|转化值|
+|:---|:----|:----|
+|true|new RegExp(true)|/true/|
+|false|new RegExp(false)|/false/|
+|undefined|new RegExp(undefined)|/(?:)/|
+|null|new RegExp(null)|/null/|
+|NaN|new RegExp(NaN)|/NaN/|
+|{ name: 'Wu Eva' }|new RegExp(oo)| /[object Object]/|
+|[String: 'hello world']|new RegExp(oString)|/hello world/|
+|[Boolean: true]|new RegExp(oBool)|/true/|
+|[Number: 68]|new RegExp(oNum)|/68/|
+|oDate|new RegExp(oDate)|/Thu Dec 21 2017 19:39:40 GMT+0800 (中国标准时间)/|
+|`Number.MAX_VALUE`|new RegExp(Number.MAX_VALUE)|/1.7976931348623157e+308/|
+|`Number.MIN_VALUE`|new RegExp(Number.MIN_VALUE)|/5e-324/|
+|Number.NaN|new RegExp(Number.NaN)|/NaN/|
+|`Number.NEGATIVE_INFINITY`|new RegExp(Number.NEGATIVE_INFINITY)|/-Infinity/|
+|`Number.POSITIVE_INFINITY`|new RegExp(Number.POSITIVE_INFINITY)|/Infinity/|
+
+# 8 常用正则表达式
 
 - 用户名
 
