@@ -231,79 +231,79 @@ or object instanceof(constructor)
 
 ### 4.1.2 详细
 
-> 1 big()
+#### 1) big()
 
 |使用方法|结果|
 |:---|:---|
 |varName.big()|`<big>varName_val</big>`|
 
-> 2 small()
+#### 2) small()
 
 |使用方法|结果|
 |:---|:---|
 |varName.small()|`<small>varName_val</small>`|
 
-> 3 blink()
+#### 3) blink()
 
 |使用方法|结果|
 |:---|:---|
 |varName.blink()|`<blink>varName_val</blink>`|
 
-> 4 bold()
+#### 4) bold()
 
 |使用方法|结果|
 |:---|:---|
 |varName.bold()|`<b>varName_val</b>`|
 
-> 5 italics()
+#### 5) italics()
 
 |使用方法|结果|
 |:---|:---|
 |varName.italics()|`<i>varName_val</i>`|
 
-> 6 strike()
+#### 6) strike()
 
 |使用方法|结果|
 |:---|:---|
 |varName.strike()|`<strike>varName_val</strike>`|
 
-> 7 fixed()
+#### 7) fixed()
 
 |使用方法|结果|
 |:---|:---|
 |varName.fixed()|`<tt>varName_val</tt>`|
 
-> 8 sub()
+#### 8) sub()
 
 |使用方法|结果|
 |:---|:---|
 |varName.sub()|`<sub>varName_val</sub>`|
 
-> 9 sup()
+#### 9) sup()
 
 |使用方法|结果|
 |:---|:---|
 |varName.sup()|`<sup>varName_val</sup>`|
 
-> 10 anchor(anchorname)
+#### 10) anchor(anchorname)
 
 |使用方法|结果|
 |:---|:---|
 |varName.anchor(param1)|`<a name="param1">varName_val</a>`|
 
-> 11 link(url)
+#### 11) link(url)
 
 |使用方法|结果|
 |:---|:---|
 |varName.link(param1)|`<a href="param1">varName_val</a>`|
 
-> 12 fontcolor(color)
+#### 12) fontcolor(color)
 
 |使用方法|结果|
 |:---|:---|
 |varName.fontcolor(param1)|`<font color="param1">varName_val</font>`|
 
-> 13 fontsize(size)
+#### 13) fontsize(size)
 
 |使用方法|结果|
 |:---|:---|
@@ -324,7 +324,7 @@ or object instanceof(constructor)
 
 ### 4.2.2 详细
 
-> 1 charAt(index)
+#### 1) charAt(index)
 
 字符串中的字符从左向右索引，第一个字符的索引值为`0`，最后一个字符（假设该字符位于字符串 `varName` 中）的索引值为`varName.length - 1`。 如果指定的`index`值超出了该范围，则返回一个空字符串。而且本方法不管你传入多少参数，这边只会处理传入的第一个参数值，如果传进来为小数，这个方法是向上取整，举个栗子，你传入的值是`1.2`,这边就认为你传入的是`2`。
 
@@ -354,7 +354,7 @@ or object instanceof(constructor)
 |oString.charAt(oDate)|空字符串|
 |oString.charAt(oString.length)|空字符串|
 
-> 2 charCodeAt()
+#### 2) charCodeAt()
 
 Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）。开头的 128 个 Unicode 编码单元和 ASCII 字符编码一样。关于 Unicode 的更多信息，可查看 JavaScript Guide。
 
@@ -444,7 +444,7 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |}|125|
 |~|126|
 
-> 3 codePointAt(pos)
+#### 3) codePointAt(pos)
 
 返回值是在字符串中的给定索引的编码单元体现的数字，如果指定的 `index` 小于 0 或不小于字符串的长度则返回 `undefined` 。如果，则 `codePointAt` 返回 `undefined`。而且本方法不管你传入多少参数，这边只会处理传入的第一个参数值，如果传进来为小数，这个方法是向上取整，举个栗子，你传入的值是`1.2`,这边就认为你传入的是`2`。
 
@@ -480,7 +480,7 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |oString.codePointAt(oDate)|undefined|
 |oString.codePointAt(oString.length)|undefined|
 
-> 4 normalize([form])
+#### 4) normalize([form])
 
 |参数缩写|参数全称|参数中文含义|
 |:---|:---|:---|
@@ -505,7 +505,7 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |varName.normalize("NFKC")|varName_val|
 |varName.normalize("NFKD")|varName_val|
 
-> 5 fromCharCode(num1, …, numN)
+#### 5) fromCharCode(num1, …, numN)
 
 尽管绝大部分常用的 `Unicode` 值可以用一个 `16-bit` 数字表示（正如 `JavaScript` 标准化过程早期），并且对于绝大部分值 `fromCharCode()` 返回一个字符（即对于绝大部分字符 `UCS-2` 值是 `UTF-16` 的子集），但是为了处理所有的 `Unicode` 值（至 `21 bits`），只用 `fromCharCode()` 是不足的。
 由于高位编码字符是用两个低位编码（`lower value`）表示形成的一个字符，因此`String.fromCodePoint()` （ES6 草案的一部分）被用来返回这样一对`低位编码`，从而可以完全表示这些`高位编码字符`。
@@ -535,7 +535,7 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |objectName.fromCharCode(oArray)|空字符串|
 |objectName.fromCharCode(oDate)|乱码|
 
-> 6 fromCodePoint(num1, …, numN)
+#### 6) fromCodePoint(num1, …, numN)
 
 因为`fromCodePoint()`是`String`的一个静态方法，所以只能通过 `String.fromCodePoint()`这样的方式来使用，不能在你创建的`String`对象实例上直接调用。
 
@@ -584,7 +584,7 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 
 ### 4.3.2 详细
 
-> 1 indexOf(searchValue[, fromIndex])
+#### 1) indexOf(searchValue[, fromIndex])
 
 - 指定值的第一次出现的索引; 如果没有找到 -1。
 - 对于字符串中原本包含空格，tab缩进，tab键和空格键产生的空白占位格是不同的，`indexOf方法`会进行严格的匹配。
@@ -669,7 +669,7 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |oString.indexOf("hell",Number.NEGATIVE_INFINITY)|0|
 |oString.indexOf("hell",Number.POSITIVE_INFINITY)|-1|
 
-> 2 lastIndexOf(searchValue[, fromIndex])
+#### 2) lastIndexOf(searchValue[, fromIndex])
 
 - 对于字符串中原本包含空格，tab缩进，tab键和空格键产生的空白占位格是不同的，`lastIndexOf方法`会进行严格的匹配。
 - 对于字符串中原本包含字母，`lastIndexOf方法`会进行严格的大小写匹配。
@@ -754,7 +754,7 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |oString.lastIndexOf("hell",Number.NEGATIVE_INFINITY)|0|
 |oString.lastIndexOf("hell",Number.POSITIVE_INFINITY)|0|
 
-> 3 includes(searchString[, position])
+#### 3) includes(searchString[, position])
 
 这个方法已经被加入到 `ECMAScript 6`标准中，但未必在所有的`JavaScript`实现中都可以使用。
 
@@ -844,7 +844,7 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |oString.includes("llo",Number.NEGATIVE_INFINITY)|true|
 |oString.includes("llo",Number.POSITIVE_INFINITY)|false|
 
-> 4 startsWith(searchString [, position])
+#### 4) startsWith(searchString [, position])
 
 |使用方法|结果|
 |:---|:---|
@@ -917,7 +917,7 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |oString.startsWith("hell",Number.NEGATIVE_INFINITY)|false|
 |oString.startsWith("hell",Number.POSITIVE_INFINITY)|true|
 
-> 5 endsWith(searchString [, position])
+#### 5) endsWith(searchString [, position])
 
 |使用方法|结果|
 |:---|:---|
@@ -990,7 +990,7 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |oString.endsWith("world",Number.NEGATIVE_INFINITY)|false|
 |oString.endsWith("world",Number.POSITIVE_INFINITY)|true|
 
-> 6 search(regexp)
+#### 6) search(regexp)
 
 当你想要知道字符串中是否存在某个模式`pattern`时可使用 `search`，类似于正则表达式的 `test` 方法。当要了解更多匹配信息时，可使用 `match`会更慢，该方法类似于正则表达式的 `exec` 方法。
 
@@ -1062,7 +1062,7 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |oString.search(Number.NEGATIVE_INFINITY)|-1|
 |oString.search(Number.POSITIVE_INFINITY)|-1|
 
-> 6 match(regexp)
+#### 7) match(regexp)
 
 - `regexp`该参数可以是需要在`varName`中检索的子串，也可以是需要检索的`RegExp`对象。
 - `regexp` 一个正则表达式（regular expression）对象。如果传入一个非正则表达式对象，则会使用 `new RegExp(obj)` 隐式地将其转换为正则表达式对象。
@@ -1145,21 +1145,123 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 
 |方法名|描述|参数|
 |:---|:---|:---|
-|localeCompare()|  返回一个数字表示是否引用字符串在排序中位于比较字符串的前面，后面，或者二者相同。|无|
+|localeCompare(stringExp[, locales][, options]) |  返回一个数字，表示是否引用字符串在排序中位于比较字符串的前面，后面，或者二者相同。新的 `locales` 、 `options` 参数能让应用程序定制函数的行为即指定用来排序的语言。  `locales` 和 `options` 参数是依赖于具体实现的，在旧的实现中这两个参数是完全被忽略的。|@para  stringExp 必需。用于比较的字符串。@para locales 可选。包含一种或多种语言或区域设置标记的区域设置字符串数组。如果包含多个区域设置字符串，请以降序优先级对它们进行排列，确保首个条目为首选区域位置。如果省略此参数，则使用 JavaScript 运行时的默认区域设置。此参数必须符合 [BCP 47](https://tools.ietf.org/html/rfc5646) 标准；请参见 [Intl.Collator](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_identification_and_negotiation) 对象了解详细信息。@para options 可选。包含指定比较选项的一个或多个特性的对象。请参见 [Intl.Collator](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_identification_and_negotiation) 对象了解详细信息。|
 
 ### 4.4.2 详细
 
-> 1 localeCompare()
+#### 1) localeCompare(stringExp[, locales][, options])
+
+- 除了`Safari`之外，`Internet Explorer 11`（只有ie11这个版本） ，`Chrome`，`Firefox (Gecko)`和`Opera`都支持`localeCompare` 在内部使用 `Intl.Collator` 对象进行比较，添加对 `locales` 和 `options` 参数的支持。
+- 所有浏览器都支持`localeCompare`的基础功能。
+- 返回一个数字表示是否 `引用字符串` 在排序中位于 `比较字符串` 的`前面`，`后面`，或者二者`相同`。
+- 当 引用字符串 在 比较字符串 前面时返回 `-1`。
+- 当 引用字符串 在 比较字符串 后面时返回 `1`。
+- 相同位置时返回 `0`。
+- 切勿依赖于 `-1` 或 `1` 这样特定的返回值。不同浏览器之间（以及不同浏览器版本之间） 返回的正负数的值`各有不同`，因为W3C规范中只要求返回值是`正值`和`负值`，而没有规定`具体的值`。一些浏览器可能返回`-2`或`2`或其他一些负的、正的`值`。
+- 把 `<` 和 `>` 运算符应用到字符串时，它们只用字符的 Unicode 编码比较字符串，而不考虑当地的排序规则。
+- 以这种方法生成的顺序不一定是正确的。
+- `ECMAscript` 标准并没有规定如何进行本地特定的比较操作，它只规定该函数采用底层操作系统提供的排序规则。
+- 可以用于有多个字符串的数组进行排序
 
 |使用方法|结果|
 |:---|:---|
-|varName.localeCompare()||
+|strString.localeCompare("llo")|-1|
+|oString_1.localeCompare("A")|1|
+|tString_1.localeCompare("Tem")|-1|
+|strString.localeCompare("llo")|-1|
+|oString_3.localeCompare("Fifteen")|1|
+|tString_1.localeCompare("Tem")|-1|
 
-> 2 match()
+> 第一个参数错误示例
+
+- 如果不传入任何参数，`localeCompare`会直接返回负值。
+- 就目前测试的相关数据结果表现，不管字符串中是什么内容，传入什么样的正则值，或者传入制表符，空格，和换行符等等特殊字符，`localeCompare`都会返回正值。
+- 如果以字符串本身传入`localeCompare`，会直接返回`0`。
+- 进行匹配的时候，只要原始值是定义好的，没加双引号都可以被正常检测出来。
 
 |使用方法|结果|
 |:---|:---|
-|varName.match()||
+|strString.localeCompare()|-1|
+|oString.localeCompare(/\s/)|1|
+|oString_1.localeCompare(/\s/)|1|
+|tString_1.localeCompare(/\s/)|1|
+|tString_2.localeCompare(/\s/)|1|
+|tString_3.localeCompare(/\s/)|1|
+|tString_4.localeCompare(/\s/)|1|
+|strString.localeCompare(/\n/)|1|
+|strString.localeCompare(/\t/)|1|
+|strString.localeCompare(/hello world/)|1|
+|strString.localeCompare(/大吉大利/)|1|
+|tString_2.localeCompare("  ")|1|
+|tString_2.localeCompare("    ")|1|
+|tString_2.localeCompare("     ")|1|
+|tString_2.localeCompare("	")|1|
+|tString_2.localeCompare("		")|1|
+|strString.localeCompare(strString)|0|
+|"true".localeCompare(true)|0|
+|"true".localeCompare("true")|0|
+|"true".localeCompare(oBool)|0|
+|"false".localeCompare(false)|0|
+|"false".localeCompare("false")|0|
+|"false".localeCompare(oBool)|-1|
+|"null".localeCompare(null)|0|
+|"null".localeCompare("null")|0|
+|"undefined".localeCompare(undefined)|0|
+|"undefined".localeCompare("undefined")|0|
+|"NaN".localeCompare(NaN)|0|
+|"NaN".localeCompare("NaN")|0|
+
+> 第二个参数错误示例
+
+|使用方法|结果|
+|:---|:---|
+|strString.localeCompare()|-1|
+
+> 第三个参数错误示例
+
+|使用方法|结果|
+|:---|:---|
+
+> Intl.Collator([locales[, options]])
+
+是用于语言敏感字符串比较的`collators`构造函数。
+
+- locales
+  可选. 缩写语言代码 (`BCP 47 language tag`, 例如: `cmn-Hans-CN`) 的字符串或者这些字符串组成的数组. 关于参数 `locales` 的一般形式和解释请参见[Intl page](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_identification_and_negotiation). 下面的这些 `Unicode` 扩展键也是被允许的:
+
+  - co
+    某些区域设置的变体归类。 可能的值包括：`big5han`，`dict`，`direct`，`ducet`，`gb2312`，`phonebk`，`phonetic`，`pinyin`，`reformed`，`searchjl`，`stroke` ，`unihan`。值`standard` 和 `search` 被忽略; 它们被 options 属性用法替换（详见下文）。
+  - kn
+    是否应使用数字对照，使得 `1`<`2`<`10`。 可能的值为 `true` 和 `false`。 此选项可以通过 `options` 属性或通过 `Unicode` 扩展 `key` 设置; 如果两者都提供，`options` 属性优先。
+  - kf
+    首先排序大写或者小写。可能的值为 `upper`，`lower` 或 `false`（使用区域设置的默认值）。 此选项可以通过 `options` 属性或通过 `Unicode` 扩展 `key` 设置; 如果两者都提供，`options` 属性优先。
+- options
+  可选. 包含一些或所有的下面属性的对象:
+  - localeMatcher
+    使用的 local 的匹配算法. 可能的值有 "lookup" 和 "best fit"; 默认值是 "best fit". 有关此选项的信息, 请参见Intl page.
+  - usage
+    比较是用于排序还是用于搜索匹配的字符串。 可能的值为 `sort` 和 `search`; 默认为 `sort`。
+  - sensitivity
+    字符串中的哪些差异应导致结果值为非零(non-zero)。 可能的值有：
+
+    `base`: 只有字母不同的字母比较不相等。例子: a ≠ b, a = á, a = A。
+    `accent`: 只有不同的基本字母或重音符号和其他变音符号的字符串比较为不相等。 例如: a ≠ b, a ≠ á, a = A。
+    `case`: 只有不同的基本字母或大小写的字符串比较不相等。 Examples: a ≠ b, a = á, a ≠ A。
+    `variant`: 字符串的字母，口音和其他变音符号、或不同大小写比较不相等。 也可以考虑其他差异。例如： a ≠ b, a ≠ á, a ≠ A.
+    `variant` 的默认值使用 `sort`; 它的 `locale` 依赖于使用 `search`.
+
+  - ignore­Punctua­tion
+    是否应忽略标点。 可能的值为 `true` 和 `false`; 默认值为 `false`。
+  - numeric
+    是否应使用数字对照，使得 `1`<`2`<`10`。 可能的值为 `true` 和 `false`。默认值为 `false` 。 此选项可以通过 `options` 属性或通过 `Unicode` 扩展 `key` 设置; 如果两者都提供，`options` 属性优先。实现不需要支持此属性。
+  - caseFirst
+    首先排序大写或者小写。可能的值为 `upper`，`lower` 或 `false`（使用区域设置的默认值）。 此选项可以通过 `options` 属性或通过 `Unicode` 扩展 `key` 设置; 如果两者都提供，`options` 属性优先。实现不需要支持此属性。
+
+|使用方法|结果|
+|:---|:---|
+|new Intl.Collator().compare('a', 'c')|-1|
+|new Intl.Collator().compare('c', 'a')|1|
+|new Intl.Collator().compare('a', 'a')|0|
 
 ## 4.5. 拼接
 
@@ -1171,35 +1273,35 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |padEnd()| `不推荐使用`， 从给定字符串的末端填充当前字符串，以从给定长度创建新字符串。|无|
 |padStart()| `不推荐使用`， 从一个给定字符串开始填充当前字符串，从给定长度创建一个新字符串。|无|
 |repeat()| `不推荐使用`，返回指定重复次数的由元素组成的字符串对象。|无|
-|quote()| `已废弃`，用双引号（“”）包装字符串。|无|
+|quote()| `已废弃`，用双引号（``）包装字符串。|无|
 
 ### 4.5.2 详细
 
-> 1 concat()
+#### 1) concat()
 
 |使用方法|结果|
 |:---|:---|
 |varName.concat()||
 
-> 2 padEnd()
+#### 2) padEnd()
 
 |使用方法|结果|
 |:---|:---|
 |varName.padEnd()||
 
-> 3 padStart()
+#### 3) padStart()
 
 |使用方法|结果|
 |:---|:---|
 |varName.padStart()||
 
-> 4 repeat()
+#### 4) repeat()
 
 |使用方法|结果|
 |:---|:---|
 |varName.repeat()||
 
-> 5 quote()
+#### 5) quote()
 
 |使用方法|结果|
 |:---|:---|
@@ -1218,25 +1320,25 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 
 ### 4.6.2 详细
 
-> 1 toLowerCase()
+#### 1) toLowerCase()
 
 |使用方法|结果|
 |:---|:---|
 |varName.toLowerCase()||
 
-> 2 toLocaleLowerCase()
+#### 2) toLocaleLowerCase()
 
 |使用方法|结果|
 |:---|:---|
 |varName.toLocaleLowerCase()||
 
-> 3 toUpperCase()
+#### 3) toUpperCase()
 
 |使用方法|结果|
 |:---|:---|
 |varName.toUpperCase()||
 
-> 4 toLocaleUpperCase()
+#### 4) toLocaleUpperCase()
 
 |使用方法|结果|
 |:---|:---|
@@ -1293,7 +1395,7 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 
 ### 5.2.2 详细
 
-> 1 replace()
+#### 1) replace()
 
 |使用方法|结果|
 |:---|:---|
@@ -1312,25 +1414,25 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 
 ### 5.3.2 详细
 
-> 1 slice()
+#### 1) slice()
 
 |使用方法|结果|
 |:---|:---|
 |varName.slice()||
 
-> 2 split()
+#### 2) split()
 
 |使用方法|结果|
 |:---|:---|
 |varName.split()||
 
-> 3 substr()
+#### 3) substr()
 
 |使用方法|结果|
 |:---|:---|
 |varName.substr()||
 
-> 4 substring()
+#### 4) substring()
 
 |使用方法|结果|
 |:---|:---|
@@ -1348,19 +1450,19 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 
 ### 5.4.2 详细
 
-> 1 trim()
+#### 1) trim()
 
 |使用方法|结果|
 |:---|:---|
 |varName.trim()||
 
-> 2 trimLeft()
+#### 2) trimLeft()
 
 |使用方法|结果|
 |:---|:---|
 |varName.trimLeft()||
 
-> 3 trimRight()
+#### 3) trimRight()
 
 |使用方法|结果|
 |:---|:---|
@@ -1390,91 +1492,91 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 
 ### 5.5.2 详细
 
-> 1 toString()
+#### 1) toString()
 
 |使用方法|结果|
 |:---|:---|
 |varName.toString()||
 
-> 2 toLocaleString()
+#### 2) toLocaleString()
 
 |使用方法|结果|
 |:---|:---|
 |varName.toLocaleString()||
 
-> 3 valueOf()
+#### 3) valueOf()
 
 |使用方法|结果|
 |:---|:---|
 |varName.valueOf()||
 
-> 4 `[@@iterator]()`
+#### 4) `[@@iterator]()`
 
 |使用方法|结果|
 |:---|:---|
 |varName[0]||
 
-> 5 toSource()
+#### 5) toSource()
 
 |使用方法|结果|
 |:---|:---|
 |varName.toSource()||
 
-> 6 `__defineGetter__()`
+#### 6) `__defineGetter__()`
 
 |使用方法|结果|
 |:---|:---|
 |varName.toString()||
 
-> 7 `__defineSetter__()`
+#### 7) `__defineSetter__()`
 
 |使用方法|结果|
 |:---|:---|
 |varName.valueOf()||
 
-> 8 `__lookupGetter__()`
+#### 8) `__lookupGetter__()`
 
 |使用方法|结果|
 |:---|:---|
 |varName[0]||
 
-> 9 `__lookupSetter__()`
+#### 9) `__lookupSetter__()`
 
 |使用方法|结果|
 |:---|:---|
 |varName.toSource()||
 
-> 10 hasOwnProperty()
+#### 10) hasOwnProperty()
 
 |使用方法|结果|
 |:---|:---|
 |varName.toString()||
 
-> 11 isPrototypeOf()
+#### 11) isPrototypeOf()
 
 |使用方法|结果|
 |:---|:---|
 |varName.valueOf()||
 
-> 12 setPrototypeOf()
+#### 12) setPrototypeOf()
 
 |使用方法|结果|
 |:---|:---|
 |varName[0]||
 
-> 13 unwatch()
+#### 13) unwatch()
 
 |使用方法|结果|
 |:---|:---|
 |varName.toSource()||
 
-> 14 watch()
+#### 14) watch()
 
 |使用方法|结果|
 |:---|:---|
 |varName[0]||
 
-> 15 propertyIsEnumerable()
+#### 15) propertyIsEnumerable()
 
 |使用方法|结果|
 |:---|:---|
@@ -1490,7 +1592,7 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 
 ## 6.2 详细
 
-> 1 raw()
+### 1) raw()
 
 如果第一个参数没有传入一个格式良好的调用点对象，则会抛出 TypeError 异常。
 
@@ -1531,6 +1633,7 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |indexOf(searchValue[, fromIndex])| 从字符串对象中返回首个被发现的给定值的索引值开始在 fromIndex进行搜索。如果未找到该值，则返回-1。|@para searchValue 一个字符串表示被查找的值。@para fromIndex 可选 表示调用该方法的字符串中开始查找的位置。可以是任意整数。默认值为 0。如果 fromIndex < 0 则查找整个字符串（如同传进了 0）。如果 fromIndex >= varName.length，则该方法返回 -1，除非被查找的字符串是一个空字符串，此时返回 varName.length。|
 |lastIndexOf(searchValue[, fromIndex])| 返回指定值在调用该方法的字符串中最后出现的位置，如果没找到则返回 -1。从该字符串的后面向前查找，从 fromIndex 处开始。|@para searchValue 一个字符串，表示被查找的值。@para fromIndex 从调用该方法字符串的此位置处开始查找。可以是任意整数。默认值为 str.length。如果为负值，则被看作 0。如果 fromIndex > str.length，则 fromIndex 被看作 str.length。|
 |search(regexp)| 对正则表达式和指定字符串进行匹配搜索，返回第一个出现的匹配项的下标。如果匹配成功，则 search() 返回正则表达式在字符串中首次匹配项的索引。否则，返回 -1。|@para regexp 一个正则表达式（regular expression）对象。如果传入一个非正则表达式对象，则会使用 new RegExp(obj) 隐式地将其转换为正则表达式对象。|
+|localeCompare(stringExp[, locales][, options]) |  返回一个数字，表示是否引用字符串在排序中位于比较字符串的前面，后面，或者二者相同。新的 `locales` 、 `options` 参数能让应用程序定制函数的行为即指定用来排序的语言。  `locales` 和 `options` 参数是依赖于具体实现的，在旧的实现中这两个参数是完全被忽略的。|@para  stringExp 必需。用于比较的字符串。@para locales 可选。包含一种或多种语言或区域设置标记的区域设置字符串数组。如果包含多个区域设置字符串，请以降序优先级对它们进行排列，确保首个条目为首选区域位置。如果省略此参数，则使用 JavaScript 运行时的默认区域设置。此参数必须符合 [BCP 47](https://tools.ietf.org/html/rfc5646) 标准；请参见 [Intl.Collator](https://msdn.microsoft.com/zh-cn/library/dn342821(v=vs.94).aspx) 对象了解详细信息。@para options 可选。包含指定比较选项的一个或多个特性的对象。请参见 [Intl.Collator](https://msdn.microsoft.com/zh-cn/library/dn342821(v=vs.94).aspx) 对象了解详细信息。|
 
 ## 7.3 返回值为布尔值的方法
 
@@ -1557,3 +1660,5 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 - [Unicode字符平面映射](https://zh.wikipedia.org/wiki/Unicode%E5%AD%97%E7%AC%A6%E5%B9%B3%E9%9D%A2%E6%98%A0%E5%B0%84#.E5.9F.BA.E6.9C.AC.E5.A4.9A.E6.96.87.E7.A7.8D.E5.B9.B3.E9.9D.A2)
 
 - [ASCII码查询](http://www.asciima.com/)
+
+- [微软官方技术学习文档-String](https://msdn.microsoft.com/zh-cn/library/ecczf11c(v=vs.94).aspx)
