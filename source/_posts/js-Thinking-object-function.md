@@ -20,7 +20,7 @@ String引用类型方法速览表
 |:---|:---|:---|
 |编码| 返回字符串内容中对应位置的值或者编码单元 | - charAt(index) - charCodeAt(index) - codePointAt(pos) - normalize([form]) - fromCharCode(num1, ..., numN) - fromCodePoint(num1, …, numN)|
 |检索| 将字符串中内容进行检索返回对应结果 | - indexOf(searchValue[, fromIndex]) - lastIndexOf(searchValue[, fromIndex]) - search(regexp) - includes(searchString[, position]) - startsWith(searchString [, position]) - endsWith(searchString [, position]) - match(regexp)|
-|排序| 将字符串中的内容按照ACSII码值进行排序之后返回 |localeCompare()|
+|对比| 返回一个数字，表示是否引用字符串在排序中位于比较字符串的前面，后面，或者二者相同。 |localeCompare(stringExp[, locales][, options])|
 |拼接| 将字符串和其他内容进行拼接 | - concat() - padEnd() - padStart()|
 |大小写转换| 将字符串中的字母进行大小写转换 | - toLowerCase() - toLocaleLowerCase() - toUpperCase() - toLocaleUpperCase()|
 |HTML相关方法| 将字符串转成对应的Dom内容 | - big() - small() - blink() - bold() - italics() - strike() - fixed() - sub() - sup() - anchor(anchorname) - link(url) - fontcolor(color) - fontsize(size)|
