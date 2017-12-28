@@ -1,6 +1,6 @@
 ---
 title: 知识储备之理解服务概念
-category: 样式表
+category: 知识储备
 tags:
   - IaaS
   - PaaS
