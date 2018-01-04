@@ -1223,57 +1223,149 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |"NaN".localeCompare(NaN)|0|
 |"NaN".localeCompare("NaN")|0|
 
-> 第二个参数错误示例
-
-|使用方法|结果|
-|:---|:---|
-|strString.localeCompare()|-1|
-
-> 第三个参数错误示例
-
-|使用方法|结果|
-|:---|:---|
-
-> Intl.Collator([locales[, options]])
+#### 2) Intl.Collator([locales[, options]])
 
 是用于语言敏感字符串比较的`collators`构造函数。
 
 - locales
-  可选. 缩写语言代码 (`BCP 47 language tag`, 例如: `cmn-Hans-CN`) 的字符串或者这些字符串组成的数组. 关于参数 `locales` 的一般形式和解释请参见[Intl page](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_identification_and_negotiation). 下面的这些 `Unicode` 扩展键也是被允许的:
+
+  可选.`locales` 参数必须是一个 `BCP 47 语言标记`的字符串，或者是一个包括`多个语言标记`的数组。如果 `locales` 参数未提供或者是 `undefined`，便会使用运行时默认的 `locale`。
+
+  一个 `BCP 47 语言标记`代表了一种`语`言或者`区域`（两者没有很大的区别）。在其最常见的格式中，它以这样的顺序囊括了这些内容：`语言代码`，`脚本代码`，和`国家代码`，全部由`连字符`分隔开。
+
+  - "hi"：印地语
+  - "de-AT"：在奥地利使用的德语
+  - "zh-Hans-CN"：在中国使用的中文简体
+
+  在 `BCP 47` 中表示语言，脚本，国家（区域）和变体（少用）的语言子标记含义可以在 [IANA语言](http://www.iana.org/assignments/language-subtag-registry/language-subtag-registry) 子标记注册中找到。
+
+  `BCP 47` 也支持扩展，其中一个和 `JavaScript` 国际化方法相关的是：`u`（Unicode）扩展。它可以用于请求一个`自定义区域`特定行为的 `Collator`，`NumberFormat`，或者 `DateTimeFormat` 对象。
+
+  - "de-DE-u-co-phonebk"：使用德语的电话簿排序变体，这会把元音变音扩展成字符对：ä → ae, ö → oe, ü → ue。
+  - "th-TH-u-nu-thai"：在数字格式中使用泰语的数值表示（๐, ๑, ๒, ๓, ๔, ๕, ๖, ๗, ๘, ๙）
+  - "ja-JP-u-ca-japanese"：在日期和时间格式化中使用日本的日历表示方式，所以 2013 会表示为平成 25。
+
+  语言区域判定
+
+  `locales` 参数，在除去所有的 `Unicode` 扩展之后，会被转化成来自应用的优先请求。运行时拿它和可用的语言区域做对比然后选择出最合适的一个。有两种匹配算法：`查找` 匹配遵循 `BCP 47` 中指定的查找算法。
+
+  `最佳命中`匹配器会让运行时至少提供一个`语言区域`，但合适请求的结果可能会比查找算法的要多。如果应用没有提供一个 `locales` 参数，或者运行时没有一个匹配请求的语言区域，那么会使用运行时默认的语言区域。
+
+  如果选中的语言标记有一个 `Unicode` 扩展子字符串，这个扩展会用于自定义构造对象或者方法的行为。每一个构造函数或者方法仅支持 `Unicode` 扩展定义的 `key` 的一个子集，和依赖于语言标记的支持的值。例如，`co` 这个 key（collation）只在 `Collator` 中支持，它的值 `phonebk` 只在`德语`中支持。
+
+  关于参数 `locales` 的一般形式和解释请参见[Intl page](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_identification_and_negotiation). 下面的这些 `Unicode` 扩展键也是被允许的:
 
   - co
-    某些区域设置的变体归类。 可能的值包括：`big5han`，`dict`，`direct`，`ducet`，`gb2312`，`phonebk`，`phonetic`，`pinyin`，`reformed`，`searchjl`，`stroke` ，`unihan`。值`standard` 和 `search` 被忽略; 它们被 options 属性用法替换（详见下文）。
+
+    某些区域设置的变体归类。 可能的值包括：`big5han`，`dict`，`direct`，`ducet`，`gb2312`，`phonebk`，`phonetic`，`pinyin`，`reformed`，`searchjl`，`stroke` ，`unihan`。值`standard` 和 `search` 被忽略。
+
   - kn
+
     是否应使用数字对照，使得 `1`<`2`<`10`。 可能的值为 `true` 和 `false`。 此选项可以通过 `options` 属性或通过 `Unicode` 扩展 `key` 设置; 如果两者都提供，`options` 属性优先。
+
   - kf
+
     首先排序大写或者小写。可能的值为 `upper`，`lower` 或 `false`（使用区域设置的默认值）。 此选项可以通过 `options` 属性或通过 `Unicode` 扩展 `key` 设置; 如果两者都提供，`options` 属性优先。
+
+---
+
 - options
-  可选. 包含一些或所有的下面属性的对象:
+
+  `options` 参数必须是一个对象，其属性值在不同的构造函数和方法中会有所变化。如果 `options` 参数未提供或者为 `undefined`，所有的属性值则使用默认的。
+
+  所有语言敏感的构造函数和方法都支持的一个属性是：`localeMatcher` 属性，它的值必须是字符串 `lookup` 或者 `best fit`，用于选择上边描述的语言区域匹配算法。包含一些或所有的下面属性的对象:
+
   - localeMatcher
-    使用的 local 的匹配算法. 可能的值有 "lookup" 和 "best fit"; 默认值是 "best fit". 有关此选项的信息, 请参见Intl page.
+
+    使用的 `local` 的匹配算法. 可能的值有`lookup` 和 `best fit`，默认值是 `best fit`. 有关此选项的信息。
+
   - usage
+
     比较是用于排序还是用于搜索匹配的字符串。 可能的值为 `sort` 和 `search`; 默认为 `sort`。
+
   - sensitivity
+
     字符串中的哪些差异应导致结果值为非零(non-zero)。 可能的值有：
 
     `base`: 只有字母不同的字母比较不相等。例子: a ≠ b, a = á, a = A。
     `accent`: 只有不同的基本字母或重音符号和其他变音符号的字符串比较为不相等。 例如: a ≠ b, a ≠ á, a = A。
     `case`: 只有不同的基本字母或大小写的字符串比较不相等。 Examples: a ≠ b, a = á, a ≠ A。
     `variant`: 字符串的字母，口音和其他变音符号、或不同大小写比较不相等。 也可以考虑其他差异。例如： a ≠ b, a ≠ á, a ≠ A.
-    `variant` 的默认值使用 `sort`; 它的 `locale` 依赖于使用 `search`.
+    默认值使用 `sort`; 它的 `locale` 依赖于使用 `search`.
 
-  - ignore­Punctua­tion
+  - ignorePunctuation
+
     是否应忽略标点。 可能的值为 `true` 和 `false`; 默认值为 `false`。
+
   - numeric
-    是否应使用数字对照，使得 `1`<`2`<`10`。 可能的值为 `true` 和 `false`。默认值为 `false` 。 此选项可以通过 `options` 属性或通过 `Unicode` 扩展 `key` 设置; 如果两者都提供，`options` 属性优先。实现不需要支持此属性。
+
+    是否应使用数字对照，使得 `1`<`2`<`10`。 可能的值为 `true` 和 `false`。默认值为 `false` 。 此选项可以通过 `options` 属性或通过 `Unicode` 扩展 `key` 设置。如果两者都提供，`options` 属性优先。
+
   - caseFirst
-    首先排序大写或者小写。可能的值为 `upper`，`lower` 或 `false`（使用区域设置的默认值）。 此选项可以通过 `options` 属性或通过 `Unicode` 扩展 `key` 设置; 如果两者都提供，`options` 属性优先。实现不需要支持此属性。
+
+    首先排序大写或者小写。可能的值为 `upper`，`lower` 或 `false`（使用区域设置的默认值）。 此选项可以通过 `options` 属性或通过 `Unicode` 扩展 `key` 设置。 如果两者都提供，`options` 属性优先。
+
+---
+
+> 基础用法
 
 |使用方法|结果|
 |:---|:---|
 |new Intl.Collator().compare('a', 'c')|-1|
 |new Intl.Collator().compare('c', 'a')|1|
 |new Intl.Collator().compare('a', 'a')|0|
+
+> numeric参数用法
+
+|使用方法|结果|
+|:---|:---|
+|"1".localeCompare("2")|-1|
+|"1".localeCompare("2","kn",{numeric:"true"})|-1|
+|"1".localeCompare("2","language-region-u-kn-true",{numeric:"true"})|-1|
+|"1".localeCompare("16")|-1|
+|"1".localeCompare("16","kn",{numeric:"true"})|-1|
+|"1".localeCompare("16","language-region-u-kn-true",{numeric:"true"})|-1|
+|"2".localeCompare("16")|1|
+|"2".localeCompare("16","kn",{numeric:"true"})|-1|
+|"2".localeCompare("16","language-region-u-kn-true",{numeric:"true"})|-1|
+
+> sensitivity参数用法
+
+|使用方法|结果|
+|:---|:---|
+|"a".localeCompare("b")|-1|
+|"a".localeCompare("b","language-region-u-search",{sensitivity:"base"})|-1|
+|"a".localeCompare("b","language-region-u-search",{sensitivity:"accent"})|-1|
+|"a".localeCompare("b","language-region-u-search",{sensitivity:"case"})|-1|
+|"a".localeCompare("b","language-region-u-search",{sensitivity:"variant"})|-1|
+|"a".localeCompare("á")|-1|
+|"a".localeCompare("á","language-region-u-search",{sensitivity:"base"})|0|
+|"a".localeCompare("á","language-region-u-search",{sensitivity:"accent"})|-1|
+|"a".localeCompare("á","language-region-u-search",{sensitivity:"case"})|0|
+|"a".localeCompare("á","language-region-u-search",{sensitivity:"variant"})|-1|
+|"a".localeCompare("A")|-1|
+|"a".localeCompare("A","language-region-u-search",{sensitivity:"base"})|0|
+|"a".localeCompare("A","language-region-u-search",{sensitivity:"accent"})|0|
+|"a".localeCompare("A","language-region-u-search",{sensitivity:"case"})|-1|
+|"a".localeCompare("A","language-region-u-search",{sensitivity:"variant"})|-1|
+
+> caseFirst参数用法
+
+|使用方法|结果|
+|:---|:---|
+|"a".localeCompare("A")|-1|
+|"a".localeCompare("A","kf",{caseFirst:"upper"})|-1|
+|"a".localeCompare("A","language-region-u-kf-upper",{caseFirst:"upper"})|1|
+|"a".localeCompare("A","language-region-u-kf-lower",{caseFirst:"upper"})|1|
+|"a".localeCompare("A","language-region-u-kf-false",{caseFirst:"upper"})|1|
+|"a".localeCompare("A","kf",{caseFirst:"lower"})|-1|
+|"a".localeCompare("A","language-region-u-kf-upper",{caseFirst:"lower"})|-1|
+|"a".localeCompare("A","language-region-u-kf-lower",{caseFirst:"lower"})|-1|
+|"a".localeCompare("A","language-region-u-kf-false",{caseFirst:"lower"})|-1|
+|"a".localeCompare("A","kf",{caseFirst:"false"})|-1|
+|"a".localeCompare("A","language-region-u-kf-upper",{caseFirst:"false"})|-1|
+|"a".localeCompare("A","language-region-u-kf-lower",{caseFirst:"false"})|-1|
+|"a".localeCompare("A","language-region-u-kf-false",{caseFirst:"false"})|-1|
 
 ## 4.5. 拼接
 
@@ -1645,7 +1737,7 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |indexOf(searchValue[, fromIndex])| 从字符串对象中返回首个被发现的给定值的索引值开始在 fromIndex进行搜索。如果未找到该值，则返回-1。|@para searchValue 一个字符串表示被查找的值。@para fromIndex 可选 表示调用该方法的字符串中开始查找的位置。可以是任意整数。默认值为 0。如果 fromIndex < 0 则查找整个字符串（如同传进了 0）。如果 fromIndex >= varName.length，则该方法返回 -1，除非被查找的字符串是一个空字符串，此时返回 varName.length。|
 |lastIndexOf(searchValue[, fromIndex])| 返回指定值在调用该方法的字符串中最后出现的位置，如果没找到则返回 -1。从该字符串的后面向前查找，从 fromIndex 处开始。|@para searchValue 一个字符串，表示被查找的值。@para fromIndex 从调用该方法字符串的此位置处开始查找。可以是任意整数。默认值为 str.length。如果为负值，则被看作 0。如果 fromIndex > str.length，则 fromIndex 被看作 str.length。|
 |search(regexp)| 对正则表达式和指定字符串进行匹配搜索，返回第一个出现的匹配项的下标。如果匹配成功，则 search() 返回正则表达式在字符串中首次匹配项的索引。否则，返回 -1。|@para regexp 一个正则表达式（regular expression）对象。如果传入一个非正则表达式对象，则会使用 new RegExp(obj) 隐式地将其转换为正则表达式对象。|
-|localeCompare(stringExp[, locales][, options]) |  返回一个数字，表示是否引用字符串在排序中位于比较字符串的前面，后面，或者二者相同。新的 `locales` 、 `options` 参数能让应用程序定制函数的行为即指定用来排序的语言。  `locales` 和 `options` 参数是依赖于具体实现的，在旧的实现中这两个参数是完全被忽略的。|@para  stringExp 必需。用于比较的字符串。@para locales 可选。包含一种或多种语言或区域设置标记的区域设置字符串数组。如果包含多个区域设置字符串，请以降序优先级对它们进行排列，确保首个条目为首选区域位置。如果省略此参数，则使用 JavaScript 运行时的默认区域设置。此参数必须符合 [BCP 47](https://tools.ietf.org/html/rfc5646) 标准；请参见 [Intl.Collator](https://msdn.microsoft.com/zh-cn/library/dn342821(v=vs.94).aspx) 对象了解详细信息。@para options 可选。包含指定比较选项的一个或多个特性的对象。请参见 [Intl.Collator](https://msdn.microsoft.com/zh-cn/library/dn342821(v=vs.94).aspx) 对象了解详细信息。|
+|localeCompare(stringExp[, locales][, options]) |  返回一个数字，表示是否引用字符串在排序中位于比较字符串的前面，后面，或者二者相同。新的 `locales` 、 `options` 参数能让应用程序定制函数的行为即指定用来排序的语言。  `locales` 和 `options` 参数是依赖于具体实现的，在旧的实现中这两个参数是完全被忽略的。|@para  stringExp 必需。用于比较的字符串。@para locales 可选。包含一种或多种语言或区域设置标记的区域设置字符串数组。如果包含多个区域设置字符串，请以降序优先级对它们进行排列，确保首个条目为首选区域位置。如果省略此参数，则使用 JavaScript 运行时的默认区域设置。此参数必须符合 [BCP 47](https://tools.ietf.org/html/rfc5646) 标准；@para options 可选。包含指定比较选项的一个或多个特性的对象。请参见 [Intl.Collator]<https://msdn.microsoft.com/zh-cn/library/dn342821(v=vs.94).aspx> 对象了解详细信息。|
 
 ## 7.3 返回值为布尔值的方法
 
@@ -1673,4 +1765,4 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 
 - [ASCII码查询](http://www.asciima.com/)
 
-- [微软官方技术学习文档-String](https://msdn.microsoft.com/zh-cn/library/ecczf11c(v=vs.94).aspx)
+- [微软官方技术学习文档-String]<https://msdn.microsoft.com/zh-cn/library/ecczf11c(v=vs.94).aspx>
