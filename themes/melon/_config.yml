@@ -2,9 +2,9 @@
 
 menu:
   主页: /
-  js学习: /categories/js学习/
-  软件折腾: /categories/软件折腾/
-  样式学习: /categories/样式表/
+  西瓜说: /tags/watermelon/
+  框架学习: /categories/框架学习/
+  .NET: /categories/NET/
   近期文字: /archives/2017/10/
 
 # SubNav
@@ -138,6 +138,7 @@ smart_menu:
   aboutme: '关于我'
 
 friends:
+  西瓜说: /tags/watermelon/
   js思考: /categories/js-thinking/
   js学习: /categories/js学习/
   样式学习: /categories/样式表/
@@ -145,7 +146,8 @@ friends:
   前端思考: /categories/前端思考/
   前端知识: /categories/前端知识/
   Linux: /categories/Linux/
-  .NET: /tags/NET/
+  .NET: /categories/NET/
+  ArcGIS: /categories/ArcGIS/
   知识储备: /categories/知识储备/
   软件折腾: /categories/软件折腾/
   阶段总结: /categories/阶段总结/
