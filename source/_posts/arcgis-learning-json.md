@@ -1,6 +1,6 @@
 ---
 title: ArcGISJS学习之规范化json数据
-category: 样式表
+category: ArcGIS
 tags:
   - GeoJson
   - ArcGIS Geometries

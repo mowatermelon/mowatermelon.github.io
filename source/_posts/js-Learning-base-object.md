@@ -2,8 +2,8 @@
 title: js学习之对象学习
 category: js学习
 tags:
-  - jquery
-  - iviewer
+  - object
+  - function
   - js学习
 date: 2017-10-14 00:00:00
 ---
