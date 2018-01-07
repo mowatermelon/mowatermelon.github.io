@@ -224,10 +224,10 @@ or object instanceof(constructor)
 |fixed()| `不推荐使用`， 把字符串显示为打字机文本显示的字符串，只在页面中才会有效果。|无|
 |sub()|  `不推荐使用`，把字符串显示为下标，只在页面中才会有效果。|无|
 |sup()| `不推荐使用`， 把字符串显示为上标，只在页面中才会有效果。|无|
-|anchor(anchorname)|  `不推荐使用`，创建 `HTML` 锚。将字符串输出为有唯一标识的纯粹`a`标签，只在页面中才会有效果。| @para anchorname 必需，为锚定义名称。如果没有传入参数，则会输出一个`name`属性为`undefined`的`a`标签。|
-|link(url)| `不推荐使用`， 把字符串显示为链接，只在页面中才会有效果。如果没有传入参数，则会输出一个href属性为`undefined`的a标签。| @para url必需，规定要链接的 URL。|
-|fontcolor(color)| `不推荐使用`，返回指定的颜色的字符串。只在页面中才会有效果如果没有传入参数，则会输出一个`color`属性为`undefined`的font标签。| @para  color必需。为字符串规定 font-color。该值必须是颜色名(red)、RGB 值(rgb(255,0,0))或者十六进制数(#FF0000)。|
-|fontsize(size)| `不推荐使用`， 返回指定的字体大小的字符串。只在页面中才会有效果。如果没有传入参数，则会输出一个`size`属性为`undefined`的`font`标签。|  @para size 参数必须是从 1 至 7 的数字，数字越大字体越大。|
+|anchor(anchorname)|  `不推荐使用`，创建 `HTML` 锚。将字符串输出为有唯一标识的纯粹`a`标签，只在页面中才会有效果。| @param anchorname 必需，为锚定义名称。如果没有传入参数，则会输出一个`name`属性为`undefined`的`a`标签。|
+|link(url)| `不推荐使用`， 把字符串显示为链接，只在页面中才会有效果。如果没有传入参数，则会输出一个href属性为`undefined`的a标签。| @param url必需，规定要链接的 URL。|
+|fontcolor(color)| `不推荐使用`，返回指定的颜色的字符串。只在页面中才会有效果如果没有传入参数，则会输出一个`color`属性为`undefined`的font标签。| @param  color必需。为字符串规定 font-color。该值必须是颜色名(red)、RGB 值(rgb(255,0,0))或者十六进制数(#FF0000)。|
+|fontsize(size)| `不推荐使用`， 返回指定的字体大小的字符串。只在页面中才会有效果。如果没有传入参数，则会输出一个`size`属性为`undefined`的`font`标签。|  @param size 参数必须是从 1 至 7 的数字，数字越大字体越大。|
 
 ### 4.1.2 详细
 
@@ -315,12 +315,12 @@ or object instanceof(constructor)
 
 |方法名|描述|参数|
 |:---|:---|:---|
-|charAt(index)|  返回特定位置的字符，不提供参数就返回第一个字符的字符，提供游标值，就返回指定游标的字符| @para index 非必需，一个介于0 和字符串长度减1之间的正整数。 (0~varName.length-1)，如果不是一个数值，则默认为 0。|
-|charCodeAt(index)| 返回0到65535之间的整数，表示给定索引处的`UTF-16`代码单元 (在 `Unicode` 编码单元表示一个单一的 `UTF-16` 编码单元的情况下，`UTF-16` 编码单元匹配 `Unicode` 编码单元。但在——例如 `Unicode` 编码单元 > `0x10000` 的这种——不能被一个 `UTF-16` 编码单元单独表示的情况下，只能匹配 `Unicode` 代理对的第一个编码单元) 。|@para index 一个大于等于 0，小于字符串长度的整数。(0~varName.length-1)，如果不是一个数值，则默认为 0。|
-|codePointAt(pos)| `测试中`， 返回使用UTF-16编码的给定位置的值的非负整数。|@para pos 这个字符串中需要转码的元素的位置。|
-|normalize([form])| `测试中`， 返回调用字符串值的Unicode标准化形式。|@para form 四种 Unicode 正规形式 "NFC", "NFD", "NFKC", 以及 "NFKD" 其中的一个, 默认值为 "NFC".|
-|fromCharCode(num1, ..., numN)|返回一个字符串，而不是一个 String 对象。由于 fromCharCode 是 String 的静态方法，所以应该像这样使用：String.fromCharCode()，而不是作为你创建的 String 对象的方法。|@para num1, ..., numN 一组序列数字，表示 Unicode 值。|
-|fromCodePoint(num1, …, numN)| `不推荐使用`， 返回使用 Unicode 编码创建的字符串，如果传入无效的 Unicode 编码，将会抛出一个RangeError (例如： "RangeError: NaN is not a valid code point")。|@para num1, ..., numN 一组序列数字，表示 Unicode 值。|
+|charAt(index)|  返回特定位置的字符，不提供参数就返回第一个字符的字符，提供游标值，就返回指定游标的字符| @param index 非必需，一个介于0 和字符串长度减1之间的正整数。 (0~varName.length-1)，如果不是一个数值，则默认为 0。|
+|charCodeAt(index)| 返回0到65535之间的整数，表示给定索引处的`UTF-16`代码单元 (在 `Unicode` 编码单元表示一个单一的 `UTF-16` 编码单元的情况下，`UTF-16` 编码单元匹配 `Unicode` 编码单元。但在——例如 `Unicode` 编码单元 > `0x10000` 的这种——不能被一个 `UTF-16` 编码单元单独表示的情况下，只能匹配 `Unicode` 代理对的第一个编码单元) 。|@param index 一个大于等于 0，小于字符串长度的整数。(0~varName.length-1)，如果不是一个数值，则默认为 0。|
+|codePointAt(pos)| `测试中`， 返回使用UTF-16编码的给定位置的值的非负整数。|@param pos 这个字符串中需要转码的元素的位置。|
+|normalize([form])| `测试中`， 返回调用字符串值的Unicode标准化形式。|@param form 四种 Unicode 正规形式 "NFC", "NFD", "NFKC", 以及 "NFKD" 其中的一个, 默认值为 "NFC".|
+|fromCharCode(num1, ..., numN)|返回一个字符串，而不是一个 String 对象。由于 fromCharCode 是 String 的静态方法，所以应该像这样使用：String.fromCharCode()，而不是作为你创建的 String 对象的方法。|@param num1, ..., numN 一组序列数字，表示 Unicode 值。|
+|fromCodePoint(num1, …, numN)| `不推荐使用`， 返回使用 Unicode 编码创建的字符串，如果传入无效的 Unicode 编码，将会抛出一个RangeError (例如： "RangeError: NaN is not a valid code point")。|@param num1, ..., numN 一组序列数字，表示 Unicode 值。|
 
 ### 4.2.2 详细
 
@@ -574,13 +574,13 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 
 |方法名|描述|参数|
 |:---|:---|:---|
-|indexOf(searchValue[, fromIndex])| 从字符串对象中返回首个被发现的给定值的索引值开始在 fromIndex进行搜索。如果未找到该值，则返回-1。|@para searchValue 一个字符串表示被查找的值。@para fromIndex 可选 表示调用该方法的字符串中开始查找的位置。可以是任意整数。默认值为 0。如果 fromIndex < 0 则查找整个字符串（如同传进了 0）。如果 fromIndex >= varName.length，则该方法返回 -1，除非被查找的字符串是一个空字符串，此时返回 varName.length。|
-|lastIndexOf(searchValue[, fromIndex])| 返回指定值在调用该方法的字符串中最后出现的位置，如果没找到则返回 -1。从该字符串的后面向前查找，从 fromIndex 处开始。|@para searchValue 一个字符串，表示被查找的值。@para fromIndex 从调用该方法字符串的此位置处开始查找。可以是任意整数。默认值为 str.length。如果为负值，则被看作 0。如果 fromIndex > str.length，则 fromIndex 被看作 str.length。|
-|includes(searchString[, position])|  `不推荐使用`，判断一个字符串是否包含在另一个字符串中，根据情况返回true或false。|@para searchString 要在此字符串中搜索的字符串。@para position 可选。从当前字符串的哪个索引位置开始搜寻子字符串；默认值为0。|
-|startsWith(searchString [, position])| `不推荐使用`，判断字符串的起始位置是否匹配其他字符串中的字符。|@para searchString 要搜索的子字符串。@para position 在 varName 中搜索 searchString 的开始位置，默认值为 0，也就是真正的字符串开头处。|
-|endsWith(searchString [, position])| `不推荐使用`， 判断一个字符串的结尾是否包含其他字符串中的字符。|@para searchString 要搜索的子字符串。@para position 在 varName 中搜索 searchString 的结束位置，默认值为 varName.length，也就是真正的字符串结尾处。|
-|search(regexp)| 对正则表达式和指定字符串进行匹配搜索，返回第一个出现的匹配项的下标。如果匹配成功，则 search() 返回正则表达式在字符串中首次匹配项的索引。否则，返回 -1。|@para regexp 一个正则表达式（regular expression）对象。如果传入一个非正则表达式对象，则会使用 new RegExp(obj) 隐式地将其转换为正则表达式对象。|
-|match(regexp)| 将字符串与正则表达式匹配，并返回一个包含该搜索结果的数组。返回值array，一个包含了整个匹配结果以及任何括号捕获的匹配结果的 Array ；如果没有匹配项，则返回 null 。|@para regexp 一个正则表达式对象。如果传入一个非正则表达式对象，则会隐式地使用 new RegExp(obj) 将其转换为一个 RegExp 。如果你未提供任何参数，直接使用 match() ，那么你会得到一个包含空字符串的 Array ：[""] 。|
+|indexOf(searchValue[, fromIndex])| 从字符串对象中返回首个被发现的给定值的索引值开始在 fromIndex进行搜索。如果未找到该值，则返回-1。|@param searchValue 一个字符串表示被查找的值。@param fromIndex 可选 表示调用该方法的字符串中开始查找的位置。可以是任意整数。默认值为 0。如果 fromIndex < 0 则查找整个字符串（如同传进了 0）。如果 fromIndex >= varName.length，则该方法返回 -1，除非被查找的字符串是一个空字符串，此时返回 varName.length。|
+|lastIndexOf(searchValue[, fromIndex])| 返回指定值在调用该方法的字符串中最后出现的位置，如果没找到则返回 -1。从该字符串的后面向前查找，从 fromIndex 处开始。|@param searchValue 一个字符串，表示被查找的值。@param fromIndex 从调用该方法字符串的此位置处开始查找。可以是任意整数。默认值为 str.length。如果为负值，则被看作 0。如果 fromIndex > str.length，则 fromIndex 被看作 str.length。|
+|includes(searchString[, position])|  `不推荐使用`，判断一个字符串是否包含在另一个字符串中，根据情况返回true或false。|@param searchString 要在此字符串中搜索的字符串。@param position 可选。从当前字符串的哪个索引位置开始搜寻子字符串；默认值为0。|
+|startsWith(searchString [, position])| `不推荐使用`，判断字符串的起始位置是否匹配其他字符串中的字符。|@param searchString 要搜索的子字符串。@param position 在 varName 中搜索 searchString 的开始位置，默认值为 0，也就是真正的字符串开头处。|
+|endsWith(searchString [, position])| `不推荐使用`， 判断一个字符串的结尾是否包含其他字符串中的字符。|@param searchString 要搜索的子字符串。@param position 在 varName 中搜索 searchString 的结束位置，默认值为 varName.length，也就是真正的字符串结尾处。|
+|search(regexp)| 对正则表达式和指定字符串进行匹配搜索，返回第一个出现的匹配项的下标。如果匹配成功，则 search() 返回正则表达式在字符串中首次匹配项的索引。否则，返回 -1。|@param regexp 一个正则表达式（regular expression）对象。如果传入一个非正则表达式对象，则会使用 new RegExp(obj) 隐式地将其转换为正则表达式对象。|
+|match(regexp)| 将字符串与正则表达式匹配，并返回一个包含该搜索结果的数组。返回值array，一个包含了整个匹配结果以及任何括号捕获的匹配结果的 Array ；如果没有匹配项，则返回 null 。|@param regexp 一个正则表达式对象。如果传入一个非正则表达式对象，则会隐式地使用 new RegExp(obj) 将其转换为一个 RegExp 。如果你未提供任何参数，直接使用 match() ，那么你会得到一个包含空字符串的 Array ：[""] 。|
 
 ### 4.3.2 详细
 
@@ -1157,7 +1157,7 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 
 |方法名|描述|参数|
 |:---|:---|:---|
-|localeCompare(stringExp[, locales][, options]) |  返回一个数字，表示是否引用字符串在排序中位于比较字符串的前面，后面，或者二者相同。新的 `locales` 、 `options` 参数能让应用程序定制函数的行为即指定用来排序的语言。  `locales` 和 `options` 参数是依赖于具体实现的，在旧的实现中这两个参数是完全被忽略的。|@para  stringExp 必需。用于比较的字符串。@para locales 可选。包含一种或多种语言或区域设置标记的区域设置字符串数组。如果包含多个区域设置字符串，请以降序优先级对它们进行排列，确保首个条目为首选区域位置。如果省略此参数，则使用 JavaScript 运行时的默认区域设置。此参数必须符合 [BCP 47](https://tools.ietf.org/html/rfc5646) 标准；请参见 [Intl.Collator](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_identification_and_negotiation) 对象了解详细信息。@para options 可选。包含指定比较选项的一个或多个特性的对象。请参见 [Intl.Collator](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_identification_and_negotiation) 对象了解详细信息。|
+|localeCompare(stringExp[, locales][, options]) |  返回一个数字，表示是否引用字符串在排序中位于比较字符串的前面，后面，或者二者相同。新的 `locales` 、 `options` 参数能让应用程序定制函数的行为即指定用来排序的语言。  `locales` 和 `options` 参数是依赖于具体实现的，在旧的实现中这两个参数是完全被忽略的。|@param  stringExp 必需。用于比较的字符串。@param locales 可选。包含一种或多种语言或区域设置标记的区域设置字符串数组。如果包含多个区域设置字符串，请以降序优先级对它们进行排列，确保首个条目为首选区域位置。如果省略此参数，则使用 JavaScript 运行时的默认区域设置。此参数必须符合 [BCP 47](https://tools.ietf.org/html/rfc5646) 标准；请参见 [Intl.Collator](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_identification_and_negotiation) 对象了解详细信息。@param options 可选。包含指定比较选项的一个或多个特性的对象。请参见 [Intl.Collator](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_identification_and_negotiation) 对象了解详细信息。|
 
 ### 4.4.2 详细
 
@@ -1373,7 +1373,7 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 
 |方法名|描述|参数|
 |:---|:---|:---|
-|concat()|  连接两个字符串文本，并返回一个新的字符串。|无|
+|concat(string2, string3[, ..., stringN])|  连接两个字符串文本，并返回一个新的字符串。|@param string2...stringN 和原字符串连接的多个字符串|
 |padEnd()| `不推荐使用`， 从给定字符串的末端填充当前字符串，以从给定长度创建新字符串。|无|
 |padStart()| `不推荐使用`， 从一个给定字符串开始填充当前字符串，从给定长度创建一个新字符串。|无|
 |repeat()| `不推荐使用`，返回指定重复次数的由元素组成的字符串对象。|无|
@@ -1381,7 +1381,9 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 
 ### 4.5.2 详细
 
-#### 1) concat()
+#### 1) concat(string2, string3[, ..., stringN])
+
+`concat` 方法的结果等同于：`result = string1 + string2 + string3 + stringN`，即将一个或多个字符串与`原字符串`连接合并，形成一个新的字符串并返回。`concat` 方法并不影响原字符串，原字符串中或结果字符串中的值的变化都不会影响另一个字符串中的值。如果有不是字符串的参数，则它们在连接到 `varName` 之前将首先被转换为字符串。
 
 |使用方法|结果|
 |:---|:---|
@@ -1719,39 +1721,40 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |fixed()| `不推荐使用`， 把字符串显示为打字机文本显示的字符串，只在页面中才会有效果。|无|
 |sub()|  `不推荐使用`，把字符串显示为下标，只在页面中才会有效果。|无|
 |sup()| `不推荐使用`， 把字符串显示为上标，只在页面中才会有效果。|无|
-|anchor(anchorname)|  `不推荐使用`，创建 `HTML` 锚。将字符串输出为有唯一标识的纯粹`a`标签，只在页面中才会有效果。| @para anchorname 必需，为锚定义名称。如果没有传入参数，则会输出一个`name`属性为`undefined`的`a`标签。|
-|link(url)| `不推荐使用`， 把字符串显示为链接，只在页面中才会有效果。如果没有传入参数，则会输出一个href属性为`undefined`的a标签。| @para url必需，规定要链接的 URL。|
-|fontcolor(color)| `不推荐使用`，返回指定的颜色的字符串。只在页面中才会有效果如果没有传入参数，则会输出一个`color`属性为`undefined`的font标签。| @para  color必需。为字符串规定 font-color。该值必须是颜色名(red)、RGB 值(rgb(255,0,0))或者十六进制数(#FF0000)。|
-|fontsize(size)| `不推荐使用`， 返回指定的字体大小的字符串。只在页面中才会有效果。如果没有传入参数，则会输出一个`size`属性为`undefined`的`font`标签。|  @para size 参数必须是从 1 至 7 的数字，数字越大字体越大。|
-|charAt(index)|  返回特定位置的字符，不提供参数就返回第一个字符的字符，提供游标值，就返回指定游标的字符| @para index 非必需，一个介于0 和字符串长度减1之间的正整数。 (0~varName.length-1)。|
-|normalize([form])| `测试中`， 返回调用字符串值的Unicode标准化形式。|@para form 四种 Unicode 正规形式 "NFC", "NFD", "NFKC", 以及 "NFKD" 其中的一个, 默认值为 "NFC".|
-|fromCharCode(num1, ..., numN)|返回一个字符串，而不是一个 String 对象。由于 fromCharCode 是 String 的静态方法，所以应该像这样使用：String.fromCharCode()，而不是作为你创建的 String 对象的方法。|@para num1, ..., numN 一组序列数字，表示 Unicode 值。|
-|fromCodePoint(num1, …, numN)| `不推荐使用`， 返回使用 Unicode 编码创建的字符串，如果传入无效的 Unicode 编码，将会抛出一个RangeError (例如： "RangeError: NaN is not a valid code point")。|@para num1, ..., numN 一组序列数字，表示 Unicode 值。|
+|anchor(anchorname)|  `不推荐使用`，创建 `HTML` 锚。将字符串输出为有唯一标识的纯粹`a`标签，只在页面中才会有效果。| @param anchorname 必需，为锚定义名称。如果没有传入参数，则会输出一个`name`属性为`undefined`的`a`标签。|
+|link(url)| `不推荐使用`， 把字符串显示为链接，只在页面中才会有效果。如果没有传入参数，则会输出一个href属性为`undefined`的a标签。| @param url必需，规定要链接的 URL。|
+|fontcolor(color)| `不推荐使用`，返回指定的颜色的字符串。只在页面中才会有效果如果没有传入参数，则会输出一个`color`属性为`undefined`的font标签。| @param  color必需。为字符串规定 font-color。该值必须是颜色名(red)、RGB 值(rgb(255,0,0))或者十六进制数(#FF0000)。|
+|fontsize(size)| `不推荐使用`， 返回指定的字体大小的字符串。只在页面中才会有效果。如果没有传入参数，则会输出一个`size`属性为`undefined`的`font`标签。|  @param size 参数必须是从 1 至 7 的数字，数字越大字体越大。|
+|charAt(index)|  返回特定位置的字符，不提供参数就返回第一个字符的字符，提供游标值，就返回指定游标的字符| @param index 非必需，一个介于0 和字符串长度减1之间的正整数。 (0~varName.length-1)。|
+|normalize([form])| `测试中`， 返回调用字符串值的Unicode标准化形式。|@param form 四种 Unicode 正规形式 "NFC", "NFD", "NFKC", 以及 "NFKD" 其中的一个, 默认值为 "NFC".|
+|fromCharCode(num1, ..., numN)|返回一个字符串，而不是一个 String 对象。由于 fromCharCode 是 String 的静态方法，所以应该像这样使用：String.fromCharCode()，而不是作为你创建的 String 对象的方法。|@param num1, ..., numN 一组序列数字，表示 Unicode 值。|
+|fromCodePoint(num1, …, numN)| `不推荐使用`， 返回使用 Unicode 编码创建的字符串，如果传入无效的 Unicode 编码，将会抛出一个RangeError (例如： "RangeError: NaN is not a valid code point")。|@param num1, ..., numN 一组序列数字，表示 Unicode 值。|
+|concat(string2, string3[, ..., stringN])|  连接两个字符串文本，并返回一个新的字符串。|@param string2...stringN 和原字符串连接的多个字符串|
 
 ## 7.2 返回值为数值的方法
 
 |方法名|描述|参数|
 |:---|:---|:---|
-|charCodeAt(index)| 返回0到65535之间的整数，表示给定索引处的`UTF-16`代码单元 (在 `Unicode` 编码单元表示一个单一的 `UTF-16` 编码单元的情况下，`UTF-16` 编码单元匹配 `Unicode` 编码单元。但在——例如 `Unicode` 编码单元 > `0x10000` 的这种——不能被一个 `UTF-16` 编码单元单独表示的情况下，只能匹配 `Unicode` 代理对的第一个编码单元) 。|@para index 一个大于等于 0，小于字符串长度的整数。(0~varName.length-1)，如果不是一个数值，则默认为 0。|
-|codePointAt(pos)| `不推荐使用`， 返回使用UTF-16编码的给定位置的值的非负整数。|@para pos 这个字符串中需要转码的元素的位置。|
-|indexOf(searchValue[, fromIndex])| 从字符串对象中返回首个被发现的给定值的索引值开始在 fromIndex进行搜索。如果未找到该值，则返回-1。|@para searchValue 一个字符串表示被查找的值。@para fromIndex 可选 表示调用该方法的字符串中开始查找的位置。可以是任意整数。默认值为 0。如果 fromIndex < 0 则查找整个字符串（如同传进了 0）。如果 fromIndex >= varName.length，则该方法返回 -1，除非被查找的字符串是一个空字符串，此时返回 varName.length。|
-|lastIndexOf(searchValue[, fromIndex])| 返回指定值在调用该方法的字符串中最后出现的位置，如果没找到则返回 -1。从该字符串的后面向前查找，从 fromIndex 处开始。|@para searchValue 一个字符串，表示被查找的值。@para fromIndex 从调用该方法字符串的此位置处开始查找。可以是任意整数。默认值为 str.length。如果为负值，则被看作 0。如果 fromIndex > str.length，则 fromIndex 被看作 str.length。|
-|search(regexp)| 对正则表达式和指定字符串进行匹配搜索，返回第一个出现的匹配项的下标。如果匹配成功，则 search() 返回正则表达式在字符串中首次匹配项的索引。否则，返回 -1。|@para regexp 一个正则表达式（regular expression）对象。如果传入一个非正则表达式对象，则会使用 new RegExp(obj) 隐式地将其转换为正则表达式对象。|
-|localeCompare(stringExp[, locales][, options]) |  返回一个数字，表示是否引用字符串在排序中位于比较字符串的前面，后面，或者二者相同。新的 `locales` 、 `options` 参数能让应用程序定制函数的行为即指定用来排序的语言。  `locales` 和 `options` 参数是依赖于具体实现的，在旧的实现中这两个参数是完全被忽略的。|@para  stringExp 必需。用于比较的字符串。@para locales 可选。包含一种或多种语言或区域设置标记的区域设置字符串数组。如果包含多个区域设置字符串，请以降序优先级对它们进行排列，确保首个条目为首选区域位置。如果省略此参数，则使用 JavaScript 运行时的默认区域设置。此参数必须符合 [BCP 47](https://tools.ietf.org/html/rfc5646) 标准；@para options 可选。包含指定比较选项的一个或多个特性的对象。请参见 [Intl.Collator]<https://msdn.microsoft.com/zh-cn/library/dn342821(v=vs.94).aspx> 对象了解详细信息。|
+|charCodeAt(index)| 返回0到65535之间的整数，表示给定索引处的`UTF-16`代码单元 (在 `Unicode` 编码单元表示一个单一的 `UTF-16` 编码单元的情况下，`UTF-16` 编码单元匹配 `Unicode` 编码单元。但在——例如 `Unicode` 编码单元 > `0x10000` 的这种——不能被一个 `UTF-16` 编码单元单独表示的情况下，只能匹配 `Unicode` 代理对的第一个编码单元) 。|@param index 一个大于等于 0，小于字符串长度的整数。(0~varName.length-1)，如果不是一个数值，则默认为 0。|
+|codePointAt(pos)| `不推荐使用`， 返回使用UTF-16编码的给定位置的值的非负整数。|@param pos 这个字符串中需要转码的元素的位置。|
+|indexOf(searchValue[, fromIndex])| 从字符串对象中返回首个被发现的给定值的索引值开始在 fromIndex进行搜索。如果未找到该值，则返回-1。|@param searchValue 一个字符串表示被查找的值。@param fromIndex 可选 表示调用该方法的字符串中开始查找的位置。可以是任意整数。默认值为 0。如果 fromIndex < 0 则查找整个字符串（如同传进了 0）。如果 fromIndex >= varName.length，则该方法返回 -1，除非被查找的字符串是一个空字符串，此时返回 varName.length。|
+|lastIndexOf(searchValue[, fromIndex])| 返回指定值在调用该方法的字符串中最后出现的位置，如果没找到则返回 -1。从该字符串的后面向前查找，从 fromIndex 处开始。|@param searchValue 一个字符串，表示被查找的值。@param fromIndex 从调用该方法字符串的此位置处开始查找。可以是任意整数。默认值为 str.length。如果为负值，则被看作 0。如果 fromIndex > str.length，则 fromIndex 被看作 str.length。|
+|search(regexp)| 对正则表达式和指定字符串进行匹配搜索，返回第一个出现的匹配项的下标。如果匹配成功，则 search() 返回正则表达式在字符串中首次匹配项的索引。否则，返回 -1。|@param regexp 一个正则表达式（regular expression）对象。如果传入一个非正则表达式对象，则会使用 new RegExp(obj) 隐式地将其转换为正则表达式对象。|
+|localeCompare(stringExp[, locales][, options]) |  返回一个数字，表示是否引用字符串在排序中位于比较字符串的前面，后面，或者二者相同。新的 `locales` 、 `options` 参数能让应用程序定制函数的行为即指定用来排序的语言。  `locales` 和 `options` 参数是依赖于具体实现的，在旧的实现中这两个参数是完全被忽略的。|@param  stringExp 必需。用于比较的字符串。@param locales 可选。包含一种或多种语言或区域设置标记的区域设置字符串数组。如果包含多个区域设置字符串，请以降序优先级对它们进行排列，确保首个条目为首选区域位置。如果省略此参数，则使用 JavaScript 运行时的默认区域设置。此参数必须符合 [BCP 47](https://tools.ietf.org/html/rfc5646) 标准；@param options 可选。包含指定比较选项的一个或多个特性的对象。请参见 [Intl.Collator]<https://msdn.microsoft.com/zh-cn/library/dn342821(v=vs.94).aspx> 对象了解详细信息。|
 
 ## 7.3 返回值为布尔值的方法
 
 |方法名|描述|参数|
 |:---|:---|:---|
-|includes(searchString[, position])|  `不推荐使用`，判断一个字符串是否包含在另一个字符串中，根据情况返回true或false。|@para searchString 要在此字符串中搜索的字符串。@para position 可选。从当前字符串的哪个索引位置开始搜寻子字符串；默认值为0。|
-|startsWith(searchString [, position])| `不推荐使用`，判断字符串的起始位置是否匹配其他字符串中的字符。|@para searchString 要搜索的子字符串。@para position 在 varName 中搜索 searchString 的开始位置，默认值为 0，也就是真正的字符串开头处。|
-|endsWith(searchString [, position])| `不推荐使用`， 判断一个字符串的结尾是否包含其他字符串中的字符。|@para searchString 要搜索的子字符串。@para position 在 varName 中搜索 searchString 的结束位置，默认值为 varName.length，也就是真正的字符串结尾处。|
+|includes(searchString[, position])|  `不推荐使用`，判断一个字符串是否包含在另一个字符串中，根据情况返回true或false。|@param searchString 要在此字符串中搜索的字符串。@param position 可选。从当前字符串的哪个索引位置开始搜寻子字符串；默认值为0。|
+|startsWith(searchString [, position])| `不推荐使用`，判断字符串的起始位置是否匹配其他字符串中的字符。|@param searchString 要搜索的子字符串。@param position 在 varName 中搜索 searchString 的开始位置，默认值为 0，也就是真正的字符串开头处。|
+|endsWith(searchString [, position])| `不推荐使用`， 判断一个字符串的结尾是否包含其他字符串中的字符。|@param searchString 要搜索的子字符串。@param position 在 varName 中搜索 searchString 的结束位置，默认值为 varName.length，也就是真正的字符串结尾处。|
 
 ## 7.3 返回值为数组的方法
 
 |方法名|描述|参数|
 |:---|:---|:---|
-|match(regexp)| 将字符串与正则表达式匹配，并返回一个包含该搜索结果的数组。返回值array，一个包含了整个匹配结果以及任何括号捕获的匹配结果的 Array ；如果没有匹配项，则返回 null 。|@para regexp 一个正则表达式对象。如果传入一个非正则表达式对象，则会隐式地使用 new RegExp(obj) 将其转换为一个 RegExp 。如果你未提供任何参数，直接使用 match() ，那么你会得到一个包含空字符串的 Array ：[""] 。|
+|match(regexp)| 将字符串与正则表达式匹配，并返回一个包含该搜索结果的数组。返回值array，一个包含了整个匹配结果以及任何括号捕获的匹配结果的 Array ；如果没有匹配项，则返回 null 。|@param regexp 一个正则表达式对象。如果传入一个非正则表达式对象，则会隐式地使用 new RegExp(obj) 将其转换为一个 RegExp 。如果你未提供任何参数，直接使用 match() ，那么你会得到一个包含空字符串的 Array ：[""] 。|
 
 # 8 参考网站
 
