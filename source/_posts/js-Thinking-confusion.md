@@ -5,15 +5,17 @@ tags:
   - confusion
   - watermelon
   - js_thinking
-date: 2017-10-23 00:00:00
+date: 2017-11-01 00:00:00
 ---
 # 1 js类型强制转化
 
 ## 1.1 Date强转
 
-为何Date强转之后构造体成了String？
+为何`Date`强转之后构造体成了`String`？
 
 <!-- more -->
+
+> 主要原因 ：JS中`Date`除了是一个`构造器`外，同时也是一个`函数`，没有`new`的时候，相当于调用了`Date函数`，然后把返回值(一个字符串类型的日期)赋值给`doArr`,并没有产生新的`Date实例`，所以变量和`Date构造器`没有什么关系，继承的都是`String`这个构造器的方法和属性。
 
 ```javascript
 //默认String和Date没什么关系
@@ -48,7 +50,9 @@ console.log(noArr.__proto__); //[Number: 0]
 
 ### 2.1.1 正则与undefined
 
-其他特殊字面量明明都可以正常转成正则对象，但是`undefined`却会转成`/(?:)/`然后进行检测。
+特殊字面量明明都可以正常转成正则对象，那为何检测`undefined`的时候，所有案例变量都匹配成功了？
+
+> 主要原因 ：`undefined`会转成`/(?:)/`然后进行检测，正则中`(?:pattern)` 的意思是匹配`pattern`但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用，因为`/(?:)/`的`pattern`值为空，所以上面正则的意思是匹配所有。
 
 ```javascript
 var a = 4;
@@ -63,7 +67,7 @@ var oDate = new Date();
 var oString_1 = 'A \uD87E\uDC04 Z';
 var tString_1 =`hello Template`;
 var tString_2 =`hello line 1
-				hello line 2`;
+  	hello line 2`;
 //`string text ${expression} string text`  在模版字符串中使用表达式
 var tString_3 =`Fifteen is ${a + b} and\nnot ${2 * a + b}.`;
 console.log(strString.search(undefined));//0
@@ -83,9 +87,6 @@ console.log(new RegExp(true));//  /true/
 console.log(new RegExp(false));// /false/
 
 console.log(new RegExp(undefined));// /(?:)/
-//原意
-//(?:pattern) 匹配`pattern`但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用。
-//因为上面的pattern值为空，所以上面正则的意思是匹配所有
 
 console.log(new RegExp(null));// /null/
 
@@ -95,7 +96,9 @@ console.log(new RegExp(NaN));// /NaN/
 
 ### 2.1.2 正则与Object
 
-`oo`是一个空对象，它的字面量是`{}`，但是传入`search方法`中却是`[object Object]`。
+`oo`是一个空对象，它的字面量是`{}`，但是为什么可以和案例变量都进行匹配。
+
+> 主要原因 ：`oo`传入`search方法`中是`[object Object]`，在正则中中括号的意思是匹配包含在括号中的任意字符。
 
 ```javascript
 var a = 4;
@@ -110,7 +113,7 @@ var oDate = new Date();
 var oString_1 = 'A \uD87E\uDC04 Z';
 var tString_1 =`hello Template`;
 var tString_2 =`hello line 1
-				hello line 2`;
+  	hello line 2`;
 //`string text ${expression} string text`  在模版字符串中使用表达式
 var tString_3 =`Fifteen is ${a + b} and\nnot ${2 * a + b}.`;
 var tString_4 = "大吉大利今晚吃西瓜!";
@@ -142,6 +145,7 @@ console.log(strString.search(oDate));//-1
 
 
 console.log(new RegExp(oo));//  /[object Object]/
+
 //中括号的意思是    匹配中括号的任意一个字符
 // 所以对应正则的意思是只要字符串中存在object这几个字母和空格都会被匹配
 
@@ -177,7 +181,7 @@ var oDate = new Date();
 var oString_1 = 'A \uD87E\uDC04 Z';
 var tString_1 =`hello Template`;
 var tString_2 =`hello line 1
-				hello line 2`;
+  	hello line 2`;
 //`string text ${expression} string text`  在模版字符串中使用表达式
 var tString_3 =`Fifteen is ${a + b} and\nnot ${2 * a + b}.`;
 var tString_4 = "大吉大利今晚吃西瓜!"
@@ -383,4 +387,52 @@ console.log(tString_1.localeCompare(oo));//1
 console.log(tString_2.localeCompare(oo));//1
 console.log(tString_3.localeCompare(oo));//1
 console.log(tString_4.localeCompare(oo));//1
+```
+
+# 4 数据类型学习
+
+常用的有六大数据类型，一般实例化对象的时候，都是`new`关键词加上数据类型加上括号，今天突然想到如果不加括号怎样，然后发现两种情况下实例化的变量的值从表面上看几乎是一模一样的的，但是在做等式匹配的时候，不管是用全等还是用普通等式怕段，都是返回的`false`.
+
+> 主要原因 ：`基本类型`是通过`值`来`比较`，而`对象`（Object，Boolean，Number，String，Array，Date，Function）及`普通对象`通过`指针`指向的`内存`中的`地址`来做比较。
+
+```javascript
+  var temp_O = new Object;
+  var temp_B = new Boolean;
+  var temp_N = new Number;
+  var temp_S = new String;
+  var temp_A = new Array;
+  var temp_D = new Date;
+  var temp_F = new Function;
+
+  console.log(temp_O);//{}
+  console.log(temp_B);//[Boolean: false]
+  console.log(temp_N);//[Number: 0]
+  console.log(temp_S);//[String: '']
+  console.log(temp_A);//[]
+  console.log(temp_D);//2018-01-07T09:11:45.720Z
+  console.log(temp_F);//[Function: anonymous]
+
+  console.log(new Object());//{}
+  console.log(new Boolean());//[Boolean: false]
+  console.log(new Number());//[Number: 0]
+  console.log(new String());//[String: '']
+  console.log(new Array());//[]
+  console.log(new Date());//2018-01-07T09:26:55.136Z
+  console.log(new Function());//[Function: anonymous]
+
+  console.log((new Object())===temp_O);//false
+  console.log((new Boolean())===temp_B);//false
+  console.log((new Number())===temp_N);//false
+  console.log((new String())===temp_S);//false
+  console.log((new Array())===temp_A);//false
+  console.log((new Date())===temp_D);//false
+  console.log((new Function())===temp_F);//false
+
+  console.log((new Object())===(new Object()));//false
+  console.log((new Boolean())===(new Boolean()));//false
+  console.log((new Number())===(new Number()));//false
+  console.log((new String())===(new String()));//false
+  console.log((new Array())===(new Array()));//false
+  console.log((new Date())===(new Date()));//false
+  console.log((new Function())===(new Function()));//false
 ```
