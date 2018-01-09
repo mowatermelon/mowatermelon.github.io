@@ -9,7 +9,7 @@ tags:
 date: 2017-11-02 00:00:00
 ---
 
-> 一直不清楚显示原型和隐式原型的关系，所以对于new关键词的作用，很疑惑，整理一下
+> 一直不清楚显式声明和隐式原型的关系，整理了一下相关疑惑，并且整理了`new`和`instanceof`关于显式声明和隐式声明的相关知识
 
 <!--more-->
 
@@ -150,7 +150,7 @@ var temp_F = new Function();
 |temp_D|`temp_D.__proto__.prototype`|undefined|
 |temp_F|`temp_F.__proto__.prototype`|undefined|
 
-# 4 new 的过程
+# 4 new
 
 ```javascript
 var Person = function(){};
@@ -159,9 +159,9 @@ var p = new Person();
 
 > new的过程拆分成以下三步：
 
-- `var p={};` 也就是说，初始化一个对象`p`
-- `p.__proto__ = Person.prototype;`
-- `Person.call(p);` 也就是说构造`p`，也可以称之为初始化`p`
+- `var p={};` 也就是说，初始化一个空对象`p`。
+- `p.__proto__ = Person.prototype;` 将临时对象的`隐式声明`指向构造体的`显式声明`上。
+- `Person.call(p);` 也就是说构造`p`，也可以称之为初始化`p`。
 
 关键在于第二步，我们来证明一下：
 
@@ -170,3 +170,110 @@ var Person = function(){};
 var p = new Person();
 console.log(p.__proto__ === Person.prototype);//true
 ```
+
+# 5 instanceof
+
+## 5.1 定义
+
+在 `JavaScript` 中，判断一个变量的类型常常会用 `typeof` 运算符，在使用 `typeof` 运算符时采用引用类型存储值会出现一个问题，无论引用的是什么类型的对象，它都返回 `object`。`ECMAScript` 引入了 `Java` 中的运算符 `instanceof` 来解决这个问题。`instanceof` 运算符与 `typeof` 运算符相似，用于识别正在处理的`对象`的类型。与 `typeof` 方法不同的是，`instanceof` 方法要求开发者明确地确认`对象`为某特定类型。
+
+`instanceof` 运算符用来测试一个`对象`在其`原型链`中是否存在一个构造函数的 `prototype` 属性。请注意这个是检测的是`原型链`，不是单纯的只检测对象的`隐式声明`一次，是不断的在对象的`隐式声明`中去找构造体的`显式声明`，注意如果传入的第一个参数如果不是`对象`，会直接返回`false`。
+
+## 5.2 用法
+
+通常来讲，使用 `instanceof` 就是判断一个实例是否属于某种类型。
+
+```javascript
+// 判断 foo 是否是 Foo 类的实例
+function Foo(){}
+var foo = new Foo();
+console.log(foo instanceof Foo)//true
+```
+
+另外，更重的一点是 `instanceof` 可以在继承关系中用来判断一个实例是否属于它的父类型。
+
+```javascript
+// 判断 foo 是否是 Foo 类的实例 , 并且是否是其父类型的实例
+function Aoo(){}
+function Foo(){}
+Foo.prototype = new Aoo();//JavaScript 原型继承
+
+var foo = new Foo();
+console.log(foo instanceof Foo)//true
+console.log(foo instanceof Aoo)//true
+```
+
+上面的代码中是判断了一层继承关系中的父类，在`多层继承`关系中，`instanceof` 运算符同样适用。
+
+## 5.3 语言规范
+
+`ECMAScript-262 edition 3` 中 关于 `instanceof` 运算符的定义
+
+```text
+11.8.6 The instanceof operator
+ The production RelationalExpression:
+     RelationalExpression instanceof ShiftExpression is evaluated as follows:
+
+ 1. Evaluate RelationalExpression.
+ 2. Call GetValue(Result(1)).// 调用 GetValue 方法得到 Result(1) 的值，设为 Result(2)
+ 3. Evaluate ShiftExpression.
+ 4. Call GetValue(Result(3)).// 同理，这里设为 Result(4)
+ 5. If Result(4) is not an object, throw a TypeError exception.// 如果 Result(4) 不是 object，
+                                                                //抛出异常
+ /* 如果 Result(4) 没有 [[HasInstance]] 方法，抛出异常。规范中的所有 [[...]] 方法或者属性都是内部的，
+在 JavaScript 中不能直接使用。并且规范中说明，只有 Function 对象实现了 [[HasInstance]] 方法。
+所以这里可以简单的理解为：如果 Result(4) 不是 Function 对象，抛出异常 */
+ 6. If Result(4) does not have a [[HasInstance]] method,
+   throw a TypeError exception.
+ // 相当于这样调用：Result(4).[[HasInstance]](Result(2))
+ 7. Call the [[HasInstance]] method of Result(4) with parameter Result(2).
+ 8. Return Result(7).
+
+ // 相关的 HasInstance 方法定义
+ 15.3.5.3 [[HasInstance]] (V)
+ Assume F is a Function object.// 这里 F 就是上面的 Result(4)，V 是 Result(2)
+ When the [[HasInstance]] method of F is called with value V,
+     the following steps are taken:
+ 1. If V is not an object, return false.// 如果 V 不是 object，直接返回 false
+ 2. Call the [[Get]] method of F with property name "prototype".// 用 [[Get]] 方法取
+                                                                // F 的 prototype 属性
+ 3. Let O be Result(2).//O = F.[[Get]]("prototype")
+ 4. If O is not an object, throw a TypeError exception.
+ 5. Let V be the value of the [[Prototype]] property of V.//V = V.[[Prototype]]
+ 6. If V is null, return false. 
+ // 这里是关键，如果 O 和 V 引用的是同一个对象，则返回 true；否则，到 Step 8 返回 Step 5 继续循环
+ 7. If O and V refer to the same object or if they refer to objects
+   joined to each other (section 13.1.2), return true.
+ 8. Go to step 5.
+```
+
+上面的规范定义很晦涩，而且看起来比较复杂，涉及到很多概念，但把这段规范翻译成 `JavaScript` 代码却很简单，
+
+```javascript
+
+// object instanceof constructor
+
+//instanceof 运算符用来检测 constructor.prototype 是否存在于参数 object 的原型链上。
+
+//模拟instanceof 功能
+function instance_of(L, R) {//L 表示左表达式，R 表示右表达式
+ var O = R.prototype;// 取 R 的显示原型
+ L = L.__proto__;// 取 L 的隐式原型
+ //请注意这个判断条件，目的是无限循环，不断在L的隐式声明链中找R的显式说明，只有完全找不到的时候，才会返回false，
+ //请注意undefined，null没有属性的，没有隐式声明的。
+ while (true) {
+   if (L === null){
+    return false;
+   }
+   if (O === L)// 这里重点：当 O 严格等于 L 时，返回 true
+   {
+    return true;
+   }
+   L = L.__proto__;//L.__proto__.__proto__.__proto__.__proto__.__proto__..........
+ }
+}
+```
+
+# 6 参考网站
+
+- [JavaScript instanceof 运算符深入剖析](https://www.ibm.com/developerworks/cn/web/1306_jiangjj_jsinstanceof/)
