@@ -31,6 +31,20 @@ Array.prototype.unique = function () {
     return res;
   }
 
+//给数组去重，对原数组的值不做修改，返回一个全新数组   ES4写法
+//利用了正则对象 适用于数组中重复元素是否相邻都可以检测
+Array.prototype.unique = function () {
+  var _a = this,
+      _b = [_a[0]];
+  _a.sort(function(a,b){
+      var pattenR= new RegExp(b);
+      if (!pattenR.test(_b)) {
+          _b.push(b);
+        }
+  });
+  return _b;
+}
+
 //给数组去重，利用了concat协助  ES5写法
 Array.prototype.distinct = function(){
     var _self = this.concat();
