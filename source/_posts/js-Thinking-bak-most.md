@@ -15,17 +15,48 @@ date: 2017-10-24 00:00:00
 
 ```javascript
 
-//给数组去重
+//给数组去重，对原数组的值不做修改，返回一个全新数组   ES4写法
+//适用于数组中重复元素相邻的情况  但是如果重复不相邻 检测力度就一般
 Array.prototype.unique = function () {
-  this.sort(); //先排序
-  var res = [this[0]];
-  for (var i = 1; i < this.length; i++) {
-    if (this[i] !== res[res.length - 1]) {
-      res.push(this[i]);
+    //this.sort会直接改变this的内容
+    //所以在调用sort之前用concat深度复制一下数组内容
+    //保证数组中首字符等等重复概率比较高的元素 在一块
+    var _a = this.concat().sort(); //先排序
+    var res = [_a[0]];
+    for (var i = 1; i < _a.length; i++) {
+      if (_a[i] !== res[res.length - 1]) {
+        res.push(_a[i]);
+      }
     }
+    return res;
   }
-  return res;
-}
+
+//给数组去重，利用了concat协助  ES5写法
+Array.prototype.distinct = function(){
+    var _self = this.concat();
+    //请注意这里不能让_a直接指向_self的sort，
+    //要不然下面使用splice的时候会使_self中重复数组不会被删除，
+    // 只是会导致数组最后一个值会变成undefined，不会有去重效果
+    var _a = this.concat().sort();
+    _a.sort(function(a,b){
+        if(a == b){
+            var n = _self.lastIndexOf(a);//默认删除后面出现的重复元素
+            _self.splice(n,1);
+        }
+    });
+    return _self;
+};
+//给数组去重，对原数组的值不做修改，返回一个全新数组，没有使用concat协助 ES5写法
+Array.prototype.distinct = function(){
+    var _a = this,
+        _b = [_a[0]];
+    _a.sort(function(a,b){
+        if (_b.indexOf(b)===-1) {
+            _b.push(b);
+          }
+    });
+    return _b;
+};
 
 //计算数组之和
 function sum(list) {
