@@ -1385,6 +1385,12 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 
 `concat` 方法的结果等同于：`result = string1 + string2 + string3 + stringN`，即将一个或多个字符串与`原字符串`连接合并，形成一个新的字符串并返回。`concat` 方法并不影响原字符串，原字符串中或结果字符串中的值的变化都不会影响另一个字符串中的值。如果有不是字符串的参数，则它们在连接到 `varName` 之前将首先被转换为字符串。
 
+> 性能
+
+强烈建议使用 赋值操作符（+, +=）代替 concat 方法。参看 性能测试（perfomance test）。
+
+![concat-vs-plus](../../../../img/concatVsPlus.png)
+
 |使用方法|结果|
 |:---|:---|
 |varName.concat()||
