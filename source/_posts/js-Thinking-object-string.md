@@ -1391,15 +1391,48 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 
 ![concat-vs-plus](../../../../img/concatVsPlus.png)
 
+> 正确用法
+
 |使用方法|结果|
 |:---|:---|
 |oString.concat()|hello world|
 |oString.concat("")|hello world|
-|oString.concat(true))|hello worldtrue|
-|oString.concat(false))|hello worldfalse|
-|oString.concat(null))|hello worldnull|
-|oString.concat(undefined))|hello worldundefined|
-|oString.concat(NaN))|hello worldNaN|
+|oString.concat("hell",1))|hello worldhell1|
+|oString.concat("hell",0.1))|hello worldhell0.1|
+|oString.concat("hell",0.5))|hello worldhell0.5|
+|oString.concat("hell",0.8))|hello worldhell0.8|
+
+> 错误用法和特殊字符
+
+- 不传参数和传空字符串都是会正常返回字符串原值。
+- 对于特殊字符都可以正常拼接，如果传入的不是字符串类型，会先转成字符串类型，然后再做处理。
+- 对于数字0，会去掉小数位和正负号
+
+|使用方法|结果|
+|:---|:---|
+|oString.concat()|hello world|
+|oString.concat("")|hello world|
+|oString.concat(true)|hello worldtrue|
+|oString.concat("true")|hello worldtrue|
+|oString.concat(oBool)|hello worldtrue|
+|oString.concat(false)|hello worldfalse|
+|oString.concat("false")|hello worldfalse|
+|oString.concat(null)|hello worldnull|
+|oString.concat("null")|hello worldnull|
+|oString.concat(undefined)|hello worldundefined|
+|oString.concat("undefined")|hello worldundefined|
+|oString.concat(NaN)|hello worldNaN|
+|oString.concat("NaN")|hello worldNaN|
+|oString.concat(Number.NaN)|hello worldNaN|
+|oString.concat(oo)|hello worldhell[object Object]|
+|oString.concat(oArray)|hello worldhelldemo,melon,water|
+|oString.concat(oDate)|hello worldhellThu Jan 11 2018 21:39:49 GMT+0800 (中国标准时间)|
+|oString.concat(Number.MAX_VALUE)|hello worldhell1.7976931348623157e+308|
+|oString.concat(Number.MIN_VALUE)|hello worldhell5e-324|
+|oString.concat(Number.NEGATIVE_INFINITY)|hello worldhell-Infinity|
+|oString.concat(Number.POSITIVE_INFINITY)|hello worldhellInfinity|
+|oString.concat("hell",0.0))|hello worldhell0|
+|oString.concat("hell",-0))|hello worldhell0|
 
 #### 2) padEnd()
 
