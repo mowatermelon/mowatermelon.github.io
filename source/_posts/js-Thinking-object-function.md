@@ -74,6 +74,12 @@ String引用类型方法速览表
 - search(regexp)，返回值为`int数字`或者`-1`。
 - match(regexp)，返回值为`字符串`或者`null`。
 
+### 1.3.4 数据拼接
+
+- 赋值操作符（+, +=），`string1 += string2+ string2 + string3`，运算速度是concat的二十倍左右，是join的两百七十倍左右。
+- str.concat(string2, string3[, ..., stringN])，运算速度是join的十倍左右。
+- arr.join(separator)。
+
 # 2 Array
 
 Array引用类型方法速览表
