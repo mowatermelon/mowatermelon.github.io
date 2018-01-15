@@ -1387,13 +1387,19 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 
 > 性能
 
-强烈建议使用 赋值操作符（+, +=）代替 concat 方法。参看 性能测试（perfomance test）。
+强烈建议使用 赋值操作符（+, +=）代替 concat 方法，`+`运算速度是`concat`的二十倍左右，是`join`的两百七十倍左右。参看 [性能测试（perfomance test）](http://jsperf.com/concat-vs-plus-vs-join)，下图是三个函数在`0.1`秒左右的执行次数，其中`join`执行时长是最长的，接近`0.2`秒。
 
 ![concat-vs-plus](../../../../img/concatVsPlus.png)
 
 |使用方法|结果|
 |:---|:---|
-|varName.concat()||
+|oString.concat()|hello world|
+|oString.concat("")|hello world|
+|oString.concat(true))|hello worldtrue|
+|oString.concat(false))|hello worldfalse|
+|oString.concat(null))|hello worldnull|
+|oString.concat(undefined))|hello worldundefined|
+|oString.concat(NaN))|hello worldNaN|
 
 #### 2) padEnd()
 
