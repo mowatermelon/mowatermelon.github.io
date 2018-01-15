@@ -108,7 +108,7 @@ Java（对Javascript）的影响，主要是把数据分成基本类型（primit
 |2008.7|由于对于下一个版本应该包括哪些功能，各方分歧太大，争论过于激进，ECMA开会决定，中止ECMAScript 4.0的开发，将其中涉及现有功能改善的一小部分，发布为ECMAScript 3.1，而将其他激进的设想扩大范围，放入以后的版本，由于会议的气氛，该版本的项目代号起名为Harmony（和谐）。会后不久，ECMAScript 3.1就改名为ECMAScript 5。|
 |2009.12|ECMAScript 5.0版正式发布。Harmony项目则一分为二，一些较为可行的设想定名为JavaScript.next继续开发，后来演变成ECMAScript 6；一些不是很成熟的设想，则被视为JavaScript.next.next，在更远的将来再考虑推出。|
 |2011.6|ECMAscript 5.1版发布，并且成为ISO国际标准（ISO/IEC 16262:2011）。|
-|2013.3|ECMAScript 6草案冻结，不再添加新功能。新的功能设想将被放到ECMAScript 7。| 
+|2013.3|ECMAScript 6草案冻结，不再添加新功能。新的功能设想将被放到ECMAScript 7。|
 |2013.12|ECMAScript 6草案发布。然后是12个月的讨论期，听取各方反馈。|
 |2015.6.17|ECMAScript 6发布正式版本，即ECMAScript 2015。|
 
