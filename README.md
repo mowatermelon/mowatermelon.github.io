@@ -2,7 +2,7 @@
 
 ## 1 [西瓜有话说系列](https://mowatermelon.github.io/tags/watermelon/)
 
-> 西瓜有话说cleanpython小白之路
+> 西瓜有话说之python小白之路
 
 2017-11-03
 
