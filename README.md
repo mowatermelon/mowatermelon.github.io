@@ -2,6 +2,12 @@
 
 ## 1 [西瓜有话说系列](https://mowatermelon.github.io/tags/watermelon/)
 
+> 西瓜有话说cleanpython小白之路
+
+2017-11-03
+
+tag: `watermelon` `小白之路` `python`
+
 > 西瓜有话说之Js对象学习string篇
 
 2017-10-31
