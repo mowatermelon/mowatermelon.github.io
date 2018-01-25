@@ -1,9 +1,10 @@
 ---
-title: python小白之路
+title: 西瓜有话说之python小白之路
 category: python
 tags:
   - 小白之路
   - python
+  - watermelon
 date: 2017-11-03 00:00:00
 ---
 > 很早就被安利过Python这个优雅的语言，由于各种原因（并不是因为拖延症，坚定的眼神.jpg），都没有学习过，主要是基于Python3.6.4做了一下整理，记录一下学习心得。
