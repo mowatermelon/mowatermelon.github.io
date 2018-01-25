@@ -79,7 +79,7 @@ favicon: /img/favicon.ico
 # 你的头像url，
 # 可以是你github的图像地址，如果不知道可以去https://api.github.com/users/{your-github-name}查看相关信息
 # 也可以是相对主页面的img图片地址
-avatar: https://avatars1.githubusercontent.com/u/18508817?v=4
+avatar: https://avatars1.githubusercontent.com/u/18508817
 
 # 是否开启分享
 share_jia: false
