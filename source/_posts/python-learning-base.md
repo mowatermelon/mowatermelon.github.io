@@ -314,7 +314,58 @@ print("Hello, watermelon!")
 
 ### 2.2.1 基础
 
+> print(value, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
+
+|参数名|原始定义|个人描述|是否有默认值|
+|:---|:---|:---|:---|
+|value, ...|the values to a stream|一组需要输出的内容序列，可以为空|无|
+|sep|string inserted between values, default a space.|每个value之间的默认间隔内容|有，默认是一个空格|
+|end|string appended after the last value, default a newline.|输出完成之后，以什么内容结尾|有，默认是一个换行符|
+|file|a file-like object (stream); defaults to the current sys.stdout.|定义流输出的文件，必须要是一个文件流对象|有，默认是标准的系统输出sys.stdout|
+|flush|whether to forcibly flush the stream.|是否立即把内容输出到流文件，不作缓存。|有，默认是False|
+
+```python
+# 一个参数都不传
+print() # ''  不会报错，输出一个空值
+
+# 只传入一个value值
+print("欢迎来到西瓜的世界") # 欢迎来到西瓜的世界
+print([{name:melon,age:1},{name:water,age:2}]) # [{name:melon,age:1},{name:water,age:2}]
+
+# 传入多个value值
+print("hello","watermelon","!") # hello watermelon !
+
+print("hello",1,"watermelon",[1.2],"!") # hello 1 watermelon [1.2] !
+
+# 传入的value需要计算
+print('100 + 200 =', 100 + 200) # 100 + 200 = 300
+
+# 设置多个value值之间间隔内容
+print("hello","watermelon","!",sep='/') # hello/watermelon/!
+
+# 设置多个value值的结尾内容
+print("hello","watermelon","!",end='/') # hello watermelon !/
+
+# 设置多个value值的输出对象
+with open(r'chapter_1\abc.txt', 'w') as demo:
+    print('hello","watermelon', file = demo) # hello watermelon
+# 这样就会在项目所在根文件夹下的chapter_1/abc.txt中，看到输出内容
+# 这个文本内容就是需要打印出来的内容，可以重复写入
+
+# 设置多个value值到流文件的时候，立即把内容输出到流文件，不作缓存。
+print("hello","watermelon","!",flush=True) # hello watermelon !
+# 目前没有看到什么效果
+```
+
 ### 2.2.2 格式化输出
+
+操作符`%`也可以用于字符串格式化。它以类似`sprintf()-style`的方式解析左参数，将右参数应用于此，得到格式化操作生成的字符串，例如:
+
+```python
+import math
+print('The value of PI is approximately %5.3f.' % math.pi)
+# The value of PI is approximately 3.142.
+```
 
 ## 2.3 输入语句
 
@@ -525,3 +576,7 @@ print("Hello, watermelon!")
 ## 9.13 数据挖掘
 
 ## 9.14 机器学习
+
+# 第十章 源代码地址
+
+[learn-Python](https://github.com/mowatermelon/learn-Python)
