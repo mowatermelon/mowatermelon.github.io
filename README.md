@@ -30,7 +30,7 @@ tag: `watermelon` `js_thinking` `function` `object`
 
 2017-10-25
 
-tag: `watermelon``bak``js_meta`
+tag: `watermelon` `bak` `js_meta`
 
 > 西瓜有话说之Js学习整理常用篇
 
