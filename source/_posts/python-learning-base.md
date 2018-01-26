@@ -329,6 +329,16 @@ print() # ''  不会报错，输出一个空值
 
 # 只传入一个value值
 print("欢迎来到西瓜的世界") # 欢迎来到西瓜的世界
+
+#2进制转为10进制
+print(0b1001) # 9
+
+#8进制转为10进制
+print(0o12) # 10
+
+#16进制到10进制
+print(0xab) # 171
+
 print([{name:melon,age:1},{name:water,age:2}]) # [{name:melon,age:1},{name:water,age:2}]
 
 # 传入多个value值
