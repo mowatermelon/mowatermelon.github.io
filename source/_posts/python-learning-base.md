@@ -301,7 +301,6 @@ print("Hello, watermelon!")
 
 ```python
 # 三个双引号
-#!/usr/bin/python3
 """
 这是多行注释，用三个双引号
 这是多行注释，用三个双引号
@@ -366,6 +365,8 @@ import math
 print('The value of PI is approximately %5.3f.' % math.pi)
 # The value of PI is approximately 3.142.
 ```
+
+大量 `Python` 代码还在使用 `%` 操作符。然而，因为旧式的格式化方法最终将从语言中去掉，应该尽量使用`str.format()`。
 
 ## 2.3 输入语句
 
