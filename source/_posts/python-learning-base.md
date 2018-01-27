@@ -134,7 +134,7 @@ date: 2017-11-03 00:00:00
 
 ## 1.6 安装Python
 
-> Unix & Linux:
+> Unix & Linux
 
 - 打开WEB浏览器访问<http://www.python.org/download/>
 
@@ -152,7 +152,7 @@ date: 2017-11-03 00:00:00
 
 执行以上操作后，`Python`会安装在 `/usr/local/bin` 目录中，`Python`库安装在`/usr/local/lib/pythonXX`，`XX`为你使用的`Python`的版本号。
 
-> Window:
+> Window
 
 - 打开WEB浏览器访问<http://www.python.org/download/>
 
@@ -213,7 +213,7 @@ path %path%;C:\Python
 
 ## 1.7 Python解释器
 
-当我们编写`Python`代码时，我们得到的是一个包含`Python`代码的以.py为扩展名的文本文件。要运行代码，就需要`Python`解释器去执行.py文件。
+当我们编写`Python`代码时，我们得到的是一个包含`Python`代码的以`.py`为扩展名的文本文件。要运行代码，就需要`Python`解释器去执行.py文件。
 
 由于整个`Python`语言从规范到解释器都是开源的，所以理论上，只要水平够高，任何人都可以编写`Python`解释器来执行`Python`代码（当然难度很大）。事实上，确实存在多种`Python`解释器。
 
@@ -343,7 +343,7 @@ print([{name:melon,age:1},{name:water,age:2}]) # [{name:melon,age:1},{name:water
 
 # 传入多个value值
 print("hello","watermelon","!") # hello watermelon !
-
+# 传入多个不同数据类型的value值
 print("hello",1,"watermelon",[1.2],"!") # hello 1 watermelon [1.2] !
 
 # 传入的value需要计算
@@ -368,15 +368,138 @@ print("hello","watermelon","!",flush=True) # hello watermelon !
 
 ### 2.2.2 格式化输出
 
-操作符`%`也可以用于字符串格式化。它以类似`sprintf()-style`的方式解析左参数，将右参数应用于此，得到格式化操作生成的字符串，例如:
+> 基本概念
+
+操作符`%`也可以用于字符串格式化。它以类似`sprintf()-style`的方式解析左参数，将右参数应用于此，得到格式化操作生成的字符串。
+
+|类型简写|完整单词|中文含义|
+|:----|:----|:----|
+|s|string|字符串|
+|x or X|hexadecimal|十六进制|
+|d|decimal|十进制|
+|o|octal|八进制|
+|f or F|float|浮点型|
+
+> 基础使用案例
+
+基础使用就是在左参数传入一个`%`加一个`数据类型`，右参数通过一个`%`加一个`空格`加上一个`参数值`，或者右参数传入一个`%`加一个`空格`加上`括号`加上`参数列表`，`参数列表`中每个`参数值`以`英文逗号`做间隔。
 
 ```python
-import math
-print('The value of PI is approximately %5.3f.' % math.pi)
-# The value of PI is approximately 3.142.
+print ("%s" % "Hello Watermelon") # Hello Watermelon
+print ("%s" % ("Hello Watermelon")) # Hello Watermelon
+
+print('浮点的300.50转成10进制的%d' % 300.50)# 浮点的300.50转成10进制的300
+print('浮点的300.50转成10进制的%d' % (300.50))# 浮点的300.50转成10进制的300
+
+print('2进制的0b1001转成8进制的%o' % 0b1001)# 2进制的0b1001转成8进制的11
+print('2进制的0b1001转成8进制的%o' % (0b1001))# 2进制的0b1001转成8进制的11
+
+print('8进制的0o10转成16进制的%x' % 0o10) # 8进制的0o10转成16进制的8
+print('8进制的0o10转成16进制的%x' % (0o10)) # 8进制的0o10转成16进制的8
+
+print('10进制的10转成浮点型的%f' % 10) # 10进制的10转成浮点型的10.000000
+print('10进制的10转成浮点型的%f' % (10)) # 10进制的10转成浮点型的10.000000
+print('10进制的%d转成浮点型的%f' % (10,10)) # 10进制的10转成浮点型的10.000000
 ```
 
-大量 `Python` 代码还在使用 `%` 操作符。然而，因为旧式的格式化方法最终将从语言中去掉，应该尽量使用`str.format()`。
+> 使用小技巧
+
+- 左参数的数据类型前面可以加上数字，限制打印的数字或者文本长度。
+- 右参数加上括号，可以传入多个参数。
+
+```python
+print ("%.*s" % (4,"Hello Watermelon")) # Hell
+print ("%.3s " % ("Hello Watermelon")) # Hel
+
+print('10进制的10转成浮点型的%.3f' % 10) # 10进制的10转成浮点型的10.000
+print ("%s,%s %s" % ("Hello","Watermelon","!")) # Hello,Watermelon !
+```
+
+> 请注意
+
+- 请注意`左参数`和`右参数`之间不存在逗号，如果写了逗号，会报错。
+- `八进制类型`，`十进制类型`和`字符串类型`的缩写必须是`小写字母`，换成`大写字母`会报错。
+- 做`类型转换`的时候，`浮点类型`和`十进制类型`需要传入的参数必要是`数字类型`的。
+- 做`类型转换`的时候，`十六进制类型`和`八进制类型`需要传入的参数必要是`整型`。
+- `左参数`的`个数`和`右参数`的`个数`一定要相等。
+- 虽然大量 `Python` 代码还在使用 `%` 操作符，但是旧式的格式化方法最终将从语言中去掉，应该尽量使用`str.format()`。
+
+```python
+
+# print("%s,%s", % ("hello","watermelon"))
+# SyntaxError: invalid syntax
+
+
+# print ("%O " % ("Hello Watermelon"))
+'''
+Traceback (most recent call last):
+  File "<pyshell#15>", line 1, in <module>
+    print ("%O " % ("Hello Watermelon"))
+ValueError: unsupported format character 'O' (0x4f) at index 1
+'''
+
+# print ("%D " % ("Hello Watermelon"))
+'''
+Traceback (most recent call last):
+  File "<pyshell#13>", line 1, in <module>
+    print ("%D " % ("Hello Watermelon"))
+ValueError: unsupported format character 'D' (0x44) at index 1
+'''
+
+# print ("%S " % ("Hello Watermelon"))
+'''
+Traceback (most recent call last):
+  File "<pyshell#14>", line 1, in <module>
+    print ("%S " % ("Hello Watermelon"))
+ValueError: unsupported format character 'S' (0x53) at index 1
+'''
+
+
+# print ("%d " % ("Hello Watermelon"))
+'''
+Traceback (most recent call last):
+  File "<pyshell#18>", line 1, in <module>
+    print ("%d " % ("Hello Watermelon"))
+TypeError: %d format: a number is required, not str
+'''
+
+# print ("%F " % ("Hello Watermelon"))
+'''
+Traceback (most recent call last):
+  File "<pyshell#19>", line 1, in <module>
+    print ("%F " % ("Hello Watermelon"))
+TypeError: must be real number, not str
+'''
+
+
+# print ("%X " % ("Hello Watermelon"))
+'''
+Traceback (most recent call last):
+  File "<pyshell#11>", line 1, in <module>
+    print ("%X " % ("Hello Watermelon"))
+TypeError: %X format: an integer is required, not str
+'''
+
+# print ("%o " % ("Hello Watermelon"))
+'''
+Traceback (most recent call last):
+  File "<pyshell#16>", line 1, in <module>
+    print ("%o " % ("Hello Watermelon"))
+TypeError: %o format: an integer is required, not str
+'''
+
+
+# print ("%s,%s" % ("Hello","Watermelon","!"))
+'''
+Traceback (most recent call last):
+  File "<pyshell#29>", line 1, in <module>
+    print ("%s,%s" % ("Hello","Watermelon","!"))
+TypeError: not all arguments converted during string formatting
+'''
+
+
+print('{0} and {1}'.format('spam', 'eggs')) # spam and eggs
+```
 
 ## 2.3 输入语句
 
