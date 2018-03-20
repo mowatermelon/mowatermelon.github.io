@@ -1374,7 +1374,7 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |方法名|描述|参数|
 |:---|:---|:---|
 |concat(string2, string3[, ..., stringN])|  连接两个字符串文本，并返回一个新的字符串。|@param string2...stringN 和原字符串连接的多个字符串|
-|padEnd()| `不推荐使用`， 从给定字符串的末端填充当前字符串，以从给定长度创建新字符串。|无|
+|padEnd(targetLength [, padString])| `不推荐使用`， 从给定字符串的末端填充当前字符串，以从给定长度创建新字符串。|@param targetLength 当前字符串需要填充到的目标长度。如果这个数值小于当前字符串的长度，则返回当前字符串本身。 @param padString (可选) 填充字符串。如果字符串太长，使填充后的字符串长度超过了目标长度，则只保留最左侧的部分，其他部分会被截断。此参数的缺省值为 " "（U+0020）。返回值，在原字符串末尾填充指定的填充字符串直到目标长度所形成的新字符串。|
 |padStart()| `不推荐使用`， 从一个给定字符串开始填充当前字符串，从给定长度创建一个新字符串。|无|
 |repeat()| `不推荐使用`，返回指定重复次数的由元素组成的字符串对象。|无|
 |quote()| `已废弃`，用双引号（``）包装字符串。|无|
@@ -1775,6 +1775,7 @@ Unicode 编码单元（code points）的范围从 0 到 1,114,111（0x10FFFF）�
 |fromCharCode(num1, ..., numN)|返回一个字符串，而不是一个 String 对象。由于 fromCharCode 是 String 的静态方法，所以应该像这样使用：String.fromCharCode()，而不是作为你创建的 String 对象的方法。|@param num1, ..., numN 一组序列数字，表示 Unicode 值。|
 |fromCodePoint(num1, …, numN)| `不推荐使用`， 返回使用 Unicode 编码创建的字符串，如果传入无效的 Unicode 编码，将会抛出一个RangeError (例如： "RangeError: NaN is not a valid code point")。|@param num1, ..., numN 一组序列数字，表示 Unicode 值。|
 |concat(string2, string3[, ..., stringN])|  连接两个字符串文本，并返回一个新的字符串。|@param string2...stringN 和原字符串连接的多个字符串|
+|padEnd(targetLength [, padString])| `不推荐使用`， 从给定字符串的末端填充当前字符串，以从给定长度创建新字符串。|@param targetLength 当前字符串需要填充到的目标长度。如果这个数值小于当前字符串的长度，则返回当前字符串本身。 @param padString (可选) 填充字符串。如果字符串太长，使填充后的字符串长度超过了目标长度，则只保留最左侧的部分，其他部分会被截断。此参数的缺省值为 " "（U+0020）。返回值，在原字符串末尾填充指定的填充字符串直到目标长度所形成的新字符串。|
 
 ## 7.2 返回值为数值的方法
 
