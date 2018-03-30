@@ -3,10 +3,9 @@ title: 框架学习之dva入门
 category: 框架学习
 tags:
   - dva
-  - Arcgis for js 4.6
-  - local-build
+  - base
   - 框架学习
-date: 2017-11-09 00:00:00
+date: 2017-11-10 00:00:00
 ---
 # 1 初始化基础项目
 
@@ -23,8 +22,6 @@ date: 2017-11-09 00:00:00
 > 项目启动效果，启动地址`http://localhost:8000/#/`
 
 ![image](https://user-images.githubusercontent.com/18508817/37641765-eec8ad2a-2c55-11e8-956c-f609bd6fd5a7.png)
-
-
 
 # 2 初始化复杂项目
 
