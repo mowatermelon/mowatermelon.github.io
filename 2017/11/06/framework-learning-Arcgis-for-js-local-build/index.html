@@ -9,7 +9,7 @@
   <title>框架学习之Arcgis for Js 4.6本地部署 | mowatermelon</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="1 部署包下载 下载对应版本">
-<meta name="keywords" content="框架学习,webgis,Arcgis for js 4.6,local-build">
+<meta name="keywords" content="webgis,Arcgis for js 4.6,local-build,框架学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="框架学习之Arcgis for Js 4.6本地部署">
 <meta property="og:url" content="https://mowatermelon.github.io/2017/11/06/framework-learning-Arcgis-for-js-local-build/index.html">
@@ -238,7 +238,7 @@ ga('send', 'pageview');
 <blockquote>
 <p>组件源码</p>
 </blockquote>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"map_box"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"viewDiv"</span> <span class="attr">class</span>=<span class="string">"map_div"</span> @<span class="attr">mousemove</span>=<span class="string">"showCoordinates($event)"</span> &gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"text-right map-info"</span> <span class="attr">:class</span>=<span class="string">"&#123;'hide': isHide&#125;"</span>&gt;</span>当前坐标：x:&#123;&#123;evt.x&#125;&#125;,y:&#123;&#123;evt.y&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">  import esriLoader from 'esri-loader'</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">  export default &#123;</span></span><br><span class="line"><span class="undefined">    name: 'MapView',</span></span><br><span class="line"><span class="undefined">    data () &#123;</span></span><br><span class="line"><span class="undefined">      return &#123;</span></span><br><span class="line"><span class="undefined">        map: &#123;'loaded': ''&#125;,</span></span><br><span class="line"><span class="undefined">        isHide: true,</span></span><br><span class="line"><span class="undefined">        evt:&#123;x:'',y:''&#125;,</span></span><br><span class="line"><span class="undefined">        camera:&#123;&#125;,</span></span><br><span class="line"><span class="undefined">        view:&#123;&#125;</span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="undefined">    &#125;,</span></span><br><span class="line"><span class="undefined">    watch: &#123;</span></span><br><span class="line"><span class="undefined">      'map.loaded': function () &#123;</span></span><br><span class="line"><span class="undefined">        if (this.map.initialized == true) &#123;</span></span><br><span class="line"><span class="undefined">          this.isHide = false;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">    &#125;,</span></span><br><span class="line"><span class="undefined">    mounted: function () &#123;</span></span><br><span class="line"><span class="undefined">      // 监听esriLoader是否存在，创建map</span></span><br><span class="line"><span class="undefined">      if (!esriLoader.isLoaded()) &#123;</span></span><br><span class="line"><span class="undefined">        // no, lazy load it the ArcGIS API before using its classes</span></span><br><span class="line"><span class="undefined">        esriLoader.bootstrap((err) =&gt; &#123;</span></span><br><span class="line"><span class="undefined">          if (err) &#123;</span></span><br><span class="line"><span class="undefined">            console.error(err);</span></span><br><span class="line"><span class="undefined">          &#125; else &#123;</span></span><br><span class="line"><span class="undefined">            // once it's loaded, create the map</span></span><br><span class="line"><span class="undefined">            this.createMap();</span></span><br><span class="line"><span class="undefined">          &#125;</span></span><br><span class="line"><span class="undefined">        &#125;, &#123;</span></span><br><span class="line"><span class="undefined">          // use a specific version instead of latest 4.x</span></span><br><span class="line"><span class="undefined">          url: '../../static/plugins/arcgis46/init.js'</span></span><br><span class="line"><span class="undefined">        &#125;);</span></span><br><span class="line"><span class="undefined">      &#125; else &#123;</span></span><br><span class="line"><span class="undefined">        // ArcGIS API is already loaded, just create the map</span></span><br><span class="line"><span class="undefined">        this.createMap();</span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">    &#125;,</span></span><br><span class="line"><span class="undefined">    methods: &#123;</span></span><br><span class="line"><span class="undefined">      // 创建地图</span></span><br><span class="line"><span class="undefined">      createMap: function () &#123;</span></span><br><span class="line"><span class="undefined">        let _this =this;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">        esriLoader.dojoRequire(["esri/map", "esri/views/MapView","dojo/domReady!"], (Map,MapView) =&gt; &#123;</span></span><br><span class="line"><span class="undefined">          _this.map = new Map(&#123;</span></span><br><span class="line"><span class="undefined">            basemap: "osm",</span></span><br><span class="line"><span class="undefined">            ground: "world-elevation"// Use the world elevation service</span></span><br><span class="line"><span class="undefined">          &#125;);</span></span><br><span class="line"><span class="undefined">          _this.view = new MapView(&#123;</span></span><br><span class="line"><span class="undefined">            container: "viewDiv",     // Reference to the scene div created in step 5</span></span><br><span class="line"><span class="undefined">            map: _this.map,                 // Reference to the map object created before the scene</span></span><br><span class="line"><span class="undefined">            scale: 50,          // Sets the initial scale to 1:50,000,000</span></span><br><span class="line"><span class="undefined">            center: [114.40845006666666,30.456864444444443]  // Sets the center point of view with lon/lat</span></span><br><span class="line"><span class="undefined">          &#125;);</span></span><br><span class="line"><span class="undefined">        &#125;);</span></span><br><span class="line"><span class="undefined">      &#125;,</span></span><br><span class="line"><span class="undefined">      // 缩放到中心图层</span></span><br><span class="line"><span class="undefined">      centerZoom: function () &#123;</span></span><br><span class="line"><span class="undefined">        this.map.centerAndZoom([114.40845006666666,30.456864444444443], 16);</span></span><br><span class="line"><span class="undefined">      &#125;,</span></span><br><span class="line"><span class="undefined">      // 显示当前坐标</span></span><br><span class="line"><span class="undefined">      showCoordinates: function(e) &#123;</span></span><br><span class="line"><span class="undefined">        let _this = this;</span></span><br><span class="line"><span class="undefined">        _this.view.hitTest(e)</span></span><br><span class="line"><span class="undefined">          .then(function(res)&#123;</span></span><br><span class="line"><span class="undefined">            let point = res.screenPoint;</span></span><br><span class="line"><span class="undefined">            if(!_this.isHide)&#123;</span></span><br><span class="line"><span class="undefined">                _this.evt.x = point.x;</span></span><br><span class="line"><span class="undefined">                _this.evt.y = point.y;</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="undefined">        &#125;);</span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">lang</span>=<span class="string">"scss"</span> <span class="attr">scoped</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">@import './../../static/plugins/arcgis46/esri/css/main.css';</span></span><br><span class="line"><span class="undefined">.map_box .map_div &#123;</span></span><br><span class="line"><span class="undefined">  width:100%;</span></span><br><span class="line"><span class="undefined">  height: calc(100vh*0.8);</span></span><br><span class="line"><span class="undefined">  cursor: pointer;</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"map_box"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"viewDiv"</span> <span class="attr">class</span>=<span class="string">"map_div"</span> @<span class="attr">mousemove</span>=<span class="string">"showCoordinates($event)"</span> &gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"text-right map-info"</span> <span class="attr">:class</span>=<span class="string">"&#123;'hide': isHide&#125;"</span>&gt;</span>当前坐标：x:&#123;&#123;evt.x&#125;&#125;,y:&#123;&#123;evt.y&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="keyword">import</span> esriLoader <span class="keyword">from</span> <span class="string">'esri-loader'</span></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="javascript">    name: <span class="string">'MapView'</span>,</span></span><br><span class="line"><span class="undefined">    data () &#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="javascript">        map: &#123;<span class="string">'loaded'</span>: <span class="string">''</span>&#125;,</span></span><br><span class="line"><span class="javascript">        isHide: <span class="literal">true</span>,</span></span><br><span class="line"><span class="javascript">        evt:&#123;<span class="attr">x</span>:<span class="string">''</span>,<span class="attr">y</span>:<span class="string">''</span>&#125;,</span></span><br><span class="line"><span class="undefined">        camera:&#123;&#125;,</span></span><br><span class="line"><span class="undefined">        view:&#123;&#125;</span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="undefined">    &#125;,</span></span><br><span class="line"><span class="undefined">    watch: &#123;</span></span><br><span class="line"><span class="javascript">      <span class="string">'map.loaded'</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span> (<span class="keyword">this</span>.map.initialized == <span class="literal">true</span>) &#123;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">this</span>.isHide = <span class="literal">false</span>;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">    &#125;,</span></span><br><span class="line"><span class="javascript">    mounted: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="comment">// 监听esriLoader是否存在，创建map</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">if</span> (!esriLoader.isLoaded()) &#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">// no, lazy load it the ArcGIS API before using its classes</span></span></span><br><span class="line"><span class="javascript">        esriLoader.bootstrap(<span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">if</span> (err) &#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.error(err);</span></span><br><span class="line"><span class="javascript">          &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="javascript">            <span class="comment">// once it's loaded, create the map</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">this</span>.createMap();</span></span><br><span class="line"><span class="undefined">          &#125;</span></span><br><span class="line"><span class="undefined">        &#125;, &#123;</span></span><br><span class="line"><span class="javascript">          <span class="comment">// use a specific version instead of latest 4.x</span></span></span><br><span class="line"><span class="javascript">          url: <span class="string">'../../static/plugins/arcgis46/init.js'</span></span></span><br><span class="line"><span class="undefined">        &#125;);</span></span><br><span class="line"><span class="javascript">      &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">// ArcGIS API is already loaded, just create the map</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.createMap();</span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">    &#125;,</span></span><br><span class="line"><span class="undefined">    methods: &#123;</span></span><br><span class="line"><span class="javascript">      <span class="comment">// 创建地图</span></span></span><br><span class="line"><span class="javascript">      createMap: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> _this =<span class="keyword">this</span>;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">        esriLoader.dojoRequire([<span class="string">"esri/map"</span>, <span class="string">"esri/views/MapView"</span>,<span class="string">"dojo/domReady!"</span>], (<span class="built_in">Map</span>,MapView) =&gt; &#123;</span></span><br><span class="line"><span class="javascript">          _this.map = <span class="keyword">new</span> <span class="built_in">Map</span>(&#123;</span></span><br><span class="line"><span class="javascript">            basemap: <span class="string">"osm"</span>,</span></span><br><span class="line"><span class="javascript">            ground: <span class="string">"world-elevation"</span><span class="comment">// Use the world elevation service</span></span></span><br><span class="line"><span class="undefined">          &#125;);</span></span><br><span class="line"><span class="javascript">          _this.view = <span class="keyword">new</span> MapView(&#123;</span></span><br><span class="line"><span class="javascript">            container: <span class="string">"viewDiv"</span>,     <span class="comment">// Reference to the scene div created in step 5</span></span></span><br><span class="line"><span class="javascript">            map: _this.map,                 <span class="comment">// Reference to the map object created before the scene</span></span></span><br><span class="line"><span class="javascript">            scale: <span class="number">50</span>,          <span class="comment">// Sets the initial scale to 1:50,000,000</span></span></span><br><span class="line"><span class="javascript">            center: [<span class="number">114.40845006666666</span>,<span class="number">30.456864444444443</span>]  <span class="comment">// Sets the center point of view with lon/lat</span></span></span><br><span class="line"><span class="undefined">          &#125;);</span></span><br><span class="line"><span class="undefined">        &#125;);</span></span><br><span class="line"><span class="undefined">      &#125;,</span></span><br><span class="line"><span class="javascript">      <span class="comment">// 缩放到中心图层</span></span></span><br><span class="line"><span class="javascript">      centerZoom: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.map.centerAndZoom([<span class="number">114.40845006666666</span>,<span class="number">30.456864444444443</span>], <span class="number">16</span>);</span></span><br><span class="line"><span class="undefined">      &#125;,</span></span><br><span class="line"><span class="javascript">      <span class="comment">// 显示当前坐标</span></span></span><br><span class="line"><span class="javascript">      showCoordinates: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> _this = <span class="keyword">this</span>;</span></span><br><span class="line"><span class="undefined">        _this.view.hitTest(e)</span></span><br><span class="line"><span class="javascript">          .then(<span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">let</span> point = res.screenPoint;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span>(!_this.isHide)&#123;</span></span><br><span class="line"><span class="undefined">                _this.evt.x = point.x;</span></span><br><span class="line"><span class="undefined">                _this.evt.y = point.y;</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="undefined">        &#125;);</span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">lang</span>=<span class="string">"scss"</span> <span class="attr">scoped</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="css">@<span class="keyword">import</span> <span class="string">'./../../static/plugins/arcgis46/esri/css/main.css'</span>;</span></span><br><span class="line"><span class="css"><span class="selector-class">.map_box</span> <span class="selector-class">.map_div</span> &#123;</span></span><br><span class="line"><span class="css">  <span class="selector-tag">width</span><span class="selector-pseudo">:100</span>%;</span></span><br><span class="line"><span class="css">  <span class="selector-tag">height</span>: <span class="selector-tag">calc</span>(100<span class="selector-tag">vh</span>*0<span class="selector-class">.8</span>);</span></span><br><span class="line"><span class="undefined">  cursor: pointer;</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
       
 
       
@@ -251,10 +251,6 @@ ga('send', 'pageview');
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">框架学习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">webgis</a>
         		</li>
       		 
@@ -264,6 +260,10 @@ ga('send', 'pageview');
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">local-build</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">框架学习</a>
         		</li>
       		
 		</ul>
@@ -293,11 +293,11 @@ ga('send', 'pageview');
   
 <nav id="article-nav">
   
-    <a href="/2018/01/28/thinking-in-the-front-end-knowledge-working/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/11/07/framework-learning-docker/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          前端思考之2018新年规划公司版
+          框架学习之Docker拉取centos镜像
         
       </div>
     </a>
@@ -489,6 +489,14 @@ ga('send', 'pageview');
               </li>
             
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">MVC</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">validate</a>
+              </li>
+            
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Dictionary</a>
               </li>
             
@@ -501,15 +509,31 @@ ga('send', 'pageview');
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">MVC</a>
-              </li>
-            
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">BASE</a>
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">validate</a>
+                <a href="javascript:void(0)" class="js-tag color3">CS</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">SESSION</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">CSS变量</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">样式表</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">OOCSS</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">小白之路</a>
               </li>
             
               <li class="article-tag-list-item">
@@ -525,22 +549,6 @@ ga('send', 'pageview');
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">OOCSS</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">样式表</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">CSS变量</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">小白之路</a>
-              </li>
-            
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">csshacker</a>
               </li>
             
@@ -549,7 +557,7 @@ ga('send', 'pageview');
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">媒体查询</a>
+                <a href="javascript:void(0)" class="js-tag color5">ioshacker</a>
               </li>
             
               <li class="article-tag-list-item">
@@ -557,19 +565,35 @@ ga('send', 'pageview');
               </li>
             
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">媒体查询</a>
+              </li>
+            
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">整体设计</a>
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ioshacker</a>
+                <a href="javascript:void(0)" class="js-tag color2">webgis</a>
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">bootstrap-table</a>
+                <a href="javascript:void(0)" class="js-tag color3">Arcgis for js 4.6</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">local-build</a>
               </li>
             
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">框架学习</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">bootstrap-affix</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">bootstrap-input</a>
               </li>
             
               <li class="article-tag-list-item">
@@ -589,7 +613,7 @@ ga('send', 'pageview');
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">bootstrap-input</a>
+                <a href="javascript:void(0)" class="js-tag color1">bootstrap-table</a>
               </li>
             
               <li class="article-tag-list-item">
@@ -606,6 +630,22 @@ ga('send', 'pageview');
             
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">hexo d</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">docker</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">github page</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
             
               <li class="article-tag-list-item">
@@ -629,18 +669,6 @@ ga('send', 'pageview');
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">bootstrap-affix</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">CS</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">SESSION</a>
-              </li>
-            
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">object</a>
               </li>
             
@@ -649,11 +677,23 @@ ga('send', 'pageview');
               </li>
             
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据类型</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">禁用按键</a>
+              </li>
+            
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">hacker</a>
               </li>
             
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">获取文件路径</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">屏幕参数</a>
               </li>
             
               <li class="article-tag-list-item">
@@ -673,6 +713,10 @@ ga('send', 'pageview');
               </li>
             
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">clone</a>
+              </li>
+            
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">iviewer</a>
               </li>
             
@@ -689,23 +733,19 @@ ga('send', 'pageview');
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">history</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">watermelon</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">clone</a>
-              </li>
-            
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">prompt</a>
               </li>
             
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">localStorage</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">history</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">watermelon</a>
               </li>
             
               <li class="article-tag-list-item">
@@ -721,15 +761,43 @@ ga('send', 'pageview');
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bak</a>
-              </li>
-            
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">confusion</a>
               </li>
             
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">bak</a>
+              </li>
+            
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">funciton</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">html5</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">IaaS</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">PaaS</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SaaS</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">on-premises</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">知识储备</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">regexp</a>
               </li>
             
               <li class="article-tag-list-item">
@@ -741,10 +809,6 @@ ga('send', 'pageview');
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">regexp</a>
-              </li>
-            
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">体素了解</a>
               </li>
             
@@ -753,31 +817,11 @@ ga('send', 'pageview');
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">知识储备</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">屏幕参数</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据类型</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">html5</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">github page</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
-              </li>
-            
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js_meta</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
             
               <li class="article-tag-list-item">
@@ -798,10 +842,6 @@ ga('send', 'pageview');
             
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">cmd</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
             
               <li class="article-tag-list-item">
@@ -865,6 +905,10 @@ ga('send', 'pageview');
               </li>
             
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">新年规划</a>
+              </li>
+            
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">接手新项目</a>
               </li>
             
@@ -873,43 +917,7 @@ ga('send', 'pageview');
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">IaaS</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">PaaS</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SaaS</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">on-premises</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">新年规划</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">禁用按键</a>
-              </li>
-            
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">string</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">webgis</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arcgis for js 4.6</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">local-build</a>
               </li>
             
             <div class="clearfix"></div>
