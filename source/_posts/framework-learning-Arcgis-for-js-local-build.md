@@ -162,3 +162,7 @@ cnpm i dojo-loader --s
 }
 </style>
 ```
+
+# 6 预览项目效果
+
+![image](https://user-images.githubusercontent.com/18508817/38131915-64846dde-33f8-11e8-9620-a70704b97059.png)
