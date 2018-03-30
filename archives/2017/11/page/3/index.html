@@ -6,20 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://mowatermelon.github.io">
-  <title>框架学习之Docker拉取centos镜像 | mowatermelon</title>
+  <title>Archives: 2017/11 | mowatermelon</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1 安装与配置 Docker1.1 安装 Docker Docker 软件包已经包括在默认的 CentOS-Extras 软件源里。因此想要安装 docker，只需要运行下面的 yum 命令：  1yum install docker-io -y">
-<meta name="keywords" content="框架学习,centos,docker">
-<meta property="og:type" content="article">
-<meta property="og:title" content="框架学习之Docker拉取centos镜像">
-<meta property="og:url" content="https://mowatermelon.github.io/2017/11/07/framework-learning-docker/index.html">
+  <meta name="description" content="this is a story of watermelon in study">
+<meta property="og:type" content="website">
+<meta property="og:title" content="mowatermelon">
+<meta property="og:url" content="https://mowatermelon.github.io/archives/2017/11/page/3/index.html">
 <meta property="og:site_name" content="mowatermelon">
-<meta property="og:description" content="1 安装与配置 Docker1.1 安装 Docker Docker 软件包已经包括在默认的 CentOS-Extras 软件源里。因此想要安装 docker，只需要运行下面的 yum 命令：  1yum install docker-io -y">
+<meta property="og:description" content="this is a story of watermelon in study">
 <meta property="og:locale" content="chinese">
-<meta property="og:updated_time" content="2018-03-30T09:00:19.879Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="框架学习之Docker拉取centos镜像">
-<meta name="twitter:description" content="1 安装与配置 Docker1.1 安装 Docker Docker 软件包已经包括在默认的 CentOS-Extras 软件源里。因此想要安装 docker，只需要运行下面的 yum 命令：  1yum install docker-io -y">
+<meta name="twitter:title" content="mowatermelon">
+<meta name="twitter:description" content="this is a story of watermelon in study">
   
     <link rel="alternative" href="/atom.xml" title="mowatermelon" type="application/atom+xml">
   
@@ -182,227 +180,148 @@ ga('send', 'pageview');
             <canvas data-colors="#ffffff" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-framework-learning-docker" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      框架学习之Docker拉取centos镜像
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2017/11/02/js-Learning-new/" class="archive-article-date">
+  	<time datetime="2017-11-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-02</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/11/02/js-Learning-new/">Js学习之new</a>
     </h1>
   
 
-        
-        <a href="/2017/11/07/framework-learning-docker/" class="archive-article-date">
-  	<time datetime="2017-11-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-安装与配置-Docker"><a href="#1-安装与配置-Docker" class="headerlink" title="1 安装与配置 Docker"></a>1 安装与配置 Docker</h1><h2 id="1-1-安装-Docker"><a href="#1-1-安装-Docker" class="headerlink" title="1.1 安装 Docker"></a>1.1 安装 Docker</h2><blockquote>
-<p>Docker 软件包已经包括在默认的 CentOS-Extras 软件源里。因此想要安装 docker，只需要运行下面的 yum 命令：</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install docker-io -y</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<blockquote>
-<p>直接yum安装，安装成功后查看版本</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker -v</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>启动docker</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service docker start</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>设置开机启动</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig docker on</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="1-2-配置-Docker"><a href="#1-2-配置-Docker" class="headerlink" title="1.2 配置 Docker"></a>1.2 配置 Docker</h2><blockquote>
-<p>更换腾讯云镜像源</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"OPTIONS='--registry-mirror=https://mirror.ccs.tencentyun.com'"</span> &gt;&gt; /etc/sysconfig/docker</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>镜像源挂载</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>重启docker镜像</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service docker restart</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="2-Docker-的简单操作"><a href="#2-Docker-的简单操作" class="headerlink" title="2 Docker 的简单操作"></a>2 Docker 的简单操作</h1><h2 id="2-1-下载镜像"><a href="#2-1-下载镜像" class="headerlink" title="2.1 下载镜像"></a>2.1 下载镜像</h2><blockquote>
-<p>运行容器</p>
-</blockquote>
-<p>这时我们可以在刚才下载的 CentOS 镜像生成的容器内操作了。<br>生成一个 centos 镜像为模板的容器并使用 bash shell</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it centos /bin/bash</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>这个时候可以看到命令行的前端已经变成了 [root@(一串 hash Id)] 的形式, 这说明我们已经成功进入了 CentOS 容器。</p>
-</blockquote>
-<p>在容器内执行任意命令, 不会影响到宿主机, 如下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /data/simple_docker</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>可以看到 /data 目录下已经创建成功了 simple_docker 文件夹</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls /data</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>退出容器</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>查看宿主机的 /data 目录, 并没有 simple_docker 文件夹, 说明容器内的操作不会影响到宿主机</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls /data</span><br></pre></td></tr></table></figure>
-<h2 id="2-2-保存容器"><a href="#2-2-保存容器" class="headerlink" title="2.2 保存容器"></a>2.2 保存容器</h2><blockquote>
-<p>查看所有的容器信息， 能获取容器的id</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>请自行将 -m 后面的信息改成自己的容器的信息，保存镜像：</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit -m=<span class="string">"备注"</span> 你的CONTAINER_ID 你的IMAGE</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">框架学习</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">js学习</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">centos</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">prototype</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">docker</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">__proto__</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">new</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/框架学习/" class="article-tag-list-link color5">框架学习</a>
+        			<a href="/categories/js学习/" class="article-tag-list-link color5">js学习</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
 
   
-<nav id="article-nav">
-  
-    <a href="/2018/01/28/thinking-in-the-front-end-knowledge-working/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          前端思考之2018新年规划公司版
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2017/11/06/framework-learning-Arcgis-for-js-local-build/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">框架学习之Arcgis for Js 4.6本地部署</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-安装与配置-Docker"><span class="toc-number">1.</span> <span class="toc-text">1 安装与配置 Docker</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-安装-Docker"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 安装 Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-配置-Docker"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 配置 Docker</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Docker-的简单操作"><span class="toc-number">2.</span> <span class="toc-text">2 Docker 的简单操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-下载镜像"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 下载镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-保存容器"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 保存容器</span></a></li></ol></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
-    </div>
-</aside>
-
-
-
-
-  
-
-  
-    <section id="comments">
-      <div id="gitment"></div>
-    </section>
-  <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
-  <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-  <!--<script src="../../../../js/gitment.browser.js"></script>-->
-  <script>
-    var gitment = new Gitment({
-      //id: location.href, // 可选。默认为 location.href
-      owner: 'mowatermelon', // 可以是你的GitHub用户名，也可以是github id
-      repo: 'mowatermelon.github.io',
-      oauth: {
-        client_id: '733f8ecb4a5dc083ab11',
-        client_secret: '880daa512d40ac262b0cdd2b0482bdf9651da9ea'
-      },
-    })
-    gitment.render('gitment')
-  </script>
-
-
-  
-
-  
-    <!-- Google Analytics -->
-    <script type="text/javascript">
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-106069703-1', 'auto');
-    ga('send', 'pageview');
-
-    </script>
-    <!-- End Google Analytics -->
     
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2017/11/01/js-Thinking-confusion/" class="archive-article-date">
+  	<time datetime="2017-10-31T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-01</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/11/01/js-Thinking-confusion/">西瓜有话说之Js学习疑惑篇</a>
+    </h1>
+  
+
+        <div class="article-info info-on-right">
+          
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">watermelon</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">js_thinking</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">confusion</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+          
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/js_thinking/" class="article-tag-list-link color2">js_thinking</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+
+  
+  
+    </div></section>
+  
+
+    
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/archives/2017/11/page/2/"><i class="icon icon-circle-left"></i> Prev</a><a class="page-number" href="/archives/2017/11/">1</a><a class="page-number" href="/archives/2017/11/page/2/">2</a><span class="page-number current">3</span>
+    </nav>
+  
+
+
 
 
 
@@ -427,8 +346,8 @@ ga('send', 'pageview');
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
@@ -510,14 +429,6 @@ ga('send', 'pageview');
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">MVC</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">validate</a>
-              </li>
-            
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Dictionary</a>
               </li>
             
@@ -530,7 +441,23 @@ ga('send', 'pageview');
               </li>
             
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">validate</a>
+              </li>
+            
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">BASE</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jar</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">IKVM</a>
               </li>
             
               <li class="article-tag-list-item">
@@ -558,6 +485,10 @@ ga('send', 'pageview');
               </li>
             
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">csshacker</a>
+              </li>
+            
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">GeoJson</a>
               </li>
             
@@ -567,10 +498,6 @@ ga('send', 'pageview');
             
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ArcGIS for JS</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">csshacker</a>
               </li>
             
               <li class="article-tag-list-item">
@@ -586,27 +513,11 @@ ga('send', 'pageview');
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">媒体查询</a>
-              </li>
-            
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">整体设计</a>
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">webgis</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arcgis for js 4.6</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">local-build</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">框架学习</a>
+                <a href="javascript:void(0)" class="js-tag color5">媒体查询</a>
               </li>
             
               <li class="article-tag-list-item">
@@ -614,7 +525,7 @@ ga('send', 'pageview');
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">bootstrap-input</a>
+                <a href="javascript:void(0)" class="js-tag color5">框架学习</a>
               </li>
             
               <li class="article-tag-list-item">
@@ -634,11 +545,59 @@ ga('send', 'pageview');
               </li>
             
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">base</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">docker</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">webgis</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Arcgis for js 4.6</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">local-build</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">bootstrap-input</a>
+              </li>
+            
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">bootstrap-table</a>
               </li>
             
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">dva</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">element</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">form</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">cnpm</a>
+              </li>
+            
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">github page</a>
               </li>
             
               <li class="article-tag-list-item">
@@ -650,31 +609,7 @@ ga('send', 'pageview');
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">hexo d</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">docker</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">github page</a>
-              </li>
-            
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">markdown</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">html2canvas</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
             
               <li class="article-tag-list-item">
@@ -682,11 +617,11 @@ ga('send', 'pageview');
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">修改URL</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js学习</a>
+                <a href="javascript:void(0)" class="js-tag color2">hexo d</a>
               </li>
             
               <li class="article-tag-list-item">
@@ -695,6 +630,14 @@ ga('send', 'pageview');
             
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">function</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js学习</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">修改URL</a>
               </li>
             
               <li class="article-tag-list-item">
@@ -710,11 +653,15 @@ ga('send', 'pageview');
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">获取文件路径</a>
+                <a href="javascript:void(0)" class="js-tag color5">屏幕参数</a>
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">屏幕参数</a>
+                <a href="javascript:void(0)" class="js-tag color2">html2canvas</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">获取文件路径</a>
               </li>
             
               <li class="article-tag-list-item">
@@ -738,7 +685,19 @@ ga('send', 'pageview');
               </li>
             
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">html5</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">localStorage</a>
+              </li>
+            
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">iviewer</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">prompt</a>
               </li>
             
               <li class="article-tag-list-item">
@@ -751,14 +710,6 @@ ga('send', 'pageview');
             
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">new</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">prompt</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">localStorage</a>
               </li>
             
               <li class="article-tag-list-item">
@@ -794,7 +745,7 @@ ga('send', 'pageview');
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">html5</a>
+                <a href="javascript:void(0)" class="js-tag color2">regexp</a>
               </li>
             
               <li class="article-tag-list-item">
@@ -818,10 +769,6 @@ ga('send', 'pageview');
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">regexp</a>
-              </li>
-            
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">instanceof</a>
               </li>
             
@@ -839,6 +786,10 @@ ga('send', 'pageview');
             
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js_meta</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">MVC</a>
               </li>
             
               <li class="article-tag-list-item">
@@ -870,11 +821,19 @@ ga('send', 'pageview');
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">json序列化</a>
+                <a href="javascript:void(0)" class="js-tag color5">mvvm</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mvc</a>
               </li>
             
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">前端知识</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">json序列化</a>
               </li>
             
               <li class="article-tag-list-item">
@@ -890,27 +849,11 @@ ga('send', 'pageview');
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面缓存</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">mvvm</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mvc</a>
-              </li>
-            
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">项目管理</a>
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">计划安排</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">2018</a>
+                <a href="javascript:void(0)" class="js-tag color2">DevOps</a>
               </li>
             
               <li class="article-tag-list-item">
@@ -922,7 +865,11 @@ ga('send', 'pageview');
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">DevOps</a>
+                <a href="javascript:void(0)" class="js-tag color5">计划安排</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">2018</a>
               </li>
             
               <li class="article-tag-list-item">
@@ -935,6 +882,10 @@ ga('send', 'pageview');
             
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">必备技术栈</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">页面缓存</a>
               </li>
             
               <li class="article-tag-list-item">
